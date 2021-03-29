@@ -6,10 +6,15 @@
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
     <string name="phone_number">Phone Number</string>
-    <string name="register">Register</string>
-    <string name="log_in">Log in</string>
+    <string name="register">Zarejestruj się</string>
     <string name="dashboard">Dashboard</string>
     <string name="logout">Logout</string>
     <string name="add_subject">Add Subject</string>
     <string name="enter_subject">Enter Subject</string>
+    <string name="forgot_password">Zapomniałeś hasła?</string>
+    <string name="log_in">Zaloguj się</string>
+    <string name="enter_email">Wprowadź e-mail</string>
+    <string name="enter_password">Wprowadź hasło</string>
+    <string name="login">Logowanie</string>
+
 </resources>
