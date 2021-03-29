@@ -20,6 +20,7 @@ class Login : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
         val editTextPassword = findViewById<EditText>(R.id.editTextPassword)
+        val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
         tvRegister.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java);
             startActivity(intent);
@@ -31,6 +32,11 @@ class Login : AppCompatActivity() {
             }else{
                 Toast.makeText(this,"Input required",Toast.LENGTH_LONG).show();
             }
+        }
+
+        tvForgotPassword.setOnClickListener{
+            val intent = Intent(this,ResetPassword::class.java);
+            startActivity(intent);
         }
 
     }

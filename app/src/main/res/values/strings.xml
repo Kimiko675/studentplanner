@@ -16,5 +16,7 @@
     <string name="enter_email">Wprowadź e-mail</string>
     <string name="enter_password">Wprowadź hasło</string>
     <string name="login">Logowanie</string>
+    <string name="reset">Resetowanie hasła</string>
+    <string name="send_link">Wyślij link</string>
 
 </resources>
