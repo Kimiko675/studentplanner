@@ -22,6 +22,7 @@
         android:background="@drawable/btn_background"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -34,21 +35,31 @@
             android:id="@+id/btnAddField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:background="@drawable/btn_background"
             android:text="Dodaj kierunek"
-            android:textAllCaps="false"
-            android:layout_margin="20dp"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnAddSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:background="@drawable/btn_background"
             android:text="Dodaj przedmiot"
-            tools:ignore="MissingConstraints"
             android:textAllCaps="false"
-            android:layout_margin="20dp"/>
+            tools:ignore="MissingConstraints" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/llFields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
