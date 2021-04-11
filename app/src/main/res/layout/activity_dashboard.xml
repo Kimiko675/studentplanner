@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard">
 
+
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
@@ -19,17 +21,34 @@
         app:layout_constraintVertical_bias="0.023"
         android:background="@drawable/btn_background"/>
 
-    <Button
-        android:id="@+id/btnAdd"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954"
-        android:background="@drawable/btn_background"/>
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/btnAddField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
+            android:text="Dodaj kierunek"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/btnAddSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
+            android:text="Dodaj przedmiot"
+            tools:ignore="MissingConstraints"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

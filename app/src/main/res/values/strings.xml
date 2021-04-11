@@ -18,5 +18,7 @@
     <string name="login">Logowanie</string>
     <string name="reset">Resetowanie hasła</string>
     <string name="send_link">Wyślij link</string>
+    <string name="add_new_field">Dodaj kierunek</string>
+    <string name="write_new_field">Podaj nazwę kierunku</string>
 
 </resources>

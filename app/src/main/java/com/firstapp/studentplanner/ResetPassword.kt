@@ -23,7 +23,7 @@ class ResetPassword : AppCompatActivity() {
         val editTextEmailForResetPassword = findViewById<EditText>(R.id.editEmailForResetPassword)
 
         btnSendLinkToResetPassword.setOnClickListener{
-            if(editTextEmailForResetPassword.text.trim().toString().isNotEmpty() || editTextEmailForResetPassword.text.trim().toString().isNotEmpty()) {
+            if(editTextEmailForResetPassword.text.trim().toString().isNotEmpty()) {
                 // dodać operację wysyłania maila
                 Toast.makeText(this,"Wysłano link do zresetowania hasła na podany e-mail", Toast.LENGTH_LONG).show();
             }
