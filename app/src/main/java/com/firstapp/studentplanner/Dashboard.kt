@@ -31,6 +31,7 @@ class Dashboard : AppCompatActivity() {
 
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnAdd = findViewById<Button>(R.id.btnAddSubject)
+        val btnList = findViewById<Button>(R.id.btnList)
 
         btnAdd.setOnClickListener{
             val intent = Intent(this,CreateSubject::class.java);
@@ -43,6 +44,11 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent);
         }
 
+        btnList.setOnClickListener{
+            val intent = Intent(this, ListOfFields::class.java);
+            startActivity(intent);
+        }
+
         // tworzenie okna dialogowego
         val bottomSheetFragment = AddFieldOfStudy()
 
@@ -50,34 +56,6 @@ class Dashboard : AppCompatActivity() {
             // wywołanie okna dialogowego
             bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
         }
-
-
-
-        val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
-
-        var list = mutableListOf<String>()
-
-        llFields.layoutManager = LinearLayoutManager(this)
-        llFields.adapter = FieldsAdapter(list)
-
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                list.clear()
-                for (i in dataSnapshot.children){
-                    list.add(i.value as String)
-                }
-                llFields.adapter = FieldsAdapter(list)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        ref.addValueEventListener(postListener)
-
-
 
     }
 }
