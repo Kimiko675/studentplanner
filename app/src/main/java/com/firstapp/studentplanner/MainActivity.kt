@@ -38,18 +38,7 @@ class MainActivity : AppCompatActivity() {
     fun createUser(email:String, password:String){
         auth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this){ task ->
-                    if(task.isSuccessful){                      
-                        //val user = Firebase.auth.currentUser
-                        //user!!.sendEmailVerification()
-                            //.addOnCompleteListener { task ->
-                                //if (task.isSuccessful) {
-                                    //Log.d(TAG, "Email sent.")
-                                //}
-                            //}                        
-                        //Log.e("Task Message", "Successful");
-                        //var intent = Intent(this,Dashboard::class.java);
-                        //startActivity(intent);                                               
-                 
+                    if(task.isSuccessful){
                         auth.currentUser?.sendEmailVerification()
                                 ?.addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
