@@ -49,6 +49,11 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent);
         }
 
+        btnList2.setOnClickListener{
+            val intent = Intent(this, ListOfSubjects::class.java);
+            startActivity(intent);
+        }
+
         // tworzenie okna dialogowego
         val bottomSheetFragment = AddFieldOfStudy()
 
