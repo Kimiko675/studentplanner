@@ -46,8 +46,25 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this){ task ->
                 if(task.isSuccessful){
                     Log.e("Task Message", "Successful");
-                    var intent = Intent(this,Dashboard::class.java);
-                    startActivity(intent);
+                    
+                    //----------------------------
+                    val user = auth.currentUser
+                    if (user !=null){
+
+                        if (user.isEmailVerified){
+                            var intent = Intent(this,Dashboard::class.java);
+                            startActivity(intent);
+                            finish()
+                        }else{
+                            Toast.makeText(this,"Twój email nie został zweryfikowany.",Toast.LENGTH_LONG).show()
+                        }
+
+
+                    }
+                    //----------------------------
+                    
+                    //var intent = Intent(this,Dashboard::class.java);
+                    //startActivity(intent);
                 }else{
                     Log.e("Task Message", "Failes"+task.exception);
                     Toast.makeText(this,"Wrong email or password",Toast.LENGTH_LONG).show();
