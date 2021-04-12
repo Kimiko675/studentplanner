@@ -19,7 +19,7 @@ class ListOfSubjects : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_subjects)
 
-    /*auth = FirebaseAuth.getInstance();
+    auth = FirebaseAuth.getInstance();
     val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
     val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
@@ -33,7 +33,7 @@ class ListOfSubjects : AppCompatActivity() {
             // Get Post object and use the values to update the UI
             list.clear()
             for (i in dataSnapshot.children){
-                val model=i.getValue(Subject::class.java)
+                val model= i.getValue(Subject::class.java)
                 list.add(model as Subject)
             }
             llSubjects.adapter = SubjectsAdapter(list)
@@ -44,7 +44,7 @@ class ListOfSubjects : AppCompatActivity() {
             Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
         }
     }
-    ref.addValueEventListener(postListener)*/
+    ref.addValueEventListener(postListener)
 
     }
 }

@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateSubject">
+    tools:context=".CreateSubject"
+    android:background="@drawable/gradient_login_background">
 
     <EditText
         android:id="@+id/editSubject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        android:layout_width="222dp"
+        android:layout_height="49dp"
         android:ems="10"
+        android:paddingLeft="20dp"
+        android:background="#88ffffff"
         android:hint="Nazwa przedmiotu"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,11 +27,13 @@
 
     <EditText
         android:id="@+id/editField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="#88ffffff"
         android:ems="10"
+        android:layout_width="222dp"
+        android:layout_height="49dp"
         android:inputType="textPersonName"
         android:hint="Kierunek"
+        android:paddingLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,11 +42,16 @@
         app:layout_constraintVertical_bias="0.212"
         tools:ignore="MissingConstraints" />
 
+
+
+
     <EditText
         android:id="@+id/editForm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="222dp"
+        android:layout_height="49dp"
+        android:background="#88ffffff"
         android:ems="10"
+        android:paddingLeft="20dp"
         android:hint="Forma przedmiotu"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +72,41 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431"
+        app:layout_constraintVertical_bias="0.679"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTime"
+        android:layout_width="222dp"
+        android:layout_height="49dp"
+        android:background="#88ffffff"
+        android:ems="10"
+        android:hint="Godzina rozpoczęcia"
+        android:inputType="time"
+        android:paddingLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTime2"
+        android:layout_width="222dp"
+        android:layout_height="49dp"
+        android:background="#88ffffff"
+        android:ems="10"
+        android:hint="Czas trwania"
+        android:inputType="time"
+        android:paddingLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard">
+    tools:context=".Dashboard"
+    android:background="@drawable/gradient_login_background">
 
 
 
@@ -13,6 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logout"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.915"
@@ -25,27 +28,33 @@
         android:id="@+id/btnList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_background"
+        android:background="@drawable/btn2_background"
         android:text="lista"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <Button
         android:id="@+id/btnList2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_background"
+        android:background="@drawable/btn2_background"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="lista2"
+        android:textColor="@color/white"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -64,7 +73,9 @@
             android:layout_margin="20dp"
             android:background="@drawable/btn_background"
             android:text="Dodaj kierunek"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-light"/>
 
         <Button
             android:id="@+id/btnAddSubject"
@@ -74,7 +85,9 @@
             android:background="@drawable/btn_background"
             android:text="Dodaj przedmiot"
             android:textAllCaps="false"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-light"/>
 
     </LinearLayout>
 

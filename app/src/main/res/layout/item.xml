@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8sp"
+        android:background="@color/turquoise"
         >
 
         <ImageView
@@ -20,12 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Line 1"
+            android:fontFamily="sans-serif-condensed-light"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="13dp"
             android:layout_toEndOf="@+id/image_view"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold"
             />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
