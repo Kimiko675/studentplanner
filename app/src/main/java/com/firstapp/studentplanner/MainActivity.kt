@@ -46,9 +46,21 @@ class MainActivity : AppCompatActivity() {
                                     //Log.d(TAG, "Email sent.")
                                 //}
                             //}                        
-                        Log.e("Task Message", "Successful");
-                        var intent = Intent(this,Dashboard::class.java);
-                        startActivity(intent);
+                        //Log.e("Task Message", "Successful");
+                        //var intent = Intent(this,Dashboard::class.java);
+                        //startActivity(intent);                                               
+                 
+                        auth.currentUser?.sendEmailVerification()
+                                ?.addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Log.e("Task Message", "Successful. Verfication email sent.");
+                                        Toast.makeText(this,"Email weryfikacyjny został wysłany. Wejdź w link aktywacyjny.",Toast.LENGTH_LONG).show()
+                                        var intent = Intent(this,Login::class.java);
+                                        startActivity(intent);
+                                        finish()
+                                    }
+                                }
+                        
                     }else{
                         Log.e("Task Message", "Failes"+task.exception);
                         Toast.makeText(this,"Failed",Toast.LENGTH_LONG).show()
