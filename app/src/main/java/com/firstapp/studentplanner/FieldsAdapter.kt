@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.dialog_add_field.view.*
 import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.row_field.view.*
 
@@ -16,7 +18,7 @@ class FieldsAdapter(private val fieldsList: MutableList<String>) : RecyclerView.
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: FieldsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = fieldsList[position]
         holder.textView.text = currentItem
     }

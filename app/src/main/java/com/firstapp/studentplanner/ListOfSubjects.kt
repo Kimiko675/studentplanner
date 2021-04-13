@@ -1,8 +1,11 @@
 package com.firstapp.studentplanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -11,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 
-class ListOfSubjects : AppCompatActivity() {
+class ListOfSubjects : AppCompatActivity(), RecyclerViewClickListener {
 
     private lateinit var auth: FirebaseAuth;
 
@@ -27,6 +30,7 @@ class ListOfSubjects : AppCompatActivity() {
     val list = mutableListOf<Subject>()
     llSubjects.layoutManager = LinearLayoutManager(this)
     llSubjects.adapter = SubjectsAdapter(list)
+    SubjectsAdapter(list).listener=this
 
     val postListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -46,5 +50,18 @@ class ListOfSubjects : AppCompatActivity() {
     }
     ref.addValueEventListener(postListener)
 
+
+    }
+
+    //IKONKI EDYTUJ I USUN (NIE DZIALAJA)
+    override fun onRecyclerViewItemClicked(view: View, subject: Subject) {
+        when(view.id){
+            R.id.image_button_edit ->{
+                Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show();
+            }
+            R.id.image_button_delete ->{
+
+            }
+        }
     }
 }
