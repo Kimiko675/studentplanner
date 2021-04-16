@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 
-class ListOfSubjects : AppCompatActivity(), RecyclerViewClickListener {
+class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
 
     private lateinit var auth: FirebaseAuth;
 
@@ -29,8 +29,7 @@ class ListOfSubjects : AppCompatActivity(), RecyclerViewClickListener {
 
     val list = mutableListOf<Subject>()
     llSubjects.layoutManager = LinearLayoutManager(this)
-    llSubjects.adapter = SubjectsAdapter(list)
-    SubjectsAdapter(list).listener=this
+    llSubjects.adapter = SubjectsAdapter(list,this)
 
     val postListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -40,28 +39,25 @@ class ListOfSubjects : AppCompatActivity(), RecyclerViewClickListener {
                 val model= i.getValue(Subject::class.java)
                 list.add(model as Subject)
             }
-            llSubjects.adapter = SubjectsAdapter(list)
+            llSubjects.adapter = SubjectsAdapter(list,this@ListOfSubjects)
         }
 
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Post failed, log a message
             Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
         }
+
     }
     ref.addValueEventListener(postListener)
-
-
     }
 
-    //IKONKI EDYTUJ I USUN (NIE DZIALAJA)
-    override fun onRecyclerViewItemClicked(view: View, subject: Subject) {
-        when(view.id){
-            R.id.image_button_edit ->{
-                Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show();
-            }
-            R.id.image_button_delete ->{
 
-            }
-        }
+
+    override fun onItemClick(subjects: Subject, position: Int) {
+        val intent= Intent(this, DetailActivity::class.java)
+        intent.putExtra("subject", subjects.subject)
+        intent.putExtra("field", subjects.field)
+        intent.putExtra("form", subjects.form)
+        startActivity(intent)
     }
 }
