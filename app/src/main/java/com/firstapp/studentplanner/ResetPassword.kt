@@ -36,6 +36,7 @@ class ResetPassword : AppCompatActivity() {
                                 Toast.makeText(this,"Wysłano link do zresetowania hasła na podany e-mail", Toast.LENGTH_LONG).show();
                             }
                         }
+                //----
             }
         }
 
