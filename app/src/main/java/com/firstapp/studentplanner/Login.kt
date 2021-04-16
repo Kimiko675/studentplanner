@@ -62,7 +62,9 @@ class Login : AppCompatActivity() {
 
                     }
                     //----------------------------
-
+                    
+                    //var intent = Intent(this,Dashboard::class.java);
+                    //startActivity(intent);
                 }else{
                     Log.e("Task Message", "Failes"+task.exception);
                     Toast.makeText(this,"Wrong email or password",Toast.LENGTH_LONG).show();
