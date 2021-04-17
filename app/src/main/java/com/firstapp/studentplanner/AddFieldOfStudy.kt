@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.dialog_add_field.*
 
 class AddFieldOfStudy: BottomSheetDialogFragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.SheetDialog);
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_add_field,container,false)
     }

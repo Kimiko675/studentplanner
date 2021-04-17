@@ -10,38 +10,51 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:background="@drawable/bottom_sheet_background"
         tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="203dp">
+        tools:layout_editor_absoluteY="203dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/slide_bar"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="="
-            android:textSize="25dp"
-            />
+            android:text="Dodaj nowy kierunek"
+            android:textSize="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <EditText
             android:id="@+id/editTextFieldName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/write_new_field"
+            android:hint="nazwa"
+            android:textAlignment="center"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonAddField"
+            android:background="@drawable/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_new_field"
-            android:textAllCaps="false"
+            android:text="DODAJ"
+            android:textSize="15dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:textColor="@color/black"/>
-
-
-
+            android:textColor="@color/white"
+            android:layout_marginBottom="40dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

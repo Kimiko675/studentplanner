@@ -33,9 +33,10 @@ class Dashboard : AppCompatActivity() {
         val btnAdd = findViewById<Button>(R.id.btnAddSubject)
         val btnList = findViewById<Button>(R.id.btnList)
 
+        val bottomSheetFragment1 = AddSubject()
+
         btnAdd.setOnClickListener{
-            val intent = Intent(this,CreateSubject::class.java);
-            startActivity(intent);
+            bottomSheetFragment1.show(supportFragmentManager,"BottomSheetDialog")
         }
 
         btnLogout.setOnClickListener{
