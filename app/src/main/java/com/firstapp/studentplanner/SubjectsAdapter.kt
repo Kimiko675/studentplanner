@@ -51,13 +51,6 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
         val textView3: TextView = itemView.text_view_3
         val imageButton: ImageButton = itemView.image_button_edit
         val imageButton2: ImageButton = itemView.image_button_delete
-        /*init {
-            itemView.setOnClickListener{
-                val intent= Intent(itemView.context, DetailActivity::class.java)
-                intent.putExtra("mydata", )
-                itemView.context.startActivity(intent)
-            }
-        }*/
         fun initialize(subjects: Subject, action: OnSubjectItemClickListener){
            textView.text = subjects.subject
             textView2.text = subjects.field
