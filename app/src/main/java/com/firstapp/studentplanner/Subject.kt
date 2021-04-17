@@ -1,7 +1,12 @@
 package com.firstapp.studentplanner
 
-import com.google.firebase.database.DataSnapshot
-
-data class Subject(val subject: String? = null, val field: String? = null, val form: String? = null) {
-
+class Subject{
+    var subject = ""
+    var field = ""
+    var form= ""
+    constructor(subject:String,field:String,form:String){
+        this.subject = subject
+        this.field = field
+        this.form = form
+    }
 }
