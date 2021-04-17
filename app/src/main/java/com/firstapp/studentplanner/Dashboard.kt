@@ -1,5 +1,6 @@
 package com.firstapp.studentplanner
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,9 +17,11 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.lang.reflect.Field
 
-class Dashboard : AppCompatActivity() {
+class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissListener {
 
     private lateinit var auth: FirebaseAuth;
+
+    private val bottomSheetFragment1 = AddSubject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class Dashboard : AppCompatActivity() {
         val btnAdd = findViewById<Button>(R.id.btnAddSubject)
         val btnList = findViewById<Button>(R.id.btnList)
 
-        val bottomSheetFragment1 = AddSubject()
+
 
         btnAdd.setOnClickListener{
             bottomSheetFragment1.show(supportFragmentManager,"BottomSheetDialog")
@@ -63,5 +66,17 @@ class Dashboard : AppCompatActivity() {
             bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
         }
 
+    }
+
+    override fun getTime(hour: Int, minute: Int) {
+        val bundle = Bundle()
+        bundle.putInt("hour",hour)
+        bundle.putInt("minute",minute)
+
+        bottomSheetFragment1.arguments = bundle
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        bottomSheetFragment1.display()
     }
 }
