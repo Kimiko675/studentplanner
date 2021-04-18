@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_list_of_fields.*
 import java.lang.reflect.Field
 
-class ListOfFields : AppCompatActivity() {
+class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
 
     private lateinit var auth: FirebaseAuth;
 
@@ -32,7 +33,7 @@ class ListOfFields : AppCompatActivity() {
 
         var list = mutableListOf<String>()
         llFields.layoutManager = LinearLayoutManager(this)
-        llFields.adapter = FieldsAdapter(list)
+        llFields.adapter = FieldsAdapter(list, this)
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -41,7 +42,7 @@ class ListOfFields : AppCompatActivity() {
                 for (i in dataSnapshot.children){
                     list.add(i.value as String)
                 }
-                llFields.adapter = FieldsAdapter(list)
+                llFields.adapter = FieldsAdapter(list, this@ListOfFields)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -54,5 +55,34 @@ class ListOfFields : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onDeleteClick(field: String) {
+        /*
+        val userId: String = FirebaseAuth.getInstance().currentUser.uid
+        val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                var counter = 0
+                for (i in dataSnapshot.key){
+                    if (field == i.value as String){
+                        (i.value as String).removeRange(counter,counter+1)
+                    }
+                    counter++
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        ref.addValueEventListener(postListener)
+
+        Toast.makeText(this, "Kierunek usunięty", Toast.LENGTH_SHORT).show()
+
+         */
     }
 }

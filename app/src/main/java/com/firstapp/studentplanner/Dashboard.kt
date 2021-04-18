@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.dialog_add_subject.*
 import java.lang.reflect.Field
 
 class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissListener {
@@ -37,9 +40,31 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
         val btnList = findViewById<Button>(R.id.btnList)
 
 
+        val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
+
+        var list = mutableListOf<String>()
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (i in dataSnapshot.children){
+                    list.add(i.value as String)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        ref.addValueEventListener(postListener)
 
         btnAdd.setOnClickListener{
-            bottomSheetFragment1.show(supportFragmentManager,"BottomSheetDialog")
+            if (list.isNotEmpty()) {
+
+                bottomSheetFragment1.show(supportFragmentManager,"BottomSheetDialog")
+            }else {
+                Toast.makeText(this, "Najpier dodaj kierunek", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         btnLogout.setOnClickListener{

@@ -299,12 +299,14 @@ class EditSubject(subjects: Subject): BottomSheetDialogFragment() {
                     ref.child(userId).child("Subjects").child(id!!).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(context, "Zdedytowano przedmiot", Toast.LENGTH_LONG).show()
+                            dismiss()
                         } else {
                             Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                            dismiss()
                         }
                     }
                 }
-                dismiss()
+
             }
 
 

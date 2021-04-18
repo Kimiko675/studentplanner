@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.dialog_add_field.view.*
 import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.row_field.view.*
 
-class FieldsAdapter(private val fieldsList: MutableList<String>) : RecyclerView.Adapter<FieldsAdapter.ViewHolder>() {
+class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListener: OnFieldItemClickListener) : RecyclerView.Adapter<FieldsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldsAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item,parent,false)
         return ViewHolder(view)
@@ -21,6 +21,8 @@ class FieldsAdapter(private val fieldsList: MutableList<String>) : RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = fieldsList[position]
         holder.textView.text = currentItem
+
+        holder.initialize(currentItem, clickListener)
     }
 
     override fun getItemCount(): Int {
@@ -30,5 +32,16 @@ class FieldsAdapter(private val fieldsList: MutableList<String>) : RecyclerView.
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imageView: ImageView = itemView.image_view
         val textView: TextView = itemView.text_view_1
+        fun initialize(field: String, action: OnFieldItemClickListener){
+            itemView.findViewById<ImageButton>(R.id.image_button_delete_field).setOnClickListener {
+                action.onDeleteClick(field)
+            }
+        }
+
+
     }
+}
+
+interface OnFieldItemClickListener{
+    fun onDeleteClick(field: String)
 }

@@ -35,8 +35,10 @@ class AddFieldOfStudy: BottomSheetDialogFragment() {
                 ref.child(userId).child("Fields").child(key).setValue(field).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(context, "Dodano kierunek", Toast.LENGTH_LONG).show()
+                        dismiss()
                     } else {
                         Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                        dismiss()
                     }
                 }
             }
