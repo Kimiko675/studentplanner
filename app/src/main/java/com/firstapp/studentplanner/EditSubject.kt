@@ -1,6 +1,5 @@
 package com.firstapp.studentplanner
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,31 +14,35 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_list_of_fields.*
 import kotlinx.android.synthetic.main.cyclical_subject.*
-import kotlinx.android.synthetic.main.dialog_add_field.*
 import kotlinx.android.synthetic.main.dialog_add_subject.*
 import kotlinx.android.synthetic.main.onetime_subject.*
-import kotlinx.android.synthetic.main.time_picker.*
 
-class AddSubject: BottomSheetDialogFragment() {
+//val Pid: String? = null ,val Psubject: String? = null, val Pfield: String? = null, val Pform: String? = null, val PhowLong: String? = null, val isCyclicalP: Boolean = true, val Phour: Int = 0, val Pminute: Int = 0, val PdayOfWeek: String? = null, val PdayStart: Int = 0, val PmonthStart: Int = 0, val PyearStart: Int = 0, val PdayEnd: Int = 0, val PmonthEnd: Int = 0, val PyearEnd: Int = 0, val Pmark: Int = 0
+
+class EditSubject(subjects: Subject): BottomSheetDialogFragment() {
 
     private lateinit var auth: FirebaseAuth;
 
-    private var hourSetted: Int = -1
-    private var minuteSetted: Int = -1
+    private var id = subjects.id
+    private var name: String? = subjects.subject
+    private var field = subjects.field
+    private var form = subjects.form
+    private var howLong = subjects.howLong
 
-    private var dayStartSetted: Int = 0
-    private var monthStartSetted: Int = 0
-    private var yearStartSetted: Int = 0
+    private var hourSetted: Int = subjects.hour
+    private var minuteSetted: Int = subjects.minute
 
-    private var dayEndSetted: Int = 0
-    private var monthEndSetted: Int = 0
-    private var yearEndSetted: Int = 0
+    private var dayStartSetted: Int = subjects.dayStart
+    private var monthStartSetted: Int = subjects.monthStart
+    private var yearStartSetted: Int = subjects.yearStart
 
-    private var dayOfWeek:Int = -1
+    private var dayEndSetted: Int = subjects.dayEnd
+    private var monthEndSetted: Int = subjects.monthEnd
+    private var yearEndSetted: Int = subjects.yearEnd
 
-    private var isCyclical: Boolean = true
+    private var dayOfWeek: Int = subjects.dayOfWeek
+    private var isCyclical: Boolean = subjects.isCyclical
 
     var timeFlag: Boolean = false
     var dayStartFlag: Boolean = false
@@ -66,8 +69,14 @@ class AddSubject: BottomSheetDialogFragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 //list.clear()
+                var index: Int = 0
+                var counter: Int = 0
                 for (i in dataSnapshot.children){
                     list.add(i.value as String)
+                    if (i.value as String == field){
+                        index = counter
+                    }
+                    counter++
                 }
 
                 val arrayAdapter = activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, list) }
@@ -75,6 +84,8 @@ class AddSubject: BottomSheetDialogFragment() {
                 arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
                 spinnerFields.adapter = arrayAdapter
+
+                spinnerFields.setSelection(index)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -95,10 +106,35 @@ class AddSubject: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val layoutToInflate1 = this.layoutInflater.inflate(R.layout.cyclical_subject, null)
-        daysOrCalendar.addView(layoutToInflate1)
+        val layoutToInflate2 = this.layoutInflater.inflate(R.layout.onetime_subject, null)
 
-        btnDayStartPicker.text = ""
-        btnDayEndPicker.text = ""
+        if (isCyclical == true)
+        {
+            daysOrCalendar.addView(layoutToInflate1)
+            btnDayStartPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
+            btnDayEndPicker.text = dayEndSetted.toString() + "/" + monthEndSetted.toString() + "/" + yearEndSetted.toString()
+
+        }else{
+            daysOrCalendar.addView(layoutToInflate2)
+            btnSingleDayPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
+        }
+
+        btnTimePicker.text = hourSetted.toString() + ":" + minuteSetted.toString()
+
+        tvTitle.text = "Edytuj przedmiot"
+        buttonAddSubject.text = "EDYTUJ"
+
+        editTextFieldNameSubject.setText(name)
+
+        editTextSubjectTime.setText(howLong)
+
+
+        spinnerForm.setSelection(form)
+        spinnerDay.setSelection(dayOfWeek)
+
+
+
+
 
         spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -133,7 +169,7 @@ class AddSubject: BottomSheetDialogFragment() {
             daySingleFlag = false
         }
 
-        val layoutToInflate2 = this.layoutInflater.inflate(R.layout.onetime_subject, null)
+
 
 
         radio_one.setOnClickListener {
@@ -258,13 +294,11 @@ class AddSubject: BottomSheetDialogFragment() {
 
             if (isNotEmptyName && isNotEmptyHowLong && isNotEmptyHour && isNotEmptyDayStart && isNotEmptyDayEnd){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
-                val newRef = ref.push()
-                val key = newRef.key
-                val newSubject=Subject(key, name, field, form, howLong, isCyclical, hourSetted, minuteSetted, dayOfWeek, dayStartSetted, monthStartSetted, yearStartSetted, dayEndSetted, monthEndSetted, yearEndSetted, 0)
-                if (key != null) {
-                    ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
+                val newSubject=Subject(id, name, field, form, howLong, isCyclical, hourSetted, minuteSetted, dayOfWeek, dayStartSetted, monthStartSetted, yearStartSetted, dayEndSetted, monthEndSetted, yearEndSetted, 0)
+                if (id != null) {
+                    ref.child(userId).child("Subjects").child(id!!).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Zdedytowano przedmiot", Toast.LENGTH_LONG).show()
                         } else {
                             Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
                         }
@@ -332,6 +366,8 @@ class AddSubject: BottomSheetDialogFragment() {
             btnSingleDayPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
         }
     }
+
+
 
 
 }

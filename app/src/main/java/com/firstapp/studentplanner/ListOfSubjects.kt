@@ -1,5 +1,6 @@
 package com.firstapp.studentplanner
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 
-class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
+class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPickedTime, DialogInterface.OnDismissListener {
 
     private lateinit var auth: FirebaseAuth;
 
@@ -37,6 +38,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
             list.clear()
             for (i in dataSnapshot.children){
                 val model= i.getValue(Subject::class.java)
+                i.key?.let { Log.d("Tab", it) }
                 list.add(model as Subject)
             }
             llSubjects.adapter = SubjectsAdapter(list,this@ListOfSubjects)
@@ -62,5 +64,43 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
         startActivity(intent)
 
          */
+    }
+
+    private lateinit var bottomSheetFragment: EditSubject
+
+    override fun onEditClick(subjects: Subject) {
+        bottomSheetFragment = EditSubject(subjects)
+        bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+    }
+
+    override fun getTime(hour: Int, minute: Int) {
+        val bundle = Bundle()
+        bundle.putInt("hour",hour)
+        bundle.putInt("minute",minute)
+
+        bottomSheetFragment.arguments = bundle
+    }
+
+    override fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int) {
+        val bundle = Bundle()
+        bundle.putInt("dayStart",dayStart)
+        bundle.putInt("monthStart",monthStart)
+        bundle.putInt("yearStart",yearStart)
+        bottomSheetFragment.arguments = bundle
+    }
+
+    override fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int) {
+        val bundle = Bundle()
+        bundle.putInt("day",dayEnd)
+        bundle.putInt("month",monthEnd)
+        bundle.putInt("year",yearEnd)
+        bottomSheetFragment.arguments = bundle
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        bottomSheetFragment.displayTime()
+        bottomSheetFragment.displayDayStart()
+        bottomSheetFragment.displayDayEnd()
+        bottomSheetFragment.displayDaySingle()
     }
 }
