@@ -26,8 +26,8 @@ class AddSubject: BottomSheetDialogFragment() {
 
     private lateinit var auth: FirebaseAuth;
 
-    private var hourSetted: Int = 0
-    private var minuteSetted: Int = 0
+    private var hourSetted: Int = -1
+    private var minuteSetted: Int = -1
 
     private var dayStartSetted: Int = 0
     private var monthStartSetted: Int = 0
@@ -223,20 +223,57 @@ class AddSubject: BottomSheetDialogFragment() {
             val form = spinnerForm.selectedItem.toString()
             val howLong = editTextSubjectTime.text.toString()
 
+            var isNotEmptyName: Boolean = false
+            var isNotEmptyHowLong: Boolean = false
+            var isNotEmptyHour: Boolean = false
+            //var isNotEmptyMinute: Boolean = false
+            var isNotEmptyDayStart: Boolean = false
+            //var isNotEmptyMonthStart: Boolean = false
+            //var isNotEmptyYearStart: Boolean = false
+            var isNotEmptyDayEnd: Boolean = false
+            //var isNotEmptyMonthEnd: Boolean = false
+            //var isNotEmptyYearEnd: Boolean = false
 
-            val ref = FirebaseDatabase.getInstance().getReference("Users")
-            val newRef = ref.push()
-            val key = newRef.key
-            val newSubject=Subject(name, field, form, howLong, isCyclical, hourSetted, minuteSetted, dayOfWeek, dayStartSetted, monthStartSetted, yearStartSetted, dayEndSetted, monthEndSetted, yearEndSetted, 0)
-            if (key != null) {
-                ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(context, "Dodano przedmiot", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+            //sprawdzamy czy dane pola są uzupełnione
+            if (name.isNotEmpty()) isNotEmptyName = true else Toast.makeText(context, "Podaj nazwę", Toast.LENGTH_SHORT).show()
+
+            if (howLong.isNotEmpty()){
+                isNotEmptyHowLong = true
+            }else{
+                Toast.makeText(context, "Podaj czas", Toast.LENGTH_SHORT).show()
+            }
+            if (hourSetted != -1){
+                isNotEmptyHour = true
+            }else{
+                Toast.makeText(context, "Podaj godzinę rozpoczęcia", Toast.LENGTH_SHORT).show()
+            }
+            if (dayStartSetted != 0){
+                isNotEmptyDayStart = true
+            }else{
+                Toast.makeText(context, "Podaj datę rozpoczęcia", Toast.LENGTH_SHORT).show()
+            }
+            if (dayEndSetted != 0){
+                isNotEmptyDayEnd = true
+            }else{
+                Toast.makeText(context, "Podaj datę zakończenia", Toast.LENGTH_SHORT).show()
+            }
+
+            if (isNotEmptyName && isNotEmptyHowLong && isNotEmptyHour && isNotEmptyDayStart && isNotEmptyDayEnd){
+                val ref = FirebaseDatabase.getInstance().getReference("Users")
+                val newRef = ref.push()
+                val key = newRef.key
+                val newSubject=Subject(name, field, form, howLong, isCyclical, hourSetted, minuteSetted, dayOfWeek, dayStartSetted, monthStartSetted, yearStartSetted, dayEndSetted, monthEndSetted, yearEndSetted, 0)
+                if (key != null) {
+                    ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(context, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
+
 
             /* zmienne z pickerow
             hourSetted / minuteSetted - godzina i minuta rozpoczecia
@@ -267,6 +304,7 @@ class AddSubject: BottomSheetDialogFragment() {
         if (dayStartFlag && arguments != null){
             dayStartSetted = arguments?.getInt("dayStart")!!
             monthStartSetted = arguments?.getInt("monthStart")!!
+            monthStartSetted += 1
             yearStartSetted = arguments?.getInt("yearStart")!!
 
             btnDayStartPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
@@ -278,6 +316,7 @@ class AddSubject: BottomSheetDialogFragment() {
         if (dayEndFlag && arguments != null){
             dayEndSetted = arguments?.getInt("dayStart")!!
             monthEndSetted = arguments?.getInt("monthStart")!!
+            monthEndSetted += 1
             yearEndSetted = arguments?.getInt("yearStart")!!
 
             btnDayEndPicker.text = dayEndSetted.toString() + "/" + monthEndSetted.toString() + "/" + yearEndSetted.toString()
@@ -289,6 +328,7 @@ class AddSubject: BottomSheetDialogFragment() {
         if (daySingleFlag && arguments != null){
             dayStartSetted = arguments?.getInt("dayStart")!!
             monthStartSetted = arguments?.getInt("monthStart")!!
+            monthStartSetted += 1
             yearStartSetted = arguments?.getInt("yearStart")!!
 
             btnSingleDayPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
