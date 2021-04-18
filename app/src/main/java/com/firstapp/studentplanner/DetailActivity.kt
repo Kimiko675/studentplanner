@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.item2.view.*
 import java.util.Collections.list
 
 class DetailActivity : AppCompatActivity() {
+    /*
     private lateinit var auth: FirebaseAuth;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +58,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
     }
-
+*/
 }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -215,10 +216,27 @@ class AddSubject: BottomSheetDialogFragment() {
         buttonAddSubject.setOnClickListener{
             // tutaj trzeba zrobic dodawanie przedmiotu do bazy
 
-            val name = editTextFieldNameSubject.text
+            val userId: String = FirebaseAuth.getInstance().currentUser.uid
+
+            val name = editTextFieldNameSubject.text.toString()
             val field = spinnerFields.selectedItem.toString()
             val form = spinnerForm.selectedItem.toString()
-            val howLong = editTextSubjectTime.text
+            val howLong = editTextSubjectTime.text.toString()
+
+
+            val ref = FirebaseDatabase.getInstance().getReference("Users")
+            val newRef = ref.push()
+            val key = newRef.key
+            val newSubject=Subject(name, field, form, howLong, isCyclical, hourSetted, minuteSetted, dayOfWeek, dayStartSetted, monthStartSetted, yearStartSetted, dayEndSetted, monthEndSetted, yearEndSetted, 0)
+            if (key != null) {
+                ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(context, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
 
             /* zmienne z pickerow
             hourSetted / minuteSetted - godzina i minuta rozpoczecia

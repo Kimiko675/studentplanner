@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_create_subject.*
 
 class CreateSubject : AppCompatActivity() {
-
+/*
     private lateinit var auth: FirebaseAuth;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +40,5 @@ class CreateSubject : AppCompatActivity() {
         }
 
     }
-
+*/
 }

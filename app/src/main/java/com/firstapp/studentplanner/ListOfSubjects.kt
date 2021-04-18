@@ -54,10 +54,13 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
 
 
     override fun onItemClick(subjects: Subject, position: Int) {
+        /*
         val intent= Intent(this, DetailActivity::class.java)
         intent.putExtra("subject", subjects.subject)
         intent.putExtra("field", subjects.field)
         intent.putExtra("form", subjects.form)
         startActivity(intent)
+
+         */
     }
 }
