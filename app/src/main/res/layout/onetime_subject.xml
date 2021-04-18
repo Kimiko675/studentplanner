@@ -7,10 +7,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSingleDayPicker"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="40dp"
         android:textAlignment="center"
-        android:hint="wybierz"
+        android:hint="wybierz date"
         android:inputType="none"
         android:layout_weight="1"
         android:background="@drawable/dropdown_field"

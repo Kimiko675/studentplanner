@@ -1,14 +1,10 @@
 package com.firstapp.studentplanner
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,7 +27,8 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
 
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
 
-        var list = mutableListOf<String>()
+        val list = mutableListOf<String>()
+        
         llFields.layoutManager = LinearLayoutManager(this)
         llFields.adapter = FieldsAdapter(list, this)
 
@@ -58,7 +55,6 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
     }
 
     override fun onDeleteClick(field: String) {
-        /*
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
 
@@ -66,9 +62,9 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 var counter = 0
-                for (i in dataSnapshot.key){
+                for (i in dataSnapshot.children){
                     if (field == i.value as String){
-                        (i.value as String).removeRange(counter,counter+1)
+                        ref.child(i.key as String).removeValue()
                     }
                     counter++
                 }
@@ -82,7 +78,5 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
         ref.addValueEventListener(postListener)
 
         Toast.makeText(this, "Kierunek usunięty", Toast.LENGTH_SHORT).show()
-
-         */
     }
 }
