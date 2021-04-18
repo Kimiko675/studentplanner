@@ -19,6 +19,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
 
     private lateinit var auth: FirebaseAuth;
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_subjects)
@@ -71,6 +72,14 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
     override fun onEditClick(subjects: Subject) {
         bottomSheetFragment = EditSubject(subjects)
         bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+    }
+
+    override fun onDeleteClick(id: String) {
+        val userId: String = FirebaseAuth.getInstance().currentUser.uid
+        val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
+        ref.child(id).removeValue()
+        Toast.makeText(this, "Przedmiot usunięty", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun getTime(hour: Int, minute: Int) {

@@ -304,6 +304,7 @@ class EditSubject(subjects: Subject): BottomSheetDialogFragment() {
                         }
                     }
                 }
+                dismiss()
             }
 
 

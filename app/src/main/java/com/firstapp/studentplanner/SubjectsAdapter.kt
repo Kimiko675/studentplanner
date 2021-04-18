@@ -2,6 +2,7 @@ package com.firstapp.studentplanner
 
 import android.accounts.AccountManager.get
 import android.content.Intent
+import android.content.res.Resources
 import android.media.CamcorderProfile.get
 import android.nfc.tech.Ndef.get
 import android.util.Log
@@ -15,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.common.collect.Iterators.get
 import com.google.gson.reflect.TypeToken.get
+import com.google.rpc.context.AttributeContext
 import io.grpc.internal.SharedResourceHolder.get
 import kotlinx.android.synthetic.main.item.view.text_view_1
 import kotlinx.android.synthetic.main.item2.view.*
 import java.lang.reflect.Array.get
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickListener: OnSubjectItemClickListener) : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 
@@ -57,7 +61,9 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
             var listener: OnSubjectItemClickListener
             textView.text = subjects.subject
             textView2.text = subjects.field
-            textView3.text = subjects.form.toString()
+
+            var forms = arrayListOf<String>("wykład","ćwiczenia","seminarium","spotkanie","zebranie","rejestracja","inne")
+            textView3.text = forms[subjects.form]
 
             itemView.setOnClickListener{
                 action.onItemClick(subjects, adapterPosition)
@@ -65,6 +71,10 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
 
             itemView.findViewById<ImageButton>(R.id.image_button_edit).setOnClickListener {
                 action.onEditClick(subjects)
+            }
+
+            itemView.findViewById<ImageButton>(R.id.image_button_delete).setOnClickListener {
+                action.onDeleteClick(subjects.id.toString())
             }
         }
     }
@@ -74,5 +84,6 @@ interface OnSubjectItemClickListener{
     fun onItemClick(subjects: Subject, position: Int)
     //fun onEditClick(Pid: String,Psubject: String, Pfield: String, Pform: String, PhowLong: String, isCyclicalP: Boolean, Phour: Int, Pminute: Int, PdayOfWeek: String, PdayStart: Int, PmonthStart: Int, PyearStart: Int, PdayEnd: Int, PmonthEnd: Int, PyearEnd: Int, Pmark: Int)
     fun onEditClick(subjects: Subject)
+    fun onDeleteClick(id: String)
 }
 

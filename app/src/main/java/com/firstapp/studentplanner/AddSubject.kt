@@ -264,13 +264,17 @@ class AddSubject: BottomSheetDialogFragment() {
                 if (key != null) {
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                            dismiss()
                         } else {
-                            Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "Błąd", Toast.LENGTH_LONG).show()
+                            dismiss()
                         }
                     }
                 }
+                //dismiss()
             }
+
 
 
             /* zmienne z pickerow
