@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,10 @@ class AddSubject: BottomSheetDialogFragment() {
     private var dayEndSetted: Int = 0
     private var monthEndSetted: Int = 0
     private var yearEndSetted: Int = 0
+
+    private var dayOfWeek: String = ""
+
+    private var isCyclical: Boolean = true
 
     var timeFlag: Boolean = false
     var dayStartFlag: Boolean = false
@@ -89,6 +94,45 @@ class AddSubject: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val layoutToInflate1 = this.layoutInflater.inflate(R.layout.cyclical_subject, null)
+        daysOrCalendar.addView(layoutToInflate1)
+
+        btnDayStartPicker.text = ""
+        btnDayEndPicker.text = ""
+
+        spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long){
+                dayOfWeek = spinnerDay.selectedItem.toString()
+                Log.d("Tag", dayOfWeek)
+            }
+        }
+
+        btnDayStartPicker.setOnClickListener {
+
+            val dayPicker1 = DayPicker()
+            activity?.let { it1 -> dayPicker1.show(it1.supportFragmentManager, "Dialog")
+            }
+
+            timeFlag = false
+            dayStartFlag = true
+            dayEndFlag = false
+            daySingleFlag = false
+        }
+
+        btnDayEndPicker.setOnClickListener {
+
+            val dayPicker2 = DayPicker()
+            activity?.let { it1 -> dayPicker2.show(it1.supportFragmentManager, "Dialog")
+            }
+
+            timeFlag = false
+            dayStartFlag = false
+            dayEndFlag = true
+            daySingleFlag = false
+        }
+
         val layoutToInflate2 = this.layoutInflater.inflate(R.layout.onetime_subject, null)
 
 
@@ -96,8 +140,20 @@ class AddSubject: BottomSheetDialogFragment() {
             daysOrCalendar.removeAllViews()
             daysOrCalendar.addView(layoutToInflate1)
 
+            isCyclical = true
+
             btnDayStartPicker.text = ""
             btnDayEndPicker.text = ""
+
+            spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long){
+                    dayOfWeek = spinnerDay.selectedItem.toString()
+                    Log.d("Tag", dayOfWeek)
+                }
+            }
 
             btnDayStartPicker.setOnClickListener {
 
@@ -127,6 +183,8 @@ class AddSubject: BottomSheetDialogFragment() {
         radio_two.setOnClickListener {
             daysOrCalendar.removeAllViews()
             daysOrCalendar.addView(layoutToInflate2)
+
+            isCyclical = false
             btnSingleDayPicker.text = ""
 
             btnSingleDayPicker.setOnClickListener {

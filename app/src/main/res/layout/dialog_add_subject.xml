@@ -157,6 +157,7 @@
                 android:background="@drawable/radio_selector"
                 android:textColor="@color/white"
                 android:layout_marginRight="10dp"
+                android:checked="true"
                 android:layout_marginLeft="20dp"/>
 
             <RadioButton
