@@ -57,14 +57,21 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
 
 
     override fun onItemClick(subjects: Subject, position: Int) {
-        /*
-        val intent= Intent(this, DetailActivity::class.java)
-        intent.putExtra("subject", subjects.subject)
-        intent.putExtra("field", subjects.field)
-        intent.putExtra("form", subjects.form)
-        startActivity(intent)
-
-         */
+            val intent= Intent(this, DetailActivity::class.java)
+            intent.putExtra("subject", subjects.subject)
+            intent.putExtra("field", subjects.field)
+            intent.putExtra("form", subjects.form)
+            intent.putExtra("dayWeek",subjects.dayOfWeek)
+            intent.putExtra("hour",subjects.hour)
+            intent.putExtra("minute", subjects.minute)
+            intent.putExtra("dayStart", subjects.dayStart)
+            intent.putExtra("monthStart", subjects.monthStart)
+            intent.putExtra("yearStart", subjects.yearStart)
+            intent.putExtra("dayEnd", subjects.dayEnd)
+            intent.putExtra("monthEnd", subjects.monthEnd)
+            intent.putExtra("yearEnd", subjects.yearEnd)
+            intent.putExtra("time", subjects.howLong)
+            startActivity(intent)
     }
 
     private lateinit var bottomSheetFragment: EditSubject
