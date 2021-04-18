@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <Spinner
+        android:id="@+id/spinnerDay"
+        android:background="@drawable/dropdown_field"
+        android:layout_width="120dp"
+        android:layout_weight="1"
+        android:layout_marginTop="2dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:entries="@array/days"
+        tools:ignore="MissingConstraints">
+    </Spinner>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDayStartPicker"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:hint="wybierz"
+        android:inputType="none"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/dropdown_field"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDayEndPicker"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:hint="wybierz"
+        android:inputType="none"
+        android:layout_weight="1"
+        android:background="@drawable/dropdown_field"
+        tools:ignore="MissingConstraints" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

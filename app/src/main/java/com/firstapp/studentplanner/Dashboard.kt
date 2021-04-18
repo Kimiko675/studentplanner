@@ -76,7 +76,26 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
         bottomSheetFragment1.arguments = bundle
     }
 
+    override fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int) {
+        val bundle = Bundle()
+        bundle.putInt("dayStart",dayStart)
+        bundle.putInt("monthStart",monthStart)
+        bundle.putInt("yearStart",yearStart)
+        bottomSheetFragment1.arguments = bundle
+    }
+
+    override fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int) {
+        val bundle = Bundle()
+        bundle.putInt("day",dayEnd)
+        bundle.putInt("month",monthEnd)
+        bundle.putInt("year",yearEnd)
+        bottomSheetFragment1.arguments = bundle
+    }
+
     override fun onDismiss(dialog: DialogInterface?) {
-        bottomSheetFragment1.display()
+        bottomSheetFragment1.displayTime()
+        bottomSheetFragment1.displayDayStart()
+        bottomSheetFragment1.displayDayEnd()
+        bottomSheetFragment1.displayDaySingle()
     }
 }

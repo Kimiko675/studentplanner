@@ -146,6 +146,7 @@
             android:layout_marginTop="10dp">
 
             <RadioButton
+                android:id="@+id/radio_one"
                 android:layout_width="120dp"
                 android:textAlignment="center"
                 android:layout_weight="1"
@@ -159,6 +160,7 @@
                 android:layout_marginLeft="20dp"/>
 
             <RadioButton
+                android:id="@+id/radio_two"
                 android:layout_width="120dp"
                 android:textAlignment="center"
                 android:layout_height="40dp"
@@ -173,13 +175,14 @@
         </RadioGroup>
 
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/dropdown_field"
+        <LinearLayout
+            android:id="@+id/daysOrCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonAddSubject"

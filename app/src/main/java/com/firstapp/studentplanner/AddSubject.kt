@@ -14,8 +14,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_fields.*
+import kotlinx.android.synthetic.main.cyclical_subject.*
 import kotlinx.android.synthetic.main.dialog_add_field.*
 import kotlinx.android.synthetic.main.dialog_add_subject.*
+import kotlinx.android.synthetic.main.onetime_subject.*
 import kotlinx.android.synthetic.main.time_picker.*
 
 class AddSubject: BottomSheetDialogFragment() {
@@ -25,13 +27,19 @@ class AddSubject: BottomSheetDialogFragment() {
     private var hourSetted: Int = 0
     private var minuteSetted: Int = 0
 
-    public fun setHour(h: Int){
-        hourSetted = h
-    }
+    private var dayStartSetted: Int = 0
+    private var monthStartSetted: Int = 0
+    private var yearStartSetted: Int = 0
 
-    public fun setMinute(m: Int){
-        minuteSetted = m
-    }
+    private var dayEndSetted: Int = 0
+    private var monthEndSetted: Int = 0
+    private var yearEndSetted: Int = 0
+
+    var timeFlag: Boolean = false
+    var dayStartFlag: Boolean = false
+    var dayEndFlag: Boolean = false
+    var daySingleFlag: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +83,63 @@ class AddSubject: BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.dialog_add_subject, container, false)
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val layoutToInflate1 = this.layoutInflater.inflate(R.layout.cyclical_subject, null)
+        val layoutToInflate2 = this.layoutInflater.inflate(R.layout.onetime_subject, null)
 
 
+        radio_one.setOnClickListener {
+            daysOrCalendar.removeAllViews()
+            daysOrCalendar.addView(layoutToInflate1)
+
+            btnDayStartPicker.text = ""
+            btnDayEndPicker.text = ""
+
+            btnDayStartPicker.setOnClickListener {
+
+                val dayPicker1 = DayPicker()
+                activity?.let { it1 -> dayPicker1.show(it1.supportFragmentManager, "Dialog")
+                }
+
+                timeFlag = false
+                dayStartFlag = true
+                dayEndFlag = false
+                daySingleFlag = false
+            }
+
+            btnDayEndPicker.setOnClickListener {
+
+                val dayPicker2 = DayPicker()
+                activity?.let { it1 -> dayPicker2.show(it1.supportFragmentManager, "Dialog")
+                }
+
+                timeFlag = false
+                dayStartFlag = false
+                dayEndFlag = true
+                daySingleFlag = false
+            }
+        }
+
+        radio_two.setOnClickListener {
+            daysOrCalendar.removeAllViews()
+            daysOrCalendar.addView(layoutToInflate2)
+            btnSingleDayPicker.text = ""
+
+            btnSingleDayPicker.setOnClickListener {
+                val dayPicker3 = DayPicker()
+                activity?.let { it1 -> dayPicker3.show(it1.supportFragmentManager, "Dialog")
+                }
+
+                timeFlag = false
+                dayStartFlag = false
+                dayEndFlag = false
+                daySingleFlag = true
+            }
+        }
 
         btnTimePicker.setOnClickListener() {
 
@@ -87,21 +147,77 @@ class AddSubject: BottomSheetDialogFragment() {
 
             activity?.let { it1 -> timePicker.show(it1.supportFragmentManager, "Dialog")
             }
+
+            timeFlag = true
+            dayStartFlag = false
+            dayEndFlag = false
+            daySingleFlag = false
         }
 
         buttonAddSubject.setOnClickListener{
-            Log.d("First",hourSetted.toString())
-            Log.d("First",minuteSetted.toString())
+            // tutaj trzeba zrobic dodawanie przedmiotu do bazy
+
+            val name = editTextFieldNameSubject.text
+            val field = spinnerFields.selectedItem.toString()
+            val form = spinnerForm.selectedItem.toString()
+            val howLong = editTextSubjectTime.text
+
+            /* zmienne z pickerow
+            hourSetted / minuteSetted - godzina i minuta rozpoczecia
+            dayStartSetted / monthStartSetted / yearStartSetted - w cyklicznie > data pierwszego spotkania / w jednorazowo > data pojedynczego spotkania
+            dayEndSetted / monthEndSetted / yearEndSetted - w cylkicznie > data ostatniego spotkania
+
+
+
+             */
+
+
 
         }
     }
 
-    public fun display(){
-        hourSetted = arguments?.getInt("hour")!!
-        minuteSetted = arguments?.getInt("minute")!!
-        Log.d("First",hourSetted.toString())
-        Log.d("First",minuteSetted.toString())
+    public fun displayTime(){
 
-        btnTimePicker.text = hourSetted.toString() + ":" + minuteSetted.toString()
+        if (timeFlag && arguments != null) {
+            hourSetted = arguments?.getInt("hour")!!
+            minuteSetted = arguments?.getInt("minute")!!
+
+            btnTimePicker.text = hourSetted.toString() + ":" + minuteSetted.toString()
+        }
     }
+
+    public fun displayDayStart(){
+
+        if (dayStartFlag && arguments != null){
+            dayStartSetted = arguments?.getInt("dayStart")!!
+            monthStartSetted = arguments?.getInt("monthStart")!!
+            yearStartSetted = arguments?.getInt("yearStart")!!
+
+            btnDayStartPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
+        }
+    }
+
+    public fun displayDayEnd(){
+
+        if (dayEndFlag && arguments != null){
+            dayEndSetted = arguments?.getInt("dayStart")!!
+            monthEndSetted = arguments?.getInt("monthStart")!!
+            yearEndSetted = arguments?.getInt("yearStart")!!
+
+            btnDayEndPicker.text = dayEndSetted.toString() + "/" + monthEndSetted.toString() + "/" + yearEndSetted.toString()
+        }
+
+    }
+
+    public fun displayDaySingle(){
+        if (daySingleFlag && arguments != null){
+            dayStartSetted = arguments?.getInt("dayStart")!!
+            monthStartSetted = arguments?.getInt("monthStart")!!
+            yearStartSetted = arguments?.getInt("yearStart")!!
+
+            btnSingleDayPicker.text = dayStartSetted.toString() + "/" + monthStartSetted.toString() + "/" + yearStartSetted.toString()
+        }
+    }
+
+
 }
