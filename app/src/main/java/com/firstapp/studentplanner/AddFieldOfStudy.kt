@@ -26,22 +26,31 @@ class AddFieldOfStudy: BottomSheetDialogFragment() {
         buttonAddField.setOnClickListener {
 
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
+
             val field = editTextFieldName.text.trim().toString()
 
-            val ref = FirebaseDatabase.getInstance().getReference("Users")
-            val newRef = ref.push()
-            val key = newRef.key
-            if (key != null) {
-                ref.child(userId).child("Fields").child(key).setValue(field).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(context, "Dodano kierunek", Toast.LENGTH_LONG).show()
-                        dismiss()
-                    } else {
-                        Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
-                        dismiss()
+            var isNotEmptyField: Boolean = false
+
+            //sprawdzam czy jest wpisany kierunek
+            if (field.isNotEmpty()){ isNotEmptyField = true } else{ Toast.makeText(context, "Podaj kierunek", Toast.LENGTH_SHORT).show() }
+
+            if (isNotEmptyField){
+                val ref = FirebaseDatabase.getInstance().getReference("Users")
+                val newRef = ref.push()
+                val key = newRef.key
+                if (key != null) {
+                    ref.child(userId).child("Fields").child(key).setValue(field).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(context, "Dodano kierunek", Toast.LENGTH_LONG).show()
+                            dismiss()
+                        } else {
+                            Toast.makeText(context, "Błąd", Toast.LENGTH_LONG).show()
+                            dismiss()
+                        }
                     }
                 }
             }
+
         }
     }
 
