@@ -26,9 +26,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
 
     auth = FirebaseAuth.getInstance();
     val userId: String = FirebaseAuth.getInstance().currentUser.uid
-
     val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
-
     val list = mutableListOf<Subject>()
     llSubjects.layoutManager = LinearLayoutManager(this)
     llSubjects.adapter = SubjectsAdapter(list,this)
@@ -49,12 +47,9 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
             // Getting Post failed, log a message
             Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
         }
-
     }
     ref.addValueEventListener(postListener)
     }
-
-
 
     override fun onItemClick(subjects: Subject, position: Int) {
             val intent= Intent(this, DetailActivity::class.java)

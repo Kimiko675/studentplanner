@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_list_of_fields.*
+import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 import java.lang.reflect.Field
 
 class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
@@ -21,14 +22,10 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_fields)
-
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
-
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
-
         val list = mutableListOf<String>()
-        
         llFields.layoutManager = LinearLayoutManager(this)
         llFields.adapter = FieldsAdapter(list, this)
 
@@ -48,25 +45,54 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
             }
         }
         ref.addValueEventListener(postListener)
-
-
-
-
     }
 
     override fun onDeleteClick(field: String) {
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
-        val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
+        val ref2 = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
+        var flag: Boolean = false
+        val list = mutableListOf<Subject>()
 
-        val postListener = object : ValueEventListener {
+        val postListener2 = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                var counter = 0
+                list.clear()
                 for (i in dataSnapshot.children){
-                    if (field == i.value as String){
-                        ref.child(i.key as String).removeValue()
+                    val model= i.getValue(Subject::class.java)
+                    i.key?.let { Log.d("Tab", it) }
+                    list.add(model as Subject)
+                }
+
+                for (i in list){
+                    Log.d("PETLA", i.field.toString())
+                    if (i.field == field){
+                        Toast.makeText(this@ListOfFields, "Nie można usunąć kierunku gdy posiadasz podpięte do niego przedmioty", Toast.LENGTH_LONG).show()
+                        flag = true
+                        break
                     }
-                    counter++
+                }
+
+                if (!flag){
+                    val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
+                    var key: String = ""
+                    val postListener = object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Get Post object and use the values to update the UI
+                            for (i in dataSnapshot.children){
+                                if (field == i.value as String){
+                                    key = i.key as String
+                                    break
+                                }
+                            }
+                            ref.child(key).removeValue()
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            // Getting Post failed, log a message
+                            Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                        }
+                    }
+                    ref.addValueEventListener(postListener)
                 }
             }
 
@@ -75,8 +101,6 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        ref.addValueEventListener(postListener)
-
-        Toast.makeText(this, "Kierunek usunięty", Toast.LENGTH_SHORT).show()
+        ref2.addValueEventListener(postListener2)
     }
 }
