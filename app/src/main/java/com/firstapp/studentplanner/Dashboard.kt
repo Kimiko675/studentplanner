@@ -73,6 +73,11 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
             startActivity(intent);
         }
 
+        btnTimetable.setOnClickListener{
+            val intent = Intent(this, Calendar::class.java);
+            startActivity(intent);
+        }
+
         btnList.setOnClickListener{
             val intent = Intent(this, ListOfFields::class.java);
             startActivity(intent);
