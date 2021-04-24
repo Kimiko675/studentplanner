@@ -20,6 +20,9 @@ import com.google.rpc.context.AttributeContext
 import io.grpc.internal.SharedResourceHolder.get
 import kotlinx.android.synthetic.main.item.view.text_view_1
 import kotlinx.android.synthetic.main.item2.view.*
+import kotlinx.android.synthetic.main.item2.view.text_view_2
+import kotlinx.android.synthetic.main.item2.view.text_view_3
+import kotlinx.android.synthetic.main.item3.view.*
 import java.lang.reflect.Array.get
 import java.sql.Time
 import java.util.*
@@ -30,7 +33,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
     var listener: RecyclerViewClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetableAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item2,parent,false)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item3,parent,false)
         return ViewHolder(view)
     }
 
@@ -38,7 +41,8 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
         val currentItem = SubjectsList[position]
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
-        holder.textView3.text = currentItem.form.toString()
+        holder.textView3.text = currentItem.hour.toString()
+        holder.textView5.text = currentItem.minute.toString()
     }
 
     override fun getItemCount(): Int {
@@ -49,7 +53,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
         val textView: TextView = itemView.text_view_1
         val textView2: TextView = itemView.text_view_2
         val textView3: TextView = itemView.text_view_3
-
+        val textView5: TextView = itemView.text_view_5
     }
 }
 
