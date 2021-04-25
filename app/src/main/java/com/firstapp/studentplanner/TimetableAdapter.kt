@@ -39,10 +39,32 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
 
     override fun onBindViewHolder(holder: TimetableAdapter.ViewHolder, position: Int) {
         val currentItem = SubjectsList[position]
+        var number: Int = position+1
+
+        var time: String = currentItem.howLong.toString()
+        var timeHH: Int = time.toInt() / 60 + currentItem.hour
+        var timeMM: Int = time.toInt() % 60 + currentItem.minute
+        if (timeMM >= 60) {
+            timeHH += 1
+            timeMM -= 60
+        }
+
+        holder.textViewNr.text = number.toString()
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
         holder.textView3.text = currentItem.hour.toString()
-        holder.textView5.text = currentItem.minute.toString()
+        holder.textView33.text = currentItem.minute.toString()
+        if (timeHH == 0) {
+            holder.textView55.text = timeHH.toString() + "0"
+        }else if (timeHH >= 24){
+            timeHH -= 24
+            holder.textView55.text = "0" + timeHH.toString()
+        }
+        else holder.textView55.text = timeHH.toString()
+        if (timeMM == 0) {
+            holder.textView5.text = timeMM.toString() + "0"
+        }else holder.textView5.text = timeMM.toString()
+
     }
 
     override fun getItemCount(): Int {
@@ -50,9 +72,12 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val textViewNr: TextView = itemView.text_view_nr
         val textView: TextView = itemView.text_view_1
         val textView2: TextView = itemView.text_view_2
         val textView3: TextView = itemView.text_view_3
+        val textView33: TextView = itemView.text_view_33
+        val textView55: TextView = itemView.text_view_55
         val textView5: TextView = itemView.text_view_5
     }
 }

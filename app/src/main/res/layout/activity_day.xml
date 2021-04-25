@@ -10,13 +10,14 @@
 
     <TextView
         android:id="@+id/tvDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="79dp"
+        android:fontFamily="@font/baloo"
+        android:padding="15dp"
         android:text="text"
         android:textAlignment="center"
-        android:padding="20dp"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="35dp"
         tools:ignore="MissingConstraints">
 
     </TextView>
@@ -25,9 +26,10 @@
         android:id="@+id/llTimetable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:clipToPadding="false"
         android:layout_marginTop="80dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
