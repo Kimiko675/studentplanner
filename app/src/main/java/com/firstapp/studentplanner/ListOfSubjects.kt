@@ -53,10 +53,10 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
 
     override fun onItemClick(subjects: Subject, position: Int) {
             val intent= Intent(this, DetailActivity::class.java)
+            intent.putExtra("subject", subjects)
+        /*
             intent.putExtra("subject", subjects.subject)
             intent.putExtra("field", subjects.field)
-        /*
-
             intent.putExtra("form", subjects.form)
             intent.putExtra("dayWeek",subjects.dayOfWeek)
             intent.putExtra("hour",subjects.hour)
@@ -70,7 +70,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
             intent.putExtra("time", subjects.howLong)
 
          */
-            startActivity(intent)
+        startActivity(intent)
 
     }
 
