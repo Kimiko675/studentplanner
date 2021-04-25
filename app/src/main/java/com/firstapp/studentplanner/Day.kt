@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 import kotlinx.android.synthetic.main.dialog_add_subject.*
 
+
 class Day: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth;
     private var listOfForms = ArrayList<Form>()
@@ -31,10 +32,10 @@ class Day: AppCompatActivity() {
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
-            //.orderByChild("forms/")
         val list = mutableListOf<Subject>()
+        val list2 = mutableListOf<ListObject>()
         llTimetable.layoutManager = LinearLayoutManager(this)
-        llTimetable.adapter = TimetableAdapter(list,listOfForms)
+        llTimetable.adapter = TimetableAdapter(list2)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -44,12 +45,15 @@ class Day: AppCompatActivity() {
                     for (i in model?.forms!!){
                         day = dni[i.dayOfWeek]
                         if (day==pos) {
-                            list.add(model as Subject)
-                            listOfForms.add(i)
+                            val newListObject= ListObject(model, i,i.hour,i.minute)
+                            list2.add(newListObject)
                         }
                     }
+
                 }
-                llTimetable.adapter = TimetableAdapter(list,listOfForms)
+                list2.sortBy{it.minute}
+                list2.sortBy{it.hour}
+                llTimetable.adapter = TimetableAdapter(list2)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

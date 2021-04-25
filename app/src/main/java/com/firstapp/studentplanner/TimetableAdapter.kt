@@ -28,7 +28,7 @@ import java.sql.Time
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TimetableAdapter(private val SubjectsList: MutableList<Subject>, private val FormsList: ArrayList<Form>) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
+class TimetableAdapter(private val SubjectsList: MutableList<ListObject>) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
 
     var listener: RecyclerViewClickListener? = null
 
@@ -39,22 +39,20 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>, private v
 
     override fun onBindViewHolder(holder: TimetableAdapter.ViewHolder, position: Int) {
         val currentItem = SubjectsList[position]
-        val currentForm = FormsList[position]
         var number: Int = position+1
 
-        var time: String = currentForm.howLong.toString()
-        var timeHH: Int = time.toInt() / 60 + currentForm.hour
-        var timeMM: Int = time.toInt() % 60 + currentForm.minute
+        var time: String = currentItem.forms?.howLong.toString()
+        var timeHH: Int = time.toInt() / 60 + currentItem.hour!!
+        var timeMM: Int = time.toInt() % 60 + currentItem.minute!!
         if (timeMM >= 60) {
             timeHH += 1
             timeMM -= 60
         }
-        for (i in currentItem?.forms!!){
         holder.textViewNr.text = number.toString()
-        holder.textView.text = currentItem.subject
-        holder.textView2.text = currentItem.field
-        holder.textView3.text = currentForm.hour.toString()
-        holder.textView33.text = currentForm.minute.toString()
+        holder.textView.text = currentItem.subjects!!.subject
+        holder.textView2.text = currentItem.subjects.field
+        holder.textView3.text = currentItem.hour.toString()
+        holder.textView33.text = currentItem.minute.toString()
         if (timeHH == 0) {
             holder.textView55.text = timeHH.toString() + "0"
         }else if (timeHH >= 24){
@@ -65,7 +63,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>, private v
         if (timeMM == 0) {
             holder.textView5.text = timeMM.toString() + "0"
         }else holder.textView5.text = timeMM.toString()
-            }
+
 
     }
 
