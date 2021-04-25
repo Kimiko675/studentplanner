@@ -20,34 +20,36 @@ import kotlinx.android.synthetic.main.dialog_add_subject.*
 
 class Day: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth;
+    private var listOfForms = ArrayList<Form>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_day)
         val pos:String = intent.getStringExtra("position").toString()
         tvDay.text=pos
         var dni = arrayListOf<String>("poniedziałek","wtorek","środa","czwartek","piątek","sobota","niedziela")
-
-
+        var day=dni[1]
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
-            .orderByChild("hour")
+            //.orderByChild("forms/")
         val list = mutableListOf<Subject>()
         llTimetable.layoutManager = LinearLayoutManager(this)
-        llTimetable.adapter = TimetableAdapter(list)
+        llTimetable.adapter = TimetableAdapter(list,listOfForms)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 list.clear()
                 for (i in dataSnapshot.children){
                     val model= i.getValue(Subject::class.java)
-                    val day = dni[model?.dayOfWeek!!]
-                    if (day==pos) {
-                        i.key?.let { Log.d("Tab", it) }
-                        list.add(model as Subject)
+                    for (i in model?.forms!!){
+                        day = dni[i.dayOfWeek]
+                        if (day==pos) {
+                            list.add(model as Subject)
+                            listOfForms.add(i)
+                        }
                     }
                 }
-                llTimetable.adapter = TimetableAdapter(list)
+                llTimetable.adapter = TimetableAdapter(list,listOfForms)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -59,4 +61,5 @@ class Day: AppCompatActivity() {
     }
 
     }
+
 

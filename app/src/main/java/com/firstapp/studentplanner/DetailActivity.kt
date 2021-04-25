@@ -22,12 +22,11 @@ import java.util.Collections.list
 
 class DetailActivity : AppCompatActivity() {
 
-        private lateinit var auth: FirebaseAuth;
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_detail)
-            val s1:String = intent.getStringExtra("subject").toString()
+           /* val s1:String = intent.getStringExtra("subject").toString()
             val s2:String = intent.getStringExtra("field").toString()
             val i11:Int = intent.getIntExtra("form",0)
             val i10:Int = intent.getIntExtra("dayWeek", 0)
@@ -55,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
             textDayEnd.text = i7.toString()
             textMonthEnd.text = i8.toString()
             textYearEnd.text = i9.toString()
-            textTime.text = s3
+            textTime.text = s3*/
         }
     }
 

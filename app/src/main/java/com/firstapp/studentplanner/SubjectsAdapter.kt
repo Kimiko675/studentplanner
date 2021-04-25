@@ -54,7 +54,6 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textView: TextView = itemView.text_view_1
         val textView2: TextView = itemView.text_view_2
-        val textView3: TextView = itemView.text_view_3
         val imageButton: ImageButton = itemView.image_button_edit
         val imageButton2: ImageButton = itemView.image_button_delete
         fun initialize(subjects: Subject, action: OnSubjectItemClickListener){

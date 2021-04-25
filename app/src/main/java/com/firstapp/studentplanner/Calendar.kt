@@ -25,7 +25,6 @@ class Calendar : AppCompatActivity() {
         )
         var listView = findViewById<ListView>(R.id.DayList)
 
-        //jakis komentarz lol
 
 
         val adapter = ArrayAdapter<String>(this, R.layout.item_day, R.id.day_of_week, dni)

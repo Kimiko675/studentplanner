@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/image_view"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Line 1"
@@ -56,26 +56,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="45dp"
             android:layout_toEndOf="@+id/image_view"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Line 2"
             android:textColor="@color/blue"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />
 
-        <TextView
-            android:id="@+id/text_view_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="55dp"
-            android:layout_toEndOf="@+id/image_view"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="Line 3"
-            android:textColor="@color/blue"
-            android:textSize="15dp"
-            android:textStyle="bold" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

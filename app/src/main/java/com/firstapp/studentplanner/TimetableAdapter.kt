@@ -21,14 +21,14 @@ import io.grpc.internal.SharedResourceHolder.get
 import kotlinx.android.synthetic.main.item.view.text_view_1
 import kotlinx.android.synthetic.main.item2.view.*
 import kotlinx.android.synthetic.main.item2.view.text_view_2
-import kotlinx.android.synthetic.main.item2.view.text_view_3
+//import kotlinx.android.synthetic.main.item2.view.text_view_3
 import kotlinx.android.synthetic.main.item3.view.*
 import java.lang.reflect.Array.get
 import java.sql.Time
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
+class TimetableAdapter(private val SubjectsList: MutableList<Subject>, private val FormsList: ArrayList<Form>) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
 
     var listener: RecyclerViewClickListener? = null
 
@@ -39,21 +39,22 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
 
     override fun onBindViewHolder(holder: TimetableAdapter.ViewHolder, position: Int) {
         val currentItem = SubjectsList[position]
+        val currentForm = FormsList[position]
         var number: Int = position+1
 
-        var time: String = currentItem.howLong.toString()
-        var timeHH: Int = time.toInt() / 60 + currentItem.hour
-        var timeMM: Int = time.toInt() % 60 + currentItem.minute
+        var time: String = currentForm.howLong.toString()
+        var timeHH: Int = time.toInt() / 60 + currentForm.hour
+        var timeMM: Int = time.toInt() % 60 + currentForm.minute
         if (timeMM >= 60) {
             timeHH += 1
             timeMM -= 60
         }
-
+        for (i in currentItem?.forms!!){
         holder.textViewNr.text = number.toString()
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
-        holder.textView3.text = currentItem.hour.toString()
-        holder.textView33.text = currentItem.minute.toString()
+        holder.textView3.text = currentForm.hour.toString()
+        holder.textView33.text = currentForm.minute.toString()
         if (timeHH == 0) {
             holder.textView55.text = timeHH.toString() + "0"
         }else if (timeHH >= 24){
@@ -64,6 +65,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<Subject>) : Recycle
         if (timeMM == 0) {
             holder.textView5.text = timeMM.toString() + "0"
         }else holder.textView5.text = timeMM.toString()
+            }
 
     }
 

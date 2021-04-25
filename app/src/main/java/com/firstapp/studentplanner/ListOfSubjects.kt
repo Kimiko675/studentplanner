@@ -68,9 +68,10 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
             intent.putExtra("monthEnd", subjects.monthEnd)
             intent.putExtra("yearEnd", subjects.yearEnd)
             intent.putExtra("time", subjects.howLong)
-            startActivity(intent)
 
          */
+            startActivity(intent)
+
     }
 
     private lateinit var bottomSheetFragment: EditSubject
