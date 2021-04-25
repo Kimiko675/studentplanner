@@ -11,6 +11,8 @@
         android:theme="@style/Theme.Studentplanner">
         <activity android:name=".Day"></activity>
         <activity android:name=".Calendar" />
+        <activity android:name=".EditExistingSubject"></activity>
+        <activity android:name=".AddNewSubject" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".ListOfSubjects" />
         <activity android:name=".ListOfFields" />

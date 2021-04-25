@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_rectangle_all_corners_gray"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="40dp"
+            android:text="Forma przedmiotu"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spinnerAddForm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:entries="@array/formsOfSubject"
+
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_rectangle_all_corners_lightgray"
+            android:padding="10dp"></Spinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="rozpoczęcie"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="czas trwania"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonPickTime"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+
+                android:layout_weight="1"
+                android:background="@drawable/rounded_rectangle_all_corners_lightgray"
+                android:hint="wybierz"
+                android:inputType="none"
+                android:paddingLeft="20dp"
+                android:textAlignment="viewStart"
+                android:textColorHint="@color/gray" />
+
+            <EditText
+                android:id="@+id/edittextHowLong"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_solid"
+                android:hint="wprowadź"
+
+                android:outlineSpotShadowColor="@color/white"
+
+                android:paddingLeft="20dp"
+                android:shadowColor="@color/gray"
+                android:textColorHint="@color/gray"
+                android:textSize="15dp" />
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:text="dzień"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spinnerDayOfWeek"
+            android:background="@drawable/rounded_rectangle_all_corners_lightgray"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:entries="@array/days">
+        </Spinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:text="od"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1"
+                android:text="do"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/linearlayoutDaysOrDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonDayStartPicker"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="wybierz"
+                android:inputType="none"
+                android:textAlignment="viewStart"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/rounded_rectangle_all_corners_lightgray"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonDayEndPicker"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="wybierz"
+                android:textAlignment="viewStart"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:inputType="none"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_rectangle_all_corners_lightgray"
+                 />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textviewRemoveForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="usuń formę"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

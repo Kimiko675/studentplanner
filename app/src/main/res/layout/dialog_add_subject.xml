@@ -71,7 +71,7 @@
 
             <Spinner
                 android:id="@+id/spinnerFields"
-                android:background="@drawable/dropdown_field"
+                android:background="@drawable/rounded_rectangle_all_corners_gray"
                 android:layout_width="120dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
@@ -85,7 +85,7 @@
 
             <Spinner
                 android:id="@+id/spinnerForm"
-                android:background="@drawable/dropdown_field"
+                android:background="@drawable/rounded_rectangle_all_corners_gray"
                 android:layout_width="120dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
@@ -122,7 +122,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/dropdown_field"
+                android:background="@drawable/rounded_rectangle_all_corners_gray"
                 />
 
             <EditText

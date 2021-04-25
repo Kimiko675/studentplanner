@@ -60,7 +60,8 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
         btnAdd.setOnClickListener{
             if (list.isNotEmpty()) {
 
-                bottomSheetFragment1.show(supportFragmentManager,"BottomSheetDialog")
+                val intent = Intent(this,AddNewSubject::class.java);
+                startActivity(intent);
             }else {
                 Toast.makeText(this, "Najpier dodaj kierunek", Toast.LENGTH_SHORT).show()
             }

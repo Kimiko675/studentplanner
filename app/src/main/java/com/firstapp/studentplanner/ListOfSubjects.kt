@@ -55,6 +55,8 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
             val intent= Intent(this, DetailActivity::class.java)
             intent.putExtra("subject", subjects.subject)
             intent.putExtra("field", subjects.field)
+        /*
+
             intent.putExtra("form", subjects.form)
             intent.putExtra("dayWeek",subjects.dayOfWeek)
             intent.putExtra("hour",subjects.hour)
@@ -67,13 +69,22 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
             intent.putExtra("yearEnd", subjects.yearEnd)
             intent.putExtra("time", subjects.howLong)
             startActivity(intent)
+
+         */
     }
 
     private lateinit var bottomSheetFragment: EditSubject
 
     override fun onEditClick(subjects: Subject) {
+
+        val intent= Intent(this, EditExistingSubject::class.java)
+        intent.putExtra("subject", subjects)
+        startActivity(intent)
+        /*
         bottomSheetFragment = EditSubject(subjects)
         bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+
+         */
     }
 
     override fun onDeleteClick(id: String) {
@@ -109,9 +120,12 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
+        /*
         bottomSheetFragment.displayTime()
         bottomSheetFragment.displayDayStart()
         bottomSheetFragment.displayDayEnd()
         bottomSheetFragment.displayDaySingle()
+
+         */
     }
 }

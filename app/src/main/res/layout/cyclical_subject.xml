@@ -8,7 +8,7 @@
 
     <Spinner
         android:id="@+id/spinnerDay"
-        android:background="@drawable/dropdown_field"
+        android:background="@drawable/rounded_rectangle_all_corners_gray"
         android:layout_width="120dp"
         android:layout_weight="1"
         android:layout_marginTop="2dp"
@@ -28,7 +28,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
-        android:background="@drawable/dropdown_field"
+        android:background="@drawable/rounded_rectangle_all_corners_gray"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -39,7 +39,7 @@
         android:hint="data końca"
         android:inputType="none"
         android:layout_weight="1"
-        android:background="@drawable/dropdown_field"
+        android:background="@drawable/rounded_rectangle_all_corners_gray"
         tools:ignore="MissingConstraints" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -37,7 +37,7 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
         val currentItem = SubjectsList[position]
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
-        holder.textView3.text = currentItem.form.toString()
+        //holder.textView3.text = currentItem.form.toString()
         holder.imageButton.setOnClickListener{
             listener?.onRecyclerViewItemClicked(it,SubjectsList[position])
         }
@@ -63,7 +63,7 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
             textView2.text = subjects.field
 
             var forms = arrayListOf<String>("wykład","ćwiczenia","seminarium","spotkanie","zebranie","rejestracja","inne")
-            textView3.text = forms[subjects.form]
+            //textView3.text = forms[subjects.form]
 
             itemView.setOnClickListener{
                 action.onItemClick(subjects, adapterPosition)

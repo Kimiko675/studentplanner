@@ -9,7 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#7343FF</color>
     <color name="blue">#3252FF</color>
+    <color name="dark_blue">#16215A</color>
+    <color name="blue_two">#3851D8</color>
     <color name="turquoise">#40B3FF</color>
-    <color name="gray">#5A5A5A</color>
-    <color name="light_gray">#CCCCCC</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="light_gray">#DDDDDD</color>
+    <color name="dark_gray">#5A5A5A</color>
 </resources>

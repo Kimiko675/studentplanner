@@ -233,6 +233,7 @@ class AddSubject: BottomSheetDialogFragment() {
             if (hourSetted != -1){ isNotEmptyHour = true }else{ Toast.makeText(context, "Podaj godzinę rozpoczęcia", Toast.LENGTH_SHORT).show() }
             if (dayStartSetted != 0){ isNotEmptyDayStart = true }else{ Toast.makeText(context, "Podaj datę rozpoczęcia", Toast.LENGTH_SHORT).show() }
             if (dayEndSetted != 0){ isNotEmptyDayEnd = true }else{ Toast.makeText(context, "Podaj datę zakończenia", Toast.LENGTH_SHORT).show() }
+            /*
 
             if (isNotEmptyName && isNotEmptyHowLong && isNotEmptyHour && isNotEmptyDayStart && isNotEmptyDayEnd){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
@@ -252,6 +253,8 @@ class AddSubject: BottomSheetDialogFragment() {
                 }
                 //dismiss()
             }
+
+             */
 
 
 

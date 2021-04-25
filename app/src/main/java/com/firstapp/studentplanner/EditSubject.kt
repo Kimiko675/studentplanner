@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.onetime_subject.*
 //val Pid: String? = null ,val Psubject: String? = null, val Pfield: String? = null, val Pform: String? = null, val PhowLong: String? = null, val isCyclicalP: Boolean = true, val Phour: Int = 0, val Pminute: Int = 0, val PdayOfWeek: String? = null, val PdayStart: Int = 0, val PmonthStart: Int = 0, val PyearStart: Int = 0, val PdayEnd: Int = 0, val PmonthEnd: Int = 0, val PyearEnd: Int = 0, val Pmark: Int = 0
 
 class EditSubject(subjects: Subject): BottomSheetDialogFragment() {
+    /*
 
     private lateinit var auth: FirebaseAuth;
 
@@ -370,6 +371,8 @@ class EditSubject(subjects: Subject): BottomSheetDialogFragment() {
         }
     }
 
+
+     */
 
 
 
