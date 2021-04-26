@@ -13,7 +13,7 @@
         android:layout_height="117dp"
         android:fontFamily="@font/changa_semibold"
         android:padding="21dp"
-        android:text="Plan zajęć"
+        android:text="Aktualny tydzień"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="45dp"
