@@ -37,7 +37,7 @@ class DayPicker: DialogFragment() {
             month = dpDayPicker.month
             year = dpDayPicker.year
 
-            picker.getDayStart(day,month,year)
+            picker.getDayStart(day,month + 1,year)
             dismiss()
         }
     }
