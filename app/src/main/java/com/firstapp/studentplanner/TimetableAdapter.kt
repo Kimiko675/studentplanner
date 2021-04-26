@@ -48,23 +48,27 @@ class TimetableAdapter(private val SubjectsList: MutableList<ListObject>) : Recy
             timeHH += 1
             timeMM -= 60
         }
+        var thisForm: String = currentItem.forms?.form.toString()
+
         holder.textViewNr.text = number.toString()
         holder.textView.text = currentItem.subjects!!.subject
-        holder.textView2.text = currentItem.subjects.field
+        if (thisForm == "0") holder.textView2.text = "wykład"
+        else if (thisForm == "1") holder.textView2.text = "ćwiczenia"
+        else if (thisForm == "2") holder.textView2.text = "seminarium"
+        else if (thisForm == "3") holder.textView2.text = "spotkanie"
+        else if (thisForm == "4") holder.textView2.text = "zebranie"
+        else if (thisForm == "5") holder.textView2.text = "rejestracja"
+        else if (thisForm == "6") holder.textView2.text = "inne"
         holder.textView3.text = currentItem.hour.toString()
         holder.textView33.text = currentItem.minute.toString()
-        if (timeHH == 0) {
-            holder.textView55.text = timeHH.toString() + "0"
-        }else if (timeHH >= 24){
+        if (timeHH == 0) holder.textView55.text = timeHH.toString() + "0"
+        else if (timeHH >= 24){
             timeHH -= 24
             holder.textView55.text = "0" + timeHH.toString()
         }
         else holder.textView55.text = timeHH.toString()
-        if (timeMM == 0) {
-            holder.textView5.text = timeMM.toString() + "0"
-        }else holder.textView5.text = timeMM.toString()
-
-
+        if (timeMM < 10) holder.textView5.text = "0" + timeMM.toString()
+        else holder.textView5.text = timeMM.toString()
     }
 
     override fun getItemCount(): Int {

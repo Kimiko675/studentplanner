@@ -31,12 +31,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/image_view"
-            android:fontFamily="sans-serif-condensed-light"
+            android:fontFamily="@font/changa_semibold"
             android:paddingLeft="20dp"
-            android:paddingTop="13dp"
+            android:paddingTop="6dp"
             android:text="Line 1"
             android:textColor="@color/purple"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

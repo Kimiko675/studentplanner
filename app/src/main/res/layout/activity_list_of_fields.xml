@@ -9,11 +9,12 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="78dp"
+        android:fontFamily="@font/baloo"
+        android:padding="22dp"
         android:text="kierunki"
         android:textAlignment="center"
-        android:padding="20dp"
         android:textColor="@color/white"
         android:textSize="30dp"
         tools:ignore="MissingConstraints">
