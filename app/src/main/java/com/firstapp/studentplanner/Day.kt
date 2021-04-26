@@ -36,7 +36,7 @@ class Day: AppCompatActivity() {
         else day2-=1
 
         val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
+        val month = c.get(Calendar.MONTH)+1
         val dayS =c.get(Calendar.DAY_OF_MONTH)-(day2-1) //data pierwszego dnia w tygodniu
         val dayy = c.get(Calendar.DAY_OF_MONTH) //obecny dzien
         val daysInMonth: Int = c.getActualMaximum(Calendar.DAY_OF_MONTH) //ilosc dni w miesiacu
