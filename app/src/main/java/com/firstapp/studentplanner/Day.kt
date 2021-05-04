@@ -65,11 +65,11 @@ class Day: AppCompatActivity() {
                     for (i in model?.forms!!){
                         day = dni[i.dayOfWeek]
                         if(day==pos){
-                            if(i.yearStart<year && i.yearEnd>year) {
+                            //if(i.yearStart<year && i.yearEnd>year) {
                                 val newListObject= ListObject(model, i, i.hour, i.minute)
                                 list2.add(newListObject)
-                            }
-                            else if(i.yearStart==year && i.yearEnd==year){
+                            //}
+                            /*else if(i.yearStart==year && i.yearEnd==year){
                                 if(i.monthStart<month && i.monthEnd>month) {
                                     val newListObject= ListObject(model, i, i.hour, i.minute)
                                     list2.add(newListObject)
@@ -81,7 +81,7 @@ class Day: AppCompatActivity() {
                                             list2.add(newListObject)
                                     }
                                 }
-                                /*else if(i.monthStart==month && i.monthEnd>month){
+                                else if(i.monthStart==month && i.monthEnd>month){
                                     if (i.dayStart<=dayy &&  i.dayEnd>=dayE){
 
                                         val newListObject= ListObject(model, i, i.hour, i.minute)
@@ -95,7 +95,7 @@ class Day: AppCompatActivity() {
                                         list2.add(newListObject)
                                     }
                                 }*/
-                            }
+                            //}
                         }
                     }
 

@@ -22,18 +22,19 @@
 
     </TextView>
 
-    <ListView
-        android:id="@+id/DayList"
-        android:layout_width="402dp"
-        android:layout_height="611dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="15dp"
-        android:listSelector="@color/cardview_shadow_start_color"></ListView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/day_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:clipToPadding="false"
+        android:layout_marginTop="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
 </RelativeLayout>

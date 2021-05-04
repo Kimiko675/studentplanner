@@ -20,5 +20,17 @@
             android:textColor="@color/purple"
             android:textSize="31dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/day_size"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:paddingLeft="300dp"
+            android:paddingTop="4dp"
+            android:text="Line"
+            android:textColor="@color/purple"
+            android:textSize="31dp"
+            android:textStyle="bold" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
