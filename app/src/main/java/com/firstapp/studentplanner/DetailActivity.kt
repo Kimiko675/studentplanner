@@ -3,6 +3,11 @@ package com.firstapp.studentplanner
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.widget.DialogTitle
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -25,7 +30,7 @@ import java.util.Collections.list
 class DetailActivity : AppCompatActivity() {
 
     private var listOfForms = ArrayList<Form>()
-    private var myAdapter = FormDetalesAdapter(listOfForms)
+    //private var myAdapter = FormDetalesAdapter(listOfForms)
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -40,11 +45,26 @@ class DetailActivity : AppCompatActivity() {
                 listOfForms.add(i)
             }
 
-            myAdapter.notifyDataSetChanged()
+            //val Frag1 = FormsFragment(listOfForms)
 
 
-            recyclerviewListOfAllForms.adapter = myAdapter
-            recyclerviewListOfAllForms.layoutManager = LinearLayoutManager(this)
+
+            val viewPager = ViewPagerAdapter(supportFragmentManager)
+            viewPager.addFragment(FormsFragment(listOfForms), "Formy")
+            viewPager.addFragment(MarksFragment(), "Oceny")
+            viewPagerFormsMarks.adapter = viewPager
+            navigation_menu.setupWithViewPager(viewPagerFormsMarks)
+
+            //myAdapter.notifyDataSetChanged()
+
+
+            //recyclerviewListOfAllForms.adapter = myAdapter
+            //recyclerviewListOfAllForms.layoutManager = LinearLayoutManager(this)
+
+
+
+
+
 
             /* val s1:String = intent.getStringExtra("subject").toString()
              val s2:String = intent.getStringExtra("field").toString()
@@ -76,6 +96,29 @@ class DetailActivity : AppCompatActivity() {
              textYearEnd.text = i9.toString()
              textTime.text = s3*/
         }
+
+    class ViewPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+        private val mFragmentList = ArrayList<Fragment>()
+        private val mFragmentTitleList = ArrayList<String>()
+
+        override fun getCount(): Int {
+            return mFragmentList.size
+        }
+
+        override fun getItem(position: Int): Fragment{
+            return mFragmentList[position]
+        }
+
+        fun addFragment(fragment: Fragment, title: String){
+            mFragmentList.add(fragment)
+            mFragmentTitleList.add(title)
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            return mFragmentTitleList[position]
+        }
     }
+}
 
 
