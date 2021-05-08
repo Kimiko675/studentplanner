@@ -1,5 +1,6 @@
 package com.firstapp.studentplanner
 
+import android.R.attr.data
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_calendar.*
 import kotlinx.android.synthetic.main.activity_day.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.Calendar
 
 
 class Calendar : AppCompatActivity(), OnDayItemClickListener {
@@ -35,27 +35,44 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
         val list = mutableListOf<DayObject>()
+        val list2 = mutableListOf<HourObject>()
         day_list.layoutManager = LinearLayoutManager(this)
-        day_list.adapter = DayAdapter(list,this)
+        day_list.adapter = DayAdapter(list, this)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.clear()
                 for (j in dni) {
+                    list2.clear()
                     size = 0
-                    for (i in dataSnapshot.children) {
-                        val model = i.getValue(Subject::class.java)
+                    for (k in dataSnapshot.children) {
+                        val model = k.getValue(Subject::class.java)
                         for (i in model?.forms!!) {
                             day = dni[i.dayOfWeek]
                             if (day == j) {
                                 size++
+                                val newListObject2 = HourObject(i.hour, i.minute)
+                                list2.add(newListObject2)
                             }
-                            print(size)
+                            else{
+                                val newListObject2 = HourObject(0, 0)
+                                list2.add(newListObject2)
+                            }
                         }
                     }
-                    val newListObject = DayObject(j, size)
+                    list2.sortBy{it.minute}
+                    list2.sortBy{it.hour}
+                    var newOb =HourObject(0,0)
+                    var newOb2 =HourObject(list2.last().hour,list2.last().minute)
+                    for(k in list2){
+                        if(k.hour!=0 || k.minute!=0){
+                            newOb =HourObject(k.hour,k.minute)
+                            break
+                        }
+                    }
+                    val newListObject = DayObject(j, size, newOb,newOb2)
                     list.add(newListObject)
                 }
-                day_list.adapter = DayAdapter(list,this@Calendar)
+                day_list.adapter = DayAdapter(list, this@Calendar)
             }
 
 
@@ -68,10 +85,14 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
         }
 
         override fun onItemClick(day_object: DayObject, position: Int) {
-            val intent= Intent(this, Day::class.java)
-            intent.putExtra("position", day_object.day)
-            startActivity(intent)
-
+            if(day_object.size!=0){
+                val intent= Intent(this, Day::class.java)
+                intent.putExtra("position", day_object.day)
+                startActivity(intent)
+            }
+            else {
+                Toast.makeText(this, "Brak zajęć", Toast.LENGTH_SHORT).show()
+            }
         }
 
 }

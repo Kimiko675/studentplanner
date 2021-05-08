@@ -1,7 +1,9 @@
 package com.firstapp.studentplanner
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +19,7 @@ import java.util.*
 import java.util.Calendar
 
 
-class Day: AppCompatActivity() {
+class Day: AppCompatActivity(), OnSubItemClickListener {
 
     private lateinit var auth: FirebaseAuth;
     private var c: Calendar = Calendar.getInstance()
@@ -55,7 +57,7 @@ class Day: AppCompatActivity() {
         val list = mutableListOf<Subject>()
         val list2 = mutableListOf<ListObject>()
         llTimetable.layoutManager = LinearLayoutManager(this)
-        llTimetable.adapter = TimetableAdapter(list2)
+        llTimetable.adapter = TimetableAdapter(list2,this)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -102,7 +104,7 @@ class Day: AppCompatActivity() {
                 }
                 list2.sortBy{it.minute}
                 list2.sortBy{it.hour}
-                llTimetable.adapter = TimetableAdapter(list2)
+                llTimetable.adapter = TimetableAdapter(list2,this@Day)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -113,6 +115,12 @@ class Day: AppCompatActivity() {
         ref.addValueEventListener(postListener)
     }
 
+    override fun onItemClick(listObject: ListObject, position: Int) {
+        val intent= Intent(this, DetailActivity::class.java)
+        intent.putExtra("subject", listObject.subjects)
+        startActivity(intent)
     }
+}
+
 
 
