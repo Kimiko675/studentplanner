@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -98,6 +99,8 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
             val name = edittextAddSubjectName.text.toString()
+            val ects = edittextECTS.text.toString().toInt()
+
             val field = spinnerAddSubjectField.selectedItem.toString()
 
             if (name == ""){
@@ -165,7 +168,7 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val newRef = ref.push()
                 val key = newRef.key
-                val newSubject = Subject(key, name, field, listOfForms, 0)
+                val newSubject = Subject(key, name, field, listOfForms, 0f, ects)
                 if (key != null) {
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {

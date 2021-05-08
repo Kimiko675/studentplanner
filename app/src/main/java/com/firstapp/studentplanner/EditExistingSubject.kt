@@ -37,6 +37,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
 
 
         edittextAddSubjectName.setText(sub.subject)
+        edittextECTS.setText(sub.ects.toString().toInt())
 
 
         for (i in sub.forms!!){
@@ -91,6 +92,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
             val name = edittextAddSubjectName.text.toString()
+            val ects = edittextECTS.text.toString().toInt()
             val field = spinnerAddSubjectField.selectedItem.toString()
 
             if (name == ""){
@@ -157,7 +159,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
             if (isEveryThingOk){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val key = sub.id
-                val newSubject = Subject(key, name, field, listOfForms, 0)
+                val newSubject = Subject(key, name, field, listOfForms, 0f, ects)
                 if (key != null) {
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {

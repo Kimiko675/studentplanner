@@ -21,22 +21,29 @@ import kotlinx.android.synthetic.main.activity_create_subject.editForm
 import kotlinx.android.synthetic.main.activity_create_subject.editSubject
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
+import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.detales_about_subject.*
 import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.item.view.text_view_1
 import kotlinx.android.synthetic.main.item2.view.*
 import java.util.Collections.list
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), GetPickedMark {
 
     private var listOfForms = ArrayList<Form>()
+    private lateinit var auth: FirebaseAuth;
+    lateinit var userId: String
+    private lateinit var sub: Subject
     //private var myAdapter = FormDetalesAdapter(listOfForms)
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.detales_about_subject)
 
-            val sub: Subject = intent.getSerializableExtra("subject") as Subject;
+            auth = FirebaseAuth.getInstance();
+            userId = FirebaseAuth.getInstance().currentUser.uid
+
+            sub = intent.getSerializableExtra("subject") as Subject;
 
             tvTitleNameOfSubject.text = sub.subject
             textviewField.text = sub.field
@@ -51,9 +58,11 @@ class DetailActivity : AppCompatActivity() {
 
             val viewPager = ViewPagerAdapter(supportFragmentManager)
             viewPager.addFragment(FormsFragment(listOfForms), "Formy")
-            viewPager.addFragment(MarksFragment(), "Oceny")
+            viewPager.addFragment(MarksFragment(sub), "Oceny")
             viewPagerFormsMarks.adapter = viewPager
             navigation_menu.setupWithViewPager(viewPagerFormsMarks)
+
+
 
             //myAdapter.notifyDataSetChanged()
 
@@ -118,6 +127,13 @@ class DetailActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence? {
             return mFragmentTitleList[position]
         }
+    }
+
+    override fun getMark(mark: Float) {
+        textviewMark.text = mark.toString()
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        val key = sub.id.toString()
+        ref.child(userId).child("Subjects").child(key).child("mark").setValue(mark)
     }
 }
 

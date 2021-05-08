@@ -8,3 +8,7 @@ public interface GetPickedTime {
     public fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int)
     public fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int)
 }
+
+public interface GetPickedMark {
+    fun getMark(mark: Float)
+}

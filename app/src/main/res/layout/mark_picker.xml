@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:background="@drawable/white_solid"
+        tools:ignore="MissingConstraints">
+
+        <CheckBox
+            android:id="@+id/checkboxMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posiadam ocenę"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="15dp"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:value="2.0"
+            android:valueFrom="2.0"
+            android:valueTo="5.0"
+            android:stepSize="0.5"
+            android:visibility="invisible"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnOKMarkPicker"
+            android:background="@drawable/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textSize="15dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
