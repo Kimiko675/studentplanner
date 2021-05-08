@@ -28,7 +28,7 @@ import java.sql.Time
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TimetableAdapter(private val SubjectsList: MutableList<ListObject>) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
+class TimetableAdapter(private val SubjectsList: MutableList<ListObject>, var clickListener: OnSubItemClickListener) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
 
     var listener: RecyclerViewClickListener? = null
 
@@ -69,6 +69,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<ListObject>) : Recy
         else holder.textView55.text = timeHH.toString()
         if (timeMM < 10) holder.textView5.text = "0" + timeMM.toString()
         else holder.textView5.text = timeMM.toString()
+        holder.initialize(SubjectsList.get(position),clickListener)
     }
 
     override fun getItemCount(): Int {
@@ -83,7 +84,16 @@ class TimetableAdapter(private val SubjectsList: MutableList<ListObject>) : Recy
         val textView33: TextView = itemView.text_view_33
         val textView55: TextView = itemView.text_view_55
         val textView5: TextView = itemView.text_view_5
+        fun initialize(listObject: ListObject, action: OnSubItemClickListener){
+            itemView.setOnClickListener{
+                action.onItemClick(listObject, adapterPosition)
+            }
+        }
     }
+}
+
+interface OnSubItemClickListener{
+    fun onItemClick(listObject: ListObject, position: Int)
 }
 
 

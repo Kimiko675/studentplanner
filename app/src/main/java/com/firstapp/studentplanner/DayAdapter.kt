@@ -41,8 +41,25 @@ class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener:
     override fun onBindViewHolder(holder: DayAdapter.ViewHolder, position: Int) {
         val currentItem = DayList[position]
         holder.textView.text = currentItem.day.toString()
-        if(currentItem.size == 0) holder.textView2.text = " "
-        else holder.textView2.text = currentItem.size.toString()
+        holder.textView2.text = currentItem.size.toString()
+        if(currentItem.list_object1!!.hour==0 && currentItem.list_object1!!.minute==0){
+            holder.textView3.text = " "
+            holder.textView4.text = " "
+            holder.textView5.text = "-"
+        }
+        else {
+            holder.textView3.text = currentItem.list_object1.hour.toString()
+            holder.textView4.text = currentItem.list_object1.minute.toString()
+        }
+        if(currentItem.list_object2!!.hour==0 && currentItem.list_object2!!.minute==0){
+            holder.textView6.text = " "
+            holder.textView7.text = " "
+            holder.textView8.text = "-"
+        }
+        else {
+            holder.textView6.text = currentItem.list_object2.hour.toString()
+            holder.textView7.text = currentItem.list_object2.minute.toString()
+        }
         holder.initialize(DayList.get(position),clickListener)
     }
 
@@ -53,6 +70,12 @@ class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener:
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textView: TextView = itemView.day_of_week
         val textView2: TextView = itemView.day_size
+        val textView3: TextView = itemView.hour1
+        val textView4: TextView = itemView.minute1
+        val textView5: TextView = itemView.kropki
+        val textView6: TextView = itemView.hour2
+        val textView7: TextView = itemView.minute2
+        val textView8: TextView = itemView.kropki2
         fun initialize(day_object: DayObject, action: OnDayItemClickListener){
             itemView.setOnClickListener{
                 action.onItemClick(day_object, adapterPosition)
