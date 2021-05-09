@@ -24,7 +24,7 @@ import java.lang.reflect.Array.get
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickListener: OnSubjectItemClickListener) : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
+class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener: OnSubjectItemClickListener) : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 
     var listener: RecyclerViewClickListener? = null
 
@@ -44,7 +44,7 @@ class SubjectsAdapter(private val SubjectsList: MutableList<Subject>, var clickL
         holder.imageButton2.setOnClickListener{
             listener?.onRecyclerViewItemClicked(it,SubjectsList[position])
         }
-        holder.initialize(SubjectsList.get(position),clickListener)
+        holder.initialize(SubjectsList[position],clickListener)
     }
 
     override fun getItemCount(): Int {

@@ -168,7 +168,7 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val newRef = ref.push()
                 val key = newRef.key
-                val newSubject = Subject(key, name, field, listOfForms, 0f, ects)
+                val newSubject = Subject(key, name, field, listOfForms, 0f, ects, null)
                 if (key != null) {
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {

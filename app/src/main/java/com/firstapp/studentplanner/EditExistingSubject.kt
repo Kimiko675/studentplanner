@@ -159,7 +159,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
             if (isEveryThingOk){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val key = sub.id
-                val newSubject = Subject(key, name, field, listOfForms, 0f, ects)
+                val newSubject = Subject(key, name, field, listOfForms, sub.mark, ects, sub.achievement)
                 if (key != null) {
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
