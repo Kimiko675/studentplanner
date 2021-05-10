@@ -34,7 +34,12 @@ class MarksFragment(subject: Subject, userID: String): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.detales_about_marks,container,false)
-        view.findViewById<TextView>(R.id.textviewMark).text = sub.mark.toString()
+
+        if (sub.mark == 0f){
+            view.findViewById<TextView>(R.id.textviewMark).text = "-"
+        }else{
+            view.findViewById<TextView>(R.id.textviewMark).text = sub.mark.toString()
+        }
         view.findViewById<TextView>(R.id.textviewECTS).text = sub.ects.toString()
         /*
 

@@ -37,7 +37,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
 
 
         edittextAddSubjectName.setText(sub.subject)
-        edittextECTS.setText(sub.ects.toString().toInt())
+        edittextECTS.setText("" + sub.ects)
 
 
         for (i in sub.forms!!){

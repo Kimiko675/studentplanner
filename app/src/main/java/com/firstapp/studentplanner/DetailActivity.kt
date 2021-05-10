@@ -126,7 +126,11 @@ class DetailActivity : AppCompatActivity(), GetPickedMark, GetAchievement, OnAch
     }
 
     override fun getMark(mark: Float) {
-        textviewMark.text = mark.toString()
+        if (mark == 0f){
+            textviewMark.text = "-"
+        }else{
+            textviewMark.text = mark.toString()
+        }
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         val key = sub.id.toString()
         ref.child(userId).child("Subjects").child(key).child("mark").setValue(mark)

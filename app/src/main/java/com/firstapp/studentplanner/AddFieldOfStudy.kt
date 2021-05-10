@@ -27,7 +27,7 @@ class AddFieldOfStudy: BottomSheetDialogFragment() {
 
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
-            val field = editTextFieldName.text.trim().toString()
+            val field = editTextFieldName.text.trim().toString() + " sem. " + editTextTerm.text.trim().toString()
 
             var isNotEmptyField: Boolean = false
 
