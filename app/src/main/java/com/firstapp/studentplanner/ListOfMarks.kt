@@ -20,7 +20,7 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
     var markSum: Float = 0f
     var resultAverage: Float = 0f
     var emptyMark: Boolean = false
-
+    var floatEctsSum: Float = 0f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,8 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
                             if (!emptyMark && model.ects != 0 && model.mark >= 2.0){
                                 ectsSum += model.ects
-                                markSum += model.mark * model.ects
+                                floatEctsSum = model.ects.toFloat()
+                                markSum += model.mark * floatEctsSum
                             }else {
                                 emptyMark = true
                             }
@@ -64,6 +65,12 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
                 }
                 llSubjectsMark.adapter = SubjectsMarksAdapter(list,this@ListOfMarks)
+
+                if (!emptyMark){
+                    resultAverage = markSum / ectsSum
+                    textView4Mark.text = String.format("%.2f",resultAverage)
+
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -73,15 +80,7 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
         }
         ref.addValueEventListener(postListener)
 
-        if (!emptyMark){
-            resultAverage = markSum / ectsSum
-            //textView4Mark.text = resultAverage.toString()
-            //textView4Mark.setText(resultAverage.toString())
-            var avInString: String = "" + resultAverage
 
-            textView4Mark.text = avInString
-
-        }
 
     }
 
