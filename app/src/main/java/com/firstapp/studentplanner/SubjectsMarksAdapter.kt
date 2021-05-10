@@ -19,7 +19,10 @@ class SubjectsMarksAdapter(private val SubjectsMarksList: MutableList<Subject>, 
     override fun onBindViewHolder(holder: SubjectsMarksAdapter.ViewHolder, position: Int) {
         val currentItem = SubjectsMarksList[position]
         holder.textView.text = currentItem.subject
-        holder.textView2.text = currentItem.mark.toString()
+        if (currentItem.mark >= 2.0)
+            holder.textView2.text = currentItem.mark.toString()
+        else
+            holder.textView2.text = "Brak"
         holder.textView3.text = currentItem.ects.toString()
 
         holder.initialize(SubjectsMarksList.get(position),clickListener)

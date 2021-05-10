@@ -101,7 +101,7 @@
                 android:background="@drawable/white_solid"
                 android:fontFamily="@font/baloo"
                 android:padding="20dp"
-                android:text="oceny"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@color/blue"
                 android:textSize="20dp"
