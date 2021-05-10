@@ -46,7 +46,7 @@
                 android:background="@drawable/white_solid"
                 android:fontFamily="@font/baloo"
                 android:padding="20dp"
-                android:text="twoje kierunki"
+                android:text="twoje studia"
                 android:textAllCaps="false"
                 android:textColor="@color/blue"
                 android:textSize="18dp"
