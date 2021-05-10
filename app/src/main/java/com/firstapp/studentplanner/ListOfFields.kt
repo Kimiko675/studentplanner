@@ -1,5 +1,6 @@
 package com.firstapp.studentplanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_list_of_fields.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
-import java.lang.reflect.Field
 
 class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
 
@@ -45,6 +45,12 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
             }
         }
         ref.addValueEventListener(postListener)
+    }
+
+    override fun onItemClick(field: String) {
+        val intent= Intent(this, ListOfMarks::class.java)
+        intent.putExtra("field", field)
+        startActivity(intent)
     }
 
     override fun onDeleteClick(field: String) {

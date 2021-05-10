@@ -89,6 +89,8 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
             startActivity(intent);
         }
 
+
+
         // tworzenie okna dialogowego
         val bottomSheetFragment = AddFieldOfStudy()
 

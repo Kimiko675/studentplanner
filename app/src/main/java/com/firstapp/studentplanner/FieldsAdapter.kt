@@ -7,12 +7,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.dialog_add_field.view.*
 import kotlinx.android.synthetic.main.item.view.*
-import kotlinx.android.synthetic.main.row_field.view.*
-import java.lang.reflect.Field
 
-class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListener: OnFieldItemClickListener) : RecyclerView.Adapter<FieldsAdapter.ViewHolder>() {
+class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListener: ListOfFields) : RecyclerView.Adapter<FieldsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldsAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item,parent,false)
         return ViewHolder(view)
@@ -36,6 +33,9 @@ class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListen
             itemView.findViewById<ImageButton>(R.id.image_button_delete_field).setOnClickListener {
                 action.onDeleteClick(field)
             }
+            itemView.setOnClickListener{
+                action.onItemClick(field)
+            }
         }
 
 
@@ -43,5 +43,6 @@ class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListen
 }
 
 interface OnFieldItemClickListener{
+    fun onItemClick(field: String)
     fun onDeleteClick(field: String)
 }
