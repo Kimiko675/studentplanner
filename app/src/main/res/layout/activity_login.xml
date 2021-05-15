@@ -5,21 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:background="@drawable/gradient_login_background">
+    android:background="@drawable/gradient_bg"><![CDATA[>
+
+    ]]>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:textSize="22sp"
         android:textColor="@color/white"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/textInputEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594"
+        app:layout_constraintVertical_bias="0.814"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,7 +88,7 @@
 
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,22 +104,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputPassword"
-        android:background="@drawable/btn_background"
+        android:background="@drawable/btn_rounded"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Student Planner"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+    <ImageView
+        android:layout_width="298dp"
+        android:layout_height="194dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.119"
         tools:ignore="MissingConstraints" />
 
     <TextView

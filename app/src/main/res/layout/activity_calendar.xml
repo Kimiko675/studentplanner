@@ -5,30 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Calendar"
-    android:background="@drawable/gradient_login_background">
+    android:background="@drawable/gradient_bg">>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text12"
         android:layout_width="match_parent"
-        android:layout_height="117dp"
-        android:fontFamily="@font/changa_semibold"
-        android:padding="21dp"
+
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rectangle_bottom"
+
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+
         android:text="Aktualny tydzień"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="45dp"
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints">
-
-    </TextView>
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/day_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:clipToPadding="false"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

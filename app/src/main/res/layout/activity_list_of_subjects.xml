@@ -5,22 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListOfSubjects"
-    android:background="@drawable/gradient_login_background"
+    android:background="@drawable/gradient_bg">
     >
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="408dp"
-        android:layout_height="79dp"
-        android:fontFamily="@font/baloo"
-        android:padding="22dp"
-        android:text="wszystkie przedmioty"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rectangle_bottom"
+
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+
+        android:text="Przedmioty"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="30dp"
-        tools:ignore="MissingConstraints">
-
-    </TextView>
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/llSubjects"
