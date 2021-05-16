@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Studentplanner">
-        <activity android:name=".ListOfMarks"></activity>
+        <activity android:name=".HomeworkActivity"></activity>
+        <activity android:name=".ListOfMarks"/>
         <activity android:name=".ListOfFieldsForMarks" />
         <activity android:name=".Day" />
         <activity android:name=".Calendar" />

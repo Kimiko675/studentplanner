@@ -184,6 +184,33 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnHomework"
+                android:layout_width="500dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_rectangle_all_corners_transparent"
+                android:drawableRight="@drawable/kalendarz"
+                android:fontFamily="@font/raleway_extralight"
+                android:paddingLeft="40dp"
+                android:paddingRight="43dp"
+                android:text="Do zrobienia"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

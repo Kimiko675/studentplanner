@@ -13,3 +13,15 @@ public interface GetPickedMark {
 interface GetAchievement{
     fun getAchievement(achievement: Achievement)
 }
+interface ConvertToAchievement{
+    fun convertToAchievement(achievement: Achievement, subjectId: String)
+}
+
+
+interface GetHomework{
+    fun getHomework(homework: Homework)
+}
+
+public interface GetPickedDeadline {
+    public fun getDay(dayEnd: Int, monthEnd: Int, yearEnd: Int)
+}
