@@ -21,6 +21,9 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
         holder.textView.text = currentItem.title
         holder.textView2.text = currentItem.description
         holder.textView3.text = currentItem.subject
+        holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString()
+
+        //day.toString() + "/" + month.toString() + "/" + year.toString()
 
         holder.initialize(HomeworksList[position],clickListener)
     }
@@ -33,6 +36,7 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
         val textView: TextView = itemView.textviewTitleHomework
         val textView2: TextView = itemView.textviewDescriptionHomework
         val textView3: TextView = itemView.textviewHomeworkSubject
+        val textView4: TextView = itemView.textviewDeadline
         fun initialize(homework: Homework, action: OnHomeworkItemClickListener){
 
             itemView.findViewById<ImageButton>(R.id.image_button_delete_homework).setOnClickListener {

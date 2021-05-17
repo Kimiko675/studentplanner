@@ -27,10 +27,10 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
+            android:layout_width="397dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginRight="20dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
 
@@ -42,11 +42,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
 
-                android:text="Line 1"
-                android:textStyle="bold"
                 android:fontFamily="@font/raleway_medium"
+                android:text="Line 1"
                 android:textColor="@color/purple"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textviewDescriptionHomework"
@@ -68,14 +68,39 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/image_button_delete_homework"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="312dp"
+            android:layout_height="70dp"
             android:layout_marginRight="20dp"
-            android:layout_alignParentTop="true"
-            android:background="#00ffffff"
-            android:src="@drawable/ic_delete" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textviewDeadline"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Date"
+                android:textColor="@color/purple"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/image_button_delete_homework"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:background="#00ffffff"
+                android:src="@drawable/ic_delete" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

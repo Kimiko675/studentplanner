@@ -41,8 +41,14 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
                     val model= i.getValue(Homework::class.java)
                     listOfHomeworks.add(model as Homework)
                 }
+
+                listOfHomeworks.sortBy { it.year }
+                listOfHomeworks.sortBy { it.month }
+                listOfHomeworks.sortBy { it.day }
+
                 recyclerviewHomeworks.layoutManager = LinearLayoutManager(this@HomeworkActivity)
                 recyclerviewHomeworks.adapter = adapter
+
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
