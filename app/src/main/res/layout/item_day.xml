@@ -16,8 +16,8 @@
             android:layout_width="198dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/baloo"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/raleway_medium"
             android:paddingLeft="18dp"
             android:paddingTop="2dp"
             android:text="Line"
@@ -29,24 +29,25 @@
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="34dp"
+            android:fontFamily="@font/raleway_medium"
             android:paddingLeft="20dp"
             android:paddingTop="4dp"
-            android:textStyle="bold"
             android:text="Liczba zajęć: "
-            android:textColor="@color/blue_two"
-            android:textSize="14dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/day_size"
             android:layout_width="41dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="31dp"
             android:layout_toEndOf="@id/text1"
             android:fontFamily="@font/baloo"
             android:paddingTop="3dp"
             android:text="Line"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="18dp" />
 
 
@@ -54,12 +55,13 @@
             android:id="@+id/zaj1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:paddingLeft="190dp"
             android:paddingTop="11dp"
-            android:textStyle="bold"
             android:text="Pierwsze zajęcia:  "
-            android:textColor="@color/blue_two"
-            android:textSize="14dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/hour1"
@@ -69,7 +71,7 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="10dp"
             android:text="0"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
 
@@ -81,7 +83,7 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="10dp"
             android:text=":"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
         <TextView
@@ -92,19 +94,20 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="10dp"
             android:text="0"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
         <TextView
             android:id="@+id/zaj2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
             android:paddingLeft="190dp"
             android:paddingTop="34dp"
             android:text="Ostatnie zajęcia:  "
-            android:textStyle="bold"
-            android:textColor="@color/blue_two"
-            android:textSize="14dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/hour2"
@@ -114,7 +117,7 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="32dp"
             android:text="0"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
 
@@ -126,7 +129,7 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="32dp"
             android:text=":"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
         <TextView
@@ -137,7 +140,7 @@
             android:fontFamily="@font/baloo"
             android:paddingTop="32dp"
             android:text="0"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/purple"
             android:textSize="16dp" />
 
     </RelativeLayout>
