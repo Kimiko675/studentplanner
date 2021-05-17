@@ -61,7 +61,7 @@
             android:fontFamily="@font/raleway_bold"
             android:paddingTop="3dp"
             android:text="Ocena:  "
-            android:textColor="@color/blue_two"
+            android:textColor="@color/dark_gray"
             android:textSize="14sp"
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />
@@ -76,7 +76,7 @@
             android:fontFamily="@font/raleway_bold"
             android:paddingTop="3dp"
             android:text="ECTS:  "
-            android:textColor="@color/blue_two"
+            android:textColor="@color/dark_gray"
             android:textSize="13sp"
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />
@@ -92,7 +92,7 @@
             android:layout_toEndOf="@+id/text_view_33Mark"
             android:paddingTop="3dp"
             android:text="Line 3"
-            android:textColor="@color/white"
+            android:textColor="@color/purple"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />

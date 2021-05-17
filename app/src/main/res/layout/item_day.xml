@@ -34,7 +34,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="4dp"
             android:text="Liczba zajęć: "
-            android:textColor="@color/white"
+            android:textColor="@color/dark_gray"
             android:textSize="14dp"
             android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
             android:paddingLeft="190dp"
             android:paddingTop="11dp"
             android:text="Pierwsze zajęcia:  "
-            android:textColor="@color/white"
+            android:textColor="@color/dark_gray"
             android:textSize="14dp"
             android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
             android:paddingLeft="190dp"
             android:paddingTop="34dp"
             android:text="Ostatnie zajęcia:  "
-            android:textColor="@color/white"
+            android:textColor="@color/dark_gray"
             android:textSize="14dp"
             android:textStyle="bold" />
 

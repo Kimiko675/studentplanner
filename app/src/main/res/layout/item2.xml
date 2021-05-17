@@ -65,7 +65,7 @@
             android:fontFamily="@font/raleway_medium"
             android:paddingLeft="2dp"
             android:text="Line 2"
-            android:textColor="@color/white"
+            android:textColor="@color/dark_gray"
             android:textSize="14sp"
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />
