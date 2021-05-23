@@ -1,6 +1,7 @@
 package com.firstapp.studentplanner
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -80,6 +81,12 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     override fun onDeleteHomeworkClick(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
         ref.child(homework.id).removeValue()
+    }
+
+    override fun onItemClick(homework: Homework, position: Int) {
+        val intent = Intent(this, HomeworkDetail::class.java);
+        intent.putExtra("homework", homework)
+        startActivity(intent);
     }
 
     override fun onCompleteHomeworkClick(homework: Homework) {

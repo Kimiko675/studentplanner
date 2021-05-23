@@ -19,8 +19,6 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
     override fun onBindViewHolder(holder: HomeworkAdapter.ViewHolder, position: Int) {
         val currentItem = HomeworksList[position]
         holder.textView.text = currentItem.title
-        holder.textView2.text = currentItem.description
-        holder.textView3.text = currentItem.subject
         holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString()
 
         //day.toString() + "/" + month.toString() + "/" + year.toString()
@@ -34,8 +32,6 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textView: TextView = itemView.textviewTitleHomework
-        val textView2: TextView = itemView.textviewDescriptionHomework
-        val textView3: TextView = itemView.textviewHomeworkSubject
         val textView4: TextView = itemView.textviewDeadline
         fun initialize(homework: Homework, action: OnHomeworkItemClickListener){
 
@@ -47,6 +43,9 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
                 action.onCompleteHomeworkClick(homework)
             }
 
+            itemView.setOnClickListener{
+                action.onItemClick(homework, adapterPosition)
+            }
         }
     }
 }
@@ -54,4 +53,5 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
 interface OnHomeworkItemClickListener {
     fun onDeleteHomeworkClick(homework: Homework)
     fun onCompleteHomeworkClick(homework: Homework)
+    fun onItemClick(homework: Homework, position: Int)
 }
