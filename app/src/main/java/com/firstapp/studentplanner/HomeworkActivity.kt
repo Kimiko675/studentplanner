@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_homework.*
 import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
 
-class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement, OnHomeworkItemClickListener, GetPickedDeadline, DialogInterface.OnDismissListener {
+class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement, OnHomeworkItemClickListener, GetPickedDeadline, GetPickedTime, DialogInterface.OnDismissListener {
 
     private lateinit var auth: FirebaseAuth
     lateinit var userId: String
@@ -175,6 +175,22 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     override fun onDismiss(dialog: DialogInterface?) {
         bottomSheetFragment.displayDay()
+        bottomSheetFragment.displayTime()
+    }
+
+    override fun getTime(hour: Int, minute: Int) {
+        val bundle = Bundle()
+        bundle.putInt("hour",hour)
+        bundle.putInt("minute",minute)
+        bottomSheetFragment.arguments = bundle
+    }
+
+    override fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int) {
+        TODO("Not yet implemented")
     }
 
 

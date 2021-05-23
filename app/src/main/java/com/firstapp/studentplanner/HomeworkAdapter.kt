@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_homework.view.*
@@ -19,7 +20,13 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
     override fun onBindViewHolder(holder: HomeworkAdapter.ViewHolder, position: Int) {
         val currentItem = HomeworksList[position]
         holder.textView.text = currentItem.title
-        holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString()
+        holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString() + " - " + currentItem.hour.toString() + ":" + currentItem.minute.toString()
+
+        if(currentItem.notification){
+            holder.imageView.visibility = View.VISIBLE
+        }else{
+            holder.imageView.visibility = View.INVISIBLE
+        }
 
         //day.toString() + "/" + month.toString() + "/" + year.toString()
 
@@ -33,6 +40,7 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textView: TextView = itemView.textviewTitleHomework
         val textView4: TextView = itemView.textviewDeadline
+        val imageView: ImageView = itemView.imageviewisNotificationSetted
         fun initialize(homework: Homework, action: OnHomeworkItemClickListener){
 
             itemView.findViewById<ImageButton>(R.id.image_button_delete_homework).setOnClickListener {
