@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_add_subject.*
 import kotlinx.android.synthetic.main.cyclical_subject.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
+import java.sql.Time
 
 class AddHomework: BottomSheetDialogFragment() {
 
@@ -30,9 +31,16 @@ class AddHomework: BottomSheetDialogFragment() {
 
     lateinit var toSend: GetHomework
 
+
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
+
+    private var hour: Int = 0
+    private var minute: Int = 0
+
+    private var flag1: Boolean = false
+    private var flag2: Boolean = false
 
     lateinit var arrayAdapter: ArrayAdapter<String>
 
@@ -81,6 +89,14 @@ class AddHomework: BottomSheetDialogFragment() {
             //toShow.showDeadlinePicker()
             val dayPicker = DeadlinePicker()
             fragmentManager?.let { it1 -> dayPicker.show(it1, "Dialog") }
+            flag1 = true
+            flag2 = false
+        }
+        view.findViewById<Button>(R.id.buttonDeadlineTimePicker).setOnClickListener {
+            val timePicker = TimePicker()
+            fragmentManager?.let { it1 -> timePicker.show(it1, "Dialog") }
+            flag1 = false
+            flag2 = true
         }
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         view.findViewById<Spinner>(R.id.spinnerAddHomeworkSubjects).adapter = arrayAdapter
@@ -97,22 +113,35 @@ class AddHomework: BottomSheetDialogFragment() {
             val subject = spinnerAddHomeworkSubjects.selectedItem.toString()
             val subjectId = listOfIds[spinnerAddHomeworkSubjects.selectedItemPosition]
 
-            val homework = Homework("",title, description, subject,subjectId, day, month, year)
+            val notification = checkboxNotification.isChecked
+
+            val homework = Homework("",title, description, subject,subjectId, day, month, year, hour, minute, notification)
 
             toSend.getHomework(homework)
             dismiss()
         }
     }
 
-    public fun displayDay(){
+    fun displayDay(){
 
 
-        if (arguments != null){
+        if (arguments != null && flag1){
             day = arguments?.getInt("day")!!
             month = arguments?.getInt("month")!!
             year = arguments?.getInt("year")!!
 
             buttonDeadlinePicker.text = day.toString() + "/" + month.toString() + "/" + year.toString()
+        }
+    }
+
+    fun displayTime(){
+
+
+        if (arguments != null && flag2){
+            hour = arguments?.getInt("hour")!!
+            minute = arguments?.getInt("minute")!!
+
+            buttonDeadlineTimePicker.text = hour.toString() + ":" + minute.toString()
         }
     }
 
