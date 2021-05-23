@@ -94,29 +94,34 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
             }
         }
 
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (homework.notification) {
 
-        val intent = Intent(this, HomeworkDetail::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            val intent = Intent(this, HomeworkDetail::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            intent.putExtra("homework", homework)
+            val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
+
+            notificationChannel = NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.enableVibration(false)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            builder = Notification.Builder(this, channelId)
+                .setContentTitle(homework.title)
+                .setContentText(homework.description)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+
+            notificationManager.notify(1234,builder.build())
+
         }
-        intent.putExtra("homework", homework)
-        val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
 
-        notificationChannel = NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
-        notificationChannel.enableLights(true)
-        notificationChannel.lightColor = Color.GREEN
-        notificationChannel.enableVibration(false)
-        notificationManager.createNotificationChannel(notificationChannel)
-
-        builder = Notification.Builder(this, channelId)
-            .setContentTitle(homework.title)
-            .setContentText(homework.description)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        notificationManager.notify(1234,builder.build())
     }
 
     override fun onDeleteHomeworkClick(homework: Homework) {
