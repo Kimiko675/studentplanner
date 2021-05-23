@@ -1,11 +1,20 @@
 package com.firstapp.studentplanner
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,6 +34,13 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     private var listOfHomeworks = ArrayList<Homework>()
     var adapter = HomeworkAdapter(listOfHomeworks, this)
+
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "com.firstapp.studentplanner"
+    //private val channelId = "StudentPlanner"
+    private val description = "Zadanie"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +78,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun getHomework(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         val newRef = ref.push()
@@ -76,6 +93,30 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
                 }
             }
         }
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val intent = Intent(this, HomeworkDetail::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        intent.putExtra("homework", homework)
+        val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
+
+        notificationChannel = NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.GREEN
+        notificationChannel.enableVibration(false)
+        notificationManager.createNotificationChannel(notificationChannel)
+
+        builder = Notification.Builder(this, channelId)
+            .setContentTitle(homework.title)
+            .setContentText(homework.description)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        notificationManager.notify(1234,builder.build())
     }
 
     override fun onDeleteHomeworkClick(homework: Homework) {

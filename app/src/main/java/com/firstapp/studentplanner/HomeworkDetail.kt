@@ -42,6 +42,8 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
             val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
             ref.child(hw.id).removeValue()
         }
+
+
     }
 
     override fun convertToAchievement(achievement: Achievement, subjectId: String) {
