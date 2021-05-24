@@ -1,20 +1,21 @@
 package com.firstapp.studentplanner
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.icu.text.DateFormat.Field.YEAR
+import android.icu.util.Calendar.YEAR
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,6 +25,10 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_homework.*
 import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
+import java.text.DateFormat.Field.YEAR
+import java.util.*
+import java.util.Calendar.YEAR
+import kotlin.collections.ArrayList
 
 class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement, OnHomeworkItemClickListener, GetPickedDeadline, GetPickedTime, DialogInterface.OnDismissListener {
 
@@ -37,10 +42,12 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     lateinit var notificationManager: NotificationManager
     lateinit var notificationChannel: NotificationChannel
-    lateinit var builder: Notification.Builder
-    private val channelId = "com.firstapp.studentplanner"
+    lateinit var builder: NotificationCompat.Builder
+    public val channelId = "com.firstapp.studentplanner"
     //private val channelId = "StudentPlanner"
     private val description = "Zadanie"
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +90,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         val newRef = ref.push()
         val key = newRef.key
-        val homeworkToAdd = Homework(key.toString(), homework.title,homework.description, homework.subject, homework.subjectId, homework.day, homework.month, homework.year)
+        val homeworkToAdd = Homework(key.toString(), homework.title,homework.description, homework.subject, homework.subjectId, homework.day, homework.month, homework.year, homework.hour, homework.minute, homework.notification)
         if (key != null) {
             ref.child(userId).child("Homeworks").child(key).setValue(homeworkToAdd).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -96,13 +103,39 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
         if (homework.notification) {
 
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val myCalendaar = GregorianCalendar.getInstance()
+
+            myCalendaar.set(GregorianCalendar.YEAR, homework.year)
+            myCalendaar.set(GregorianCalendar.MONTH, homework.month)
+            myCalendaar.set(GregorianCalendar.DAY_OF_MONTH, homework.day)
+            myCalendaar.set(GregorianCalendar.MINUTE, homework.minute)
+            myCalendaar.set(GregorianCalendar.HOUR, homework.hour)
+
+            //myCalendaar.add(GregorianCalendar.DATE, -1)
+
+            val date: Date = myCalendaar.time
 
             val intent = Intent(this, HomeworkDetail::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
-            intent.putExtra("homework", homework)
+
             val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
+
+            val notificationIntent: Intent = Intent(this, MyNotification::class.java)
+            notificationIntent.putExtra("notification-id", 1)
+            notificationIntent.putExtra("notification", getNotification(homework, pendingIntent))
+            notificationIntent.putExtra("channel-id", channelId)
+            notificationIntent.putExtra("description", description)
+
+            intent.putExtra("homework", homework)
+
+
+            val alarmManager: AlarmManager = (getSystemService(Context.ALARM_SERVICE) as AlarmManager)!!
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.time, pendingIntent)
+
+
+            /*
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             notificationChannel = NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableLights(true)
@@ -110,18 +143,36 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
             notificationChannel.enableVibration(false)
             notificationManager.createNotificationChannel(notificationChannel)
 
-            builder = Notification.Builder(this, channelId)
-                .setContentTitle(homework.title)
-                .setContentText(homework.description)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
+             */
 
-            notificationManager.notify(1234,builder.build())
+
 
         }
 
+    }
+
+    fun getNotification(homework: Homework, pendingIntent: PendingIntent) : Notification {
+        builder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(homework.title)
+            .setContentText(homework.description)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setChannelId(channelId)
+        return builder.build()
+    }
+
+    fun scheduleNotification(notification: Notification, time: Long, homework: Homework, date: Date, pendingIntent: PendingIntent) {
+
+
+
+    }
+
+    class Receiver : BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Log.d("HomeworkActivity", " Receiver : " + Date().toString())
+        }
     }
 
     override fun onDeleteHomeworkClick(homework: Homework) {
