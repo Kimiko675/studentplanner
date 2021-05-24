@@ -30,7 +30,9 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".HomeworkActivity$Receiver" />
+
+        <receiver
+            android:name=".MyNotification" />
 
         <meta-data
             android:name="preloaded_fonts"

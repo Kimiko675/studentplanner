@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
 import java.text.DateFormat.Field.YEAR
 import java.util.*
+import java.util.Calendar.MAY
 import java.util.Calendar.YEAR
 import kotlin.collections.ArrayList
 
@@ -102,14 +103,48 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
 
         if (homework.notification) {
+            //Notification without seted date and hour
 
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            val intent = Intent(this, HomeworkDetail::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            intent.putExtra("homework", homework)
+            val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+            notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.enableVibration(false)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            builder = NotificationCompat.Builder(this, channelId)
+                .setContentTitle(homework.title)
+                .setContentText(homework.description)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+
+            notificationManager.notify(1234,builder.build())
+
+            /*
             val myCalendaar = GregorianCalendar.getInstance()
 
+            /*
             myCalendaar.set(GregorianCalendar.YEAR, homework.year)
             myCalendaar.set(GregorianCalendar.MONTH, homework.month)
             myCalendaar.set(GregorianCalendar.DAY_OF_MONTH, homework.day)
             myCalendaar.set(GregorianCalendar.MINUTE, homework.minute)
             myCalendaar.set(GregorianCalendar.HOUR, homework.hour)
+             */
+
+            myCalendaar.set(GregorianCalendar.YEAR, 2021)
+            myCalendaar.set(GregorianCalendar.MONTH, 4)
+            myCalendaar.set(GregorianCalendar.DAY_OF_MONTH, 24)
+            myCalendaar.set(GregorianCalendar.MINUTE, 54)
+            myCalendaar.set(GregorianCalendar.HOUR, 13)
 
             //myCalendaar.add(GregorianCalendar.DATE, -1)
 
@@ -119,7 +154,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
 
-            val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
+            val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
 
             val notificationIntent: Intent = Intent(this, MyNotification::class.java)
             notificationIntent.putExtra("notification-id", 1)
@@ -129,10 +164,8 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
             intent.putExtra("homework", homework)
 
-
             val alarmManager: AlarmManager = (getSystemService(Context.ALARM_SERVICE) as AlarmManager)!!
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.time, pendingIntent)
-
 
             /*
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -142,8 +175,10 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
             notificationChannel.lightColor = Color.GREEN
             notificationChannel.enableVibration(false)
             notificationManager.createNotificationChannel(notificationChannel)
-
              */
+             */
+
+
 
 
 
@@ -151,6 +186,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     }
 
+    /*
     fun getNotification(homework: Homework, pendingIntent: PendingIntent) : Notification {
         builder = NotificationCompat.Builder(this, channelId)
             .setContentTitle(homework.title)
@@ -165,9 +201,9 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     fun scheduleNotification(notification: Notification, time: Long, homework: Homework, date: Date, pendingIntent: PendingIntent) {
 
-
-
     }
+     */
+
 
     class Receiver : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
