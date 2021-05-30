@@ -108,10 +108,14 @@ class AddHomework: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        afterCheckbox.visibility = View.INVISIBLE
+
         checkboxNotification.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
+                afterCheckbox.visibility = View.VISIBLE
                 sliderReminderDay.visibility = View.VISIBLE
             }else{
+                afterCheckbox.visibility = View.INVISIBLE
                 sliderReminderDay.visibility = View.INVISIBLE
             }
         }

@@ -100,7 +100,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/white_solid"
-                android:hint="wprowadź"
+                android:hint="w minutach"
 
                 android:outlineSpotShadowColor="@color/white"
 

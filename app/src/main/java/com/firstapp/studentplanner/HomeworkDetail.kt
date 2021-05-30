@@ -47,7 +47,7 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
         hw = Homework(homeworkid, homeworktitle, homeworkdescription, homeworksubject, homeworksubjectid, homeworkday, homeworkmonth, homeworkyear, homeworkhour, homeworkminute, homeworknotification, homeworkdayreminder)
 
         textView_name.text = hw.title
-        textView_date.text = hw.day.toString() + "/" + hw.month.toString() + "/" + hw.year.toString()
+        textView_date.text = hw.day.toString() + "/" + hw.month.toString() + "/" + hw.year.toString() + "    " + hw.hour.toString() + ":" + if (hw.minute<10) { "0" + hw.minute.toString() } else { hw.minute.toString() }
         textView_sub.text = hw.subject
         textView_des.text = hw.description
 

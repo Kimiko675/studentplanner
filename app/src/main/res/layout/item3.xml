@@ -29,13 +29,15 @@
 
         <TextView
             android:id="@+id/text_view_1"
-            android:layout_width="wrap_content"
+            android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/text_view_nr"
+            android:ellipsize="end"
             android:fontFamily="@font/raleway_medium"
+            android:maxLines="1"
             android:text="Line 1"
             android:textColor="@color/purple"
             android:textSize="22sp"
@@ -43,8 +45,10 @@
 
         <TextView
             android:id="@+id/text_view_2"
-            android:layout_width="wrap_content"
+            android:layout_width="187dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"

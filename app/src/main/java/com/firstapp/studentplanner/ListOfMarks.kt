@@ -1,5 +1,6 @@
 package com.firstapp.studentplanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -85,7 +86,9 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
     }
 
     override fun onItemClick(subjects: Subject, position: Int) {
-        TODO("Not yet implemented")
+        val intent= Intent(this, DetailActivity::class.java)
+        intent.putExtra("subject", subjects)
+        startActivity(intent)
     }
 
 /*

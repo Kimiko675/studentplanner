@@ -13,9 +13,10 @@
 
         <TextView
             android:id="@+id/day_of_week"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_width="171dp"
+            android:layout_height="34dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/raleway_medium"
             android:paddingLeft="18dp"

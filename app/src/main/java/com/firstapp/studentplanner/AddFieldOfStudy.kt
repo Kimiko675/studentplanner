@@ -27,14 +27,17 @@ class AddFieldOfStudy: BottomSheetDialogFragment() {
 
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
-            val field = editTextFieldName.text.trim().toString() + " sem. " + editTextTerm.text.trim().toString()
+            val field = editTextFieldName.text.trim().toString() + "sem. " + editTextTerm.text.trim().toString()
+            val term = editTextTerm.text.trim().toString()
 
             var isNotEmptyField: Boolean = false
+            var isNotEmptyTerm: Boolean = false
 
-            //sprawdzam czy jest wpisany kierunek
-            if (field.isNotEmpty()){ isNotEmptyField = true } else{ Toast.makeText(context, "Podaj kierunek", Toast.LENGTH_SHORT).show() }
+            //sprawdzam czy jest wpisany kierunek i semestr
+            if (field.isNotEmpty()) { isNotEmptyField = true } else { Toast.makeText(context, "Podaj kierunek", Toast.LENGTH_SHORT).show() }
+            if (term.isNotEmpty()) { isNotEmptyTerm = true } else { Toast.makeText(context, "Podaj semestr", Toast.LENGTH_SHORT).show() }
 
-            if (isNotEmptyField){
+            if (isNotEmptyField && isNotEmptyTerm){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val newRef = ref.push()
                 val key = newRef.key

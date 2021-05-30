@@ -68,9 +68,10 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
                     listOfHomeworks.add(model as Homework)
                 }
 
-                listOfHomeworks.sortBy { it.year }
-                listOfHomeworks.sortBy { it.month }
                 listOfHomeworks.sortBy { it.day }
+                listOfHomeworks.sortBy { it.month }
+                listOfHomeworks.sortBy { it.year }
+
 
                 recyclerviewHomeworks.layoutManager = LinearLayoutManager(this@HomeworkActivity)
                 recyclerviewHomeworks.adapter = adapter
@@ -137,9 +138,12 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
 
+            /*
             val intent2 = Intent(this, HomeworkDetail::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
+
+             */
 
 
             intent.putExtra("homeworkId", homework.id)
@@ -202,6 +206,13 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         intent.putExtra("homeworkYear", homework.year.toString())
         intent.putExtra("homeworkHour", homework.hour.toString())
         intent.putExtra("homeworkMinute", homework.minute.toString())
+        if (homework.notification){
+            intent.putExtra("homeworkNotification", "true")
+        }else{
+            intent.putExtra("homeworkNotification", "false")
+        }
+        intent.putExtra("homeworkDayReminder", homework.dayReminder.toString())
+
         startActivity(intent);
     }
 

@@ -49,7 +49,11 @@ class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener:
         }
         else {
             holder.textView3.text = currentItem.list_object1.hour.toString()
-            holder.textView4.text = currentItem.list_object1.minute.toString()
+            if (currentItem.list_object1.minute!! < 10) {
+                holder.textView4.text = "0" + currentItem.list_object1.minute.toString()
+            } else {
+                holder.textView4.text = currentItem.list_object1.minute.toString()
+            }
         }
         if(currentItem.list_object2!!.hour==0 && currentItem.list_object2!!.minute==0){
             holder.textView6.text = " "
@@ -58,7 +62,11 @@ class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener:
         }
         else {
             holder.textView6.text = currentItem.list_object2.hour.toString()
-            holder.textView7.text = currentItem.list_object2.minute.toString()
+            if (currentItem.list_object2.minute!! < 10) {
+                holder.textView7.text = "0" + currentItem.list_object2.minute.toString()
+            } else {
+                holder.textView7.text = currentItem.list_object2.minute.toString()
+            }
         }
         holder.initialize(DayList.get(position),clickListener)
     }

@@ -83,7 +83,7 @@ class NotificationBroadcast: BroadcastReceiver() {
         val builder = context?.let {
             NotificationCompat.Builder(it, "com.firstapp.studentplanner")
                 .setContentTitle(notifytitle)
-                .setContentText("Zbliża się termin! " + notifyday.toString() + "/" + notifymonth.toString() + "/" + notifyyear.toString() + " - " + notifyhour.toString() + ":" + notifyminute.toString())
+                .setContentText("Zbliża się termin!   " + notifyday.toString() + "/" + notifymonth.toString() + "/" + notifyyear.toString() + " - " + if (notifyhour<10) { "0" + notifyhour.toString()} else {notifyhour.toString()} + ":" + if (notifyhour<10) { "0" + notifyminute.toString()} else {notifyminute.toString()})
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

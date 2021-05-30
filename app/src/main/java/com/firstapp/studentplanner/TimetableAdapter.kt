@@ -60,7 +60,7 @@ class TimetableAdapter(private val SubjectsList: MutableList<ListObject>, var cl
         else if (thisForm == "5") holder.textView2.text = "rejestracja"
         else if (thisForm == "6") holder.textView2.text = "inne"
         holder.textView3.text = currentItem.hour.toString()
-        holder.textView33.text = currentItem.minute.toString()
+        holder.textView33.text = if (currentItem.minute<10) {"0" + currentItem.minute.toString() } else { currentItem.minute.toString() }
         if (timeHH == 0) holder.textView55.text = timeHH.toString() + "0"
         else if (timeHH >= 24){
             timeHH -= 24

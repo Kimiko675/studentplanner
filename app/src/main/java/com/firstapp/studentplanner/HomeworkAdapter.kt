@@ -20,7 +20,7 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
     override fun onBindViewHolder(holder: HomeworkAdapter.ViewHolder, position: Int) {
         val currentItem = HomeworksList[position]
         holder.textView.text = currentItem.title
-        holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString() + " - " + currentItem.hour.toString() + ":" + currentItem.minute.toString()
+        holder.textView4.text = currentItem.day.toString() + "/" + currentItem.month.toString() + "/" + currentItem.year.toString() + " - " + if (currentItem.hour<10) { "0" + currentItem.hour.toString()} else {currentItem.hour.toString()} + ":" + if (currentItem.minute<10) { "0" + currentItem.minute.toString()} else {currentItem.minute.toString()}
 
         if(currentItem.notification){
             holder.imageView.visibility = View.VISIBLE
