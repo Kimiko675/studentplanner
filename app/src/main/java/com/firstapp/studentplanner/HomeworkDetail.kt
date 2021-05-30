@@ -23,7 +23,28 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
         setContentView(R.layout.activity_homework_detail)
         userId = FirebaseAuth.getInstance().currentUser.uid
 
-        hw = intent.getSerializableExtra("homework") as Homework;
+        //hw = intent.getSerializableExtra("homework") as Homework;
+
+        val homeworkid = intent.getStringExtra("homeworkId").toString()
+        val homeworktitle = intent.getStringExtra("homeworkTitle").toString()
+        val homeworkdescription = intent.getStringExtra("homeworkDescription").toString()
+        val homeworksubject = intent.getStringExtra("homeworkSubject").toString()
+        val homeworksubjectid = intent.getStringExtra("homeworkSubjectId").toString()
+        val homeworkday = intent.getStringExtra("homeworkDay").toString().toInt()
+        val homeworkmonth = intent.getStringExtra("homeworkMonth").toString().toInt()
+        val homeworkyear = intent.getStringExtra("homeworkYear").toString().toInt()
+        val homeworkhour = intent.getStringExtra("homeworkHour").toString().toInt()
+        val homeworkminute = intent.getStringExtra("homeworkMinute").toString().toInt()
+        val string = intent.getStringExtra("homeworkNotification").toString()
+        val homeworknotification: Boolean
+        if (string == "true"){
+            homeworknotification = true
+        }else{
+            homeworknotification = false
+        }
+        val homeworkdayreminder = intent.getStringExtra("homeworkDayReminder").toString().toInt()
+
+        hw = Homework(homeworkid, homeworktitle, homeworkdescription, homeworksubject, homeworksubjectid, homeworkday, homeworkmonth, homeworkyear, homeworkhour, homeworkminute, homeworknotification, homeworkdayreminder)
 
         textView_name.text = hw.title
         textView_date.text = hw.day.toString() + "/" + hw.month.toString() + "/" + hw.year.toString()

@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
 import java.text.DateFormat.Field.YEAR
 import java.util.*
-import java.util.Calendar.MAY
+import java.util.Calendar
 import java.util.Calendar.YEAR
 import kotlin.collections.ArrayList
 
@@ -41,12 +41,10 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     private var listOfHomeworks = ArrayList<Homework>()
     var adapter = HomeworkAdapter(listOfHomeworks, this)
 
-    lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var builder: NotificationCompat.Builder
-    public val channelId = "com.firstapp.studentplanner"
-    //private val channelId = "StudentPlanner"
+    val channelId = "com.firstapp.studentplanner"
     private val description = "Zadanie"
+
+    lateinit var builder: NotificationCompat.Builder
 
 
 
@@ -58,6 +56,9 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         userId = FirebaseAuth.getInstance().currentUser.uid
 
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
+
+
+        createNotificationChannel()
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -86,12 +87,25 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
     }
 
+    fun createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val title = "title"
+            val description = "description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, title, importance)
+            channel.description = description
+
+            val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getHomework(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         val newRef = ref.push()
         val key = newRef.key
-        val homeworkToAdd = Homework(key.toString(), homework.title,homework.description, homework.subject, homework.subjectId, homework.day, homework.month, homework.year, homework.hour, homework.minute, homework.notification)
+        val homeworkToAdd = Homework(key.toString(), homework.title,homework.description, homework.subject, homework.subjectId, homework.day, homework.month, homework.year, homework.hour, homework.minute, homework.notification, homework.dayReminder)
         if (key != null) {
             ref.child(userId).child("Homeworks").child(key).setValue(homeworkToAdd).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -103,113 +117,73 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
 
         if (homework.notification) {
-            //Notification without seted date and hour
 
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            val intent = Intent(this, HomeworkDetail::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            intent.putExtra("homework", homework)
-            val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
-            notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
 
-            builder = NotificationCompat.Builder(this, channelId)
-                .setContentTitle(homework.title)
-                .setContentText(homework.description)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
 
-            notificationManager.notify(1234,builder.build())
+            var myCalendar = java.util.Calendar.getInstance()
 
-            /*
-            val myCalendaar = GregorianCalendar.getInstance()
+            myCalendar.set(java.util.Calendar.YEAR, homework.year)
+            myCalendar.set(java.util.Calendar.MONTH, homework.month-1)
+            myCalendar.set(java.util.Calendar.DAY_OF_MONTH, homework.day)
+            myCalendar.set(java.util.Calendar.MINUTE, homework.minute)
+            myCalendar.set(java.util.Calendar.HOUR_OF_DAY, homework.hour)
+            myCalendar.set(java.util.Calendar.SECOND, 0)
 
-            /*
-            myCalendaar.set(GregorianCalendar.YEAR, homework.year)
-            myCalendaar.set(GregorianCalendar.MONTH, homework.month)
-            myCalendaar.set(GregorianCalendar.DAY_OF_MONTH, homework.day)
-            myCalendaar.set(GregorianCalendar.MINUTE, homework.minute)
-            myCalendaar.set(GregorianCalendar.HOUR, homework.hour)
-             */
+            myCalendar.add(java.util.Calendar.DATE, -(homework.dayReminder))
 
-            myCalendaar.set(GregorianCalendar.YEAR, 2021)
-            myCalendaar.set(GregorianCalendar.MONTH, 4)
-            myCalendaar.set(GregorianCalendar.DAY_OF_MONTH, 24)
-            myCalendaar.set(GregorianCalendar.MINUTE, 54)
-            myCalendaar.set(GregorianCalendar.HOUR, 13)
-
-            //myCalendaar.add(GregorianCalendar.DATE, -1)
-
-            val date: Date = myCalendaar.time
-
-            val intent = Intent(this, HomeworkDetail::class.java).apply {
+            val intent = Intent(this, NotificationBroadcast::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
 
-            val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
+            val intent2 = Intent(this, HomeworkDetail::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
 
-            val notificationIntent: Intent = Intent(this, MyNotification::class.java)
-            notificationIntent.putExtra("notification-id", 1)
-            notificationIntent.putExtra("notification", getNotification(homework, pendingIntent))
-            notificationIntent.putExtra("channel-id", channelId)
-            notificationIntent.putExtra("description", description)
 
-            intent.putExtra("homework", homework)
+            intent.putExtra("homeworkId", homework.id)
+            intent.putExtra("homeworkTitle", homework.title)
+            intent.putExtra("homeworkDescription", homework.description)
+            intent.putExtra("homeworkSubject", homework.subject)
+            intent.putExtra("homeworkSubjectId", homework.subjectId)
+            intent.putExtra("homeworkDay", homework.day.toString())
+            intent.putExtra("homeworkMonth", homework.month.toString())
+            intent.putExtra("homeworkYear", homework.year.toString())
+            intent.putExtra("homeworkHour", homework.hour.toString())
+            intent.putExtra("homeworkMinute", homework.minute.toString())
+
+            if (homework.notification){
+                intent.putExtra("homeworkNotification", "true")
+            }else{
+                intent.putExtra("homeworkNotification", "false")
+            }
+
+            intent.putExtra("homeworkDayReminder", homework.dayReminder.toString())
+
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
             val alarmManager: AlarmManager = (getSystemService(Context.ALARM_SERVICE) as AlarmManager)!!
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.time, pendingIntent)
-
-            /*
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            notificationChannel = NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-             */
-             */
-
-
-
-
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, myCalendar.timeInMillis, pendingIntent)
 
         }
 
     }
 
     /*
-    fun getNotification(homework: Homework, pendingIntent: PendingIntent) : Notification {
-        builder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(homework.title)
-            .setContentText(homework.description)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.drawable.ic_launcher_background))
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .setChannelId(channelId)
-        return builder.build()
-    }
 
     fun scheduleNotification(notification: Notification, time: Long, homework: Homework, date: Date, pendingIntent: PendingIntent) {
 
     }
-     */
-
 
     class Receiver : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d("HomeworkActivity", " Receiver : " + Date().toString())
         }
     }
+
+
+     */
 
     override fun onDeleteHomeworkClick(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
@@ -218,7 +192,16 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
     override fun onItemClick(homework: Homework, position: Int) {
         val intent = Intent(this, HomeworkDetail::class.java);
-        intent.putExtra("homework", homework)
+        intent.putExtra("homeworkId", homework.id)
+        intent.putExtra("homeworkTitle", homework.title)
+        intent.putExtra("homeworkDescription", homework.description)
+        intent.putExtra("homeworkSubject", homework.subject)
+        intent.putExtra("homeworkSubjectId", homework.subjectId)
+        intent.putExtra("homeworkDay", homework.day.toString())
+        intent.putExtra("homeworkMonth", homework.month.toString())
+        intent.putExtra("homeworkYear", homework.year.toString())
+        intent.putExtra("homeworkHour", homework.hour.toString())
+        intent.putExtra("homeworkMinute", homework.minute.toString())
         startActivity(intent);
     }
 

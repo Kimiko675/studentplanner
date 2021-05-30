@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_add_subject.*
 import kotlinx.android.synthetic.main.cyclical_subject.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
+import kotlinx.android.synthetic.main.mark_picker.*
 import java.sql.Time
 
 class AddHomework: BottomSheetDialogFragment() {
@@ -36,8 +38,8 @@ class AddHomework: BottomSheetDialogFragment() {
     private var month: Int = 0
     private var year: Int = 0
 
-    private var hour: Int = 0
-    private var minute: Int = 0
+    private var hour1: Int = 0
+    private var minute1: Int = 0
 
     private var flag1: Boolean = false
     private var flag2: Boolean = false
@@ -106,19 +108,42 @@ class AddHomework: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkboxNotification.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                sliderReminderDay.visibility = View.VISIBLE
+            }else{
+                sliderReminderDay.visibility = View.INVISIBLE
+            }
+        }
+
         buttonAddHomework.setOnClickListener {
             title = editTextHomeworkTitle.text.toString()
             description = editTextHomeworkDescription.text.toString()
 
-            val subject = spinnerAddHomeworkSubjects.selectedItem.toString()
-            val subjectId = listOfIds[spinnerAddHomeworkSubjects.selectedItemPosition]
+            if (day == 0 && month == 0 && year == 0){
+                Toast.makeText(requireContext(), "Nie wybrano dnia", Toast.LENGTH_LONG).show()
+            }else if (hour1 == 0 && minute1 == 0){
+                Toast.makeText(requireContext(), "Nie wybrano godziny", Toast.LENGTH_LONG).show()
+            }else if (title == "" && description == ""){
+                Toast.makeText(requireContext(), "Nie uzupełniono wszystkich pól", Toast.LENGTH_LONG).show()
+            }else{
+                val subject = spinnerAddHomeworkSubjects.selectedItem.toString()
+                val subjectId = listOfIds[spinnerAddHomeworkSubjects.selectedItemPosition]
 
-            val notification = checkboxNotification.isChecked
+                val notification = checkboxNotification.isChecked
 
-            val homework = Homework("",title, description, subject,subjectId, day, month, year, hour, minute, notification)
+                val reminderDay: Int
+                if (notification){
+                    reminderDay = sliderReminderDay.value.toInt()
+                }else{
+                    reminderDay = 0
+                }
 
-            toSend.getHomework(homework)
-            dismiss()
+                val homework = Homework("",title, description, subject,subjectId, day, month, year, hour1, minute1, notification, reminderDay)
+
+                toSend.getHomework(homework)
+                dismiss()
+            }
         }
     }
 
@@ -138,10 +163,10 @@ class AddHomework: BottomSheetDialogFragment() {
 
 
         if (arguments != null && flag2){
-            hour = arguments?.getInt("hour")!!
-            minute = arguments?.getInt("minute")!!
+            hour1 = arguments?.getInt("hour")!!
+            minute1 = arguments?.getInt("minute")!!
 
-            buttonDeadlineTimePicker.text = hour.toString() + ":" + minute.toString()
+            buttonDeadlineTimePicker.text = hour1.toString() + ":" + minute1.toString()
         }
     }
 

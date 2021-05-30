@@ -31,8 +31,7 @@
         </activity>
 
 
-        <receiver
-            android:name=".MyNotification" />
+        <receiver android:name=".NotificationBroadcast" />
 
         <meta-data
             android:name="preloaded_fonts"

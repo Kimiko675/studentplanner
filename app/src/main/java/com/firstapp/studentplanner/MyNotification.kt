@@ -19,6 +19,9 @@ class MyNotification : BroadcastReceiver() {
     public var NOTIFICATION_ID = "notification-id"
     public var NOTIFICATION = "notification"
     var description = "Zadanie"
+
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context, intent: Intent) {
         val notificationManager =
