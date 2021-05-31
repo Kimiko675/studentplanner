@@ -29,38 +29,32 @@
 
     <TextView
         android:id="@+id/textView3Mark"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
+        android:layout_width="152dp"
+        android:layout_height="54dp"
         android:fontFamily="@font/baloo"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="12dp"
+        android:gravity="center_vertical"
+        android:padding="12dp"
         android:text="Średnia ocen:"
-        android:textAlignment="center"
         android:textColor="?android:attr/textColorTertiaryInverse"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/llSubjectsMark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="13dp">
 
     </TextView>
 
     <TextView
         android:id="@+id/textView4Mark"
         android:layout_width="261dp"
-        android:layout_height="56dp"
-        android:layout_toEndOf="@+id/textView3Mark"
+        android:layout_height="54dp"
         android:fontFamily="@font/baloo"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingRight="12dp"
-        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:padding="12dp"
         android:text="Brak wszystkich ocen"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textColor="?android:attr/textColorTertiaryInverse"
+        android:textSize="17dp"
         app:layout_constraintBottom_toTopOf="@+id/llSubjectsMark"
         app:layout_constraintLeft_toRightOf="@+id/textView3Mark"
         tools:ignore="MissingConstraints">
@@ -69,8 +63,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/llSubjectsMark"
-        android:layout_width="416dp"
-        android:layout_height="593dp"
+        android:layout_width="410dp"
+        android:layout_height="577dp"
         android:layout_marginTop="80dp"
         android:clipToPadding="false"
         android:padding="4dp"

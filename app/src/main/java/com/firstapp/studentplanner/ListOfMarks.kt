@@ -1,9 +1,12 @@
 package com.firstapp.studentplanner
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -12,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_marks.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
+
 
 class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
@@ -70,6 +74,8 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
                 if (!emptyMark){
                     resultAverage = markSum / ectsSum
                     textView4Mark.text = String.format("%.2f",resultAverage)
+                    textView4Mark.setTextColor(Color.parseColor("#FFFFFF"))
+                    textView4Mark.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
 
                 }
             }
