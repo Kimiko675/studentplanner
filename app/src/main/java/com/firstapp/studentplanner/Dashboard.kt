@@ -94,6 +94,11 @@ class Dashboard : AppCompatActivity(), GetPickedTime, DialogInterface.OnDismissL
             startActivity(intent)
         }
 
+        btnSettings.setOnClickListener{
+            val intent = Intent(this, Settings::class.java);
+            startActivity(intent);
+        }
+
 
 
         // tworzenie okna dialogowego
