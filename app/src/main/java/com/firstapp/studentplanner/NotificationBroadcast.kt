@@ -76,8 +76,8 @@ class NotificationBroadcast: BroadcastReceiver() {
 
         intent2.putExtra("homeworkDayReminder", notifydayreminder.toString())
 
-        val pendingIntent = PendingIntent.getActivity(context, 0,
-            intent2, 0)
+        val pendingIntent = PendingIntent.getActivity(context, hashing(notifyid),
+            intent2, PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         val builder = context?.let {

@@ -101,6 +101,10 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
     }
 
+    fun hashing(string: String): Int {
+        return string.hashCode()
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getHomework(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users")
@@ -165,7 +169,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
             intent.putExtra("homeworkDayReminder", homework.dayReminder.toString())
 
-            val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+            val pendingIntent = PendingIntent.getBroadcast(this, hashing(homework.id), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val alarmManager: AlarmManager = (getSystemService(Context.ALARM_SERVICE) as AlarmManager)!!
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, myCalendar.timeInMillis, pendingIntent)
