@@ -4,6 +4,7 @@ import android.R.attr.data
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,17 +63,25 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
                     list2.sortBy{it.minute}
                     list2.sortBy{it.hour}
                     var newOb =HourObject(0,0)
-                    var newOb2 =HourObject(list2.last().hour,list2.last().minute)
-                    for(k in list2){
-                        if(k.hour!=0 || k.minute!=0){
-                            newOb =HourObject(k.hour,k.minute)
-                            break
+                    if (list2.isNotEmpty()) {
+                        var newOb2 =HourObject(list2.last().hour,list2.last().minute)
+                        for(k in list2){
+                            if(k.hour!=0 || k.minute!=0){
+                                newOb =HourObject(k.hour,k.minute)
+                                break
+                            }
                         }
+                        val newListObject = DayObject(j, size, newOb,newOb2)
+                        list.add(newListObject)
                     }
-                    val newListObject = DayObject(j, size, newOb,newOb2)
-                    list.add(newListObject)
+
                 }
                 day_list.adapter = DayAdapter(list, this@Calendar)
+                if (list.isEmpty()) {
+                    text_freeweek.visibility = View.VISIBLE
+                } else {
+                    text_freeweek.visibility = View.INVISIBLE
+                }
             }
 
 

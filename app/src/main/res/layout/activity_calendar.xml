@@ -25,6 +25,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_freeweek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/baloo"
+        android:visibility="invisible"
+        android:text="Masz wolne"
+        android:textSize="62dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/day_list"
         android:layout_width="match_parent"

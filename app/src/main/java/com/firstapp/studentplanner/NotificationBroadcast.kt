@@ -85,6 +85,7 @@ class NotificationBroadcast: BroadcastReceiver() {
                 .setContentTitle(notifytitle)
                 .setContentText("Zbliża się termin!   " + notifyday.toString() + "/" + notifymonth.toString() + "/" + notifyyear.toString() + " - " + if (notifyhour<10) { "0" + notifyhour.toString()} else {notifyhour.toString()} + ":" + if (notifyminute<10) { "0" + notifyminute.toString()} else {notifyminute.toString()})
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         }

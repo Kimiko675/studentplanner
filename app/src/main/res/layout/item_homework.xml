@@ -62,16 +62,15 @@
             </LinearLayout>
 
 
-
             <TextView
                 android:id="@+id/textviewDeadline"
-                android:layout_width="match_parent"
+                android:layout_width="219dp"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Date"
                 android:paddingTop="8dp"
-                android:textColor="@color/purple"
+                android:text="Date"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
