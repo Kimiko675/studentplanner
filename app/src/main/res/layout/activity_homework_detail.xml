@@ -7,13 +7,22 @@
     tools:context=".HomeworkDetail"
     android:background="@drawable/gradient_bg">
 
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <TextView
         android:id="@+id/textView_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_rectangle_bottom"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:padding="20dp"
         android:text="text"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -100,36 +109,51 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/image_button_delete_homework2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/btn2_background"
-        android:src="@drawable/ic_delete2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llHomeworkDetails"
-        app:layout_constraintVertical_bias="0.038"
-        tools:ignore="MissingConstraints" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            >
 
-    <ImageButton
-        android:id="@+id/image_button_complete_homework2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/btn2_background"
-        android:src="@drawable/ic_baseline_add_task_242"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llHomeworkDetails"
-        app:layout_constraintVertical_bias="0.09"
-        tools:ignore="MissingConstraints" />
+            <ImageButton
+                android:id="@+id/image_button_delete_homework2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="160dp"
+                android:background="@drawable/btn2_background"
+                android:src="@drawable/ic_delete2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.803"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llHomeworkDetails"
+                app:layout_constraintVertical_bias="0.038"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/image_button_complete_homework2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/btn2_background"
+                android:src="@drawable/ic_baseline_add_task_242"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.175"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llHomeworkDetails"
+                app:layout_constraintVertical_bias="0.09"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
