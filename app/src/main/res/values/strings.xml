@@ -20,6 +20,20 @@
     <string name="send_link">Wyślij link</string>
     <string name="add_new_field">Dodaj kierunek</string>
     <string name="write_new_field">Podaj nazwę kierunku</string>
+    <string name="wyloguj_si">Wyloguj się</string>
+    <string name="witaj_w_panelu_g_wnym">Witaj w panelu głównym!</string>
+    <string name="twoje_studia">Twoje studia</string>
+    <string name="przedmioty">Przedmioty</string>
+    <string name="plan_zaj">Plan zajęć</string>
+    <string name="do_zrobienia">Do zrobienia</string>
+    <string name="dodaj_kierunek">Dodaj kierunek</string>
+    <string name="dodaj_przedmiot">Dodaj przedmiot</string>
+    <string name="ustawienia">Ustawienia</string>
+    <string name="zmie_has_o">Zmień hasło</string>
+    <string name="zmie_e_mail">Zmień e-mail</string>
+    <string name="tw_j_obecny_e_mail">Twój obecny e-mail:</string>
+    <string name="email">email</string>
+    <string name="usu_konto">Usuń konto</string>
 
     <string-array name="formsOfSubject">
         <item>wykład</item>
