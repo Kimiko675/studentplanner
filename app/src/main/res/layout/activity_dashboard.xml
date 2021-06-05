@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Dashboard"
-    android:background="@drawable/gradient_bg"><![CDATA[>
-
-
-
-    ]]>
+    android:background="@drawable/gradient_bg">
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,7 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.028"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/btnSettings"
@@ -36,18 +33,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLogout"
         app:layout_constraintVertical_bias="0.02"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:contentDescription="TODO" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="@drawable/rounded_purple"
         android:fontFamily="@font/raleway_medium"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="Wyloguj się"
+        android:text="@string/wyloguj_si"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,16 +63,16 @@
         android:fontFamily="@font/raleway_extralight"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
-        android:text="Witaj w panelu głównym!"
+        android:text="@string/witaj_w_panelu_g_wnym"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -90,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677"
+        app:layout_constraintVertical_bias="0.751"
         tools:ignore="MissingConstraints">
 
 
@@ -109,15 +107,15 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_rectangle_all_corners_transparent"
-                android:drawableRight="@drawable/czapka"
+                android:drawableEnd="@drawable/czapka"
                 android:fontFamily="@font/raleway_extralight"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:text="Twoje studia"
+                android:text="@string/twoje_studia"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
@@ -138,15 +136,15 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_rectangle_all_corners_transparent"
-                android:drawableRight="@drawable/ksiazka"
+                android:drawableEnd="@drawable/ksiazka"
                 android:fontFamily="@font/raleway_extralight"
-                android:paddingLeft="40dp"
-                android:paddingRight="43dp"
-                android:text="Przedmioty"
+                android:paddingStart="40dp"
+                android:paddingEnd="43dp"
+                android:text="@string/przedmioty"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -166,15 +164,15 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_rectangle_all_corners_transparent"
-                android:drawableRight="@drawable/kalendarz"
+                android:drawableEnd="@drawable/kalendarz"
                 android:fontFamily="@font/raleway_extralight"
-                android:paddingLeft="40dp"
-                android:paddingRight="43dp"
-                android:text="Plan zajęć"
+                android:paddingStart="40dp"
+                android:paddingEnd="43dp"
+                android:text="@string/plan_zaj"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -191,19 +189,18 @@
                 android:layout_marginLeft="13dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="13dp"
-                android:paddingEnd="49dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_rectangle_all_corners_transparent"
-                android:drawableRight="@drawable/zadania"
+                android:drawableEnd="@drawable/zadania"
                 android:fontFamily="@font/raleway_extralight"
-                android:paddingLeft="40dp"
-                android:paddingRight="43dp"
-                android:text="Do zrobienia"
+                android:paddingStart="40dp"
+                android:paddingEnd="49dp"
+                android:text="@string/do_zrobienia"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -230,25 +227,25 @@
             android:background="@drawable/rounded_purple"
             android:fontFamily="@font/raleway_medium"
             android:padding="15dp"
-            android:text="Dodaj kierunek"
+            android:text="@string/dodaj_kierunek"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:drawableRight="@drawable/ic_baseline_add_circle_outline_24"
+            android:drawableEnd="@drawable/ic_baseline_add_circle_outline_24"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAddSubject"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_purple"
             android:fontFamily="@font/raleway_medium"
             android:padding="15dp"
-            android:text="Dodaj przedmiot  "
+            android:text="@string/dodaj_przedmiot"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:drawableRight="@drawable/ic_baseline_add_circle_outline_24"
+            android:drawableEnd="@drawable/ic_baseline_add_circle_outline_24"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 

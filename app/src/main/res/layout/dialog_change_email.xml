@@ -26,47 +26,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zmień hasło"
+            android:text="Zmień e-mail"
             android:textSize="20dp"
             android:layout_marginBottom="20dp"/>
-            <EditText
-                android:id="@+id/editTextOldPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Stare hasło"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:inputType="textPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextNewEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nowy e-mail"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextEmailPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Podaj hasło"
+            android:textAlignment="center"
+            android:inputType="textPassword"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
 
 
-            <EditText
-                android:id="@+id/editTextNewPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nowe hasło"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:inputType="textPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"/>
-
-            <EditText
-                android:id="@+id/editTextNewPasswordAgain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Powtórz hasło"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:inputType="textPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonChangePassword"
+            android:id="@+id/buttonChangeEmail"
             android:background="@drawable/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
