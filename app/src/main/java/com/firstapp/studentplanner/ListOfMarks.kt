@@ -16,7 +16,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_marks.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 
-
 class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
     private lateinit var auth: FirebaseAuth;
@@ -27,13 +26,12 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
     var emptyMark: Boolean = false
     var floatEctsSum: Float = 0f
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_marks)
 
+        //Przekazanie kierunku
         fieldForMark = intent.getStringExtra("field").toString()
-
 
         textView2Mark.text = fieldForMark
         auth = FirebaseAuth.getInstance();
@@ -45,7 +43,6 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
                 list.clear()
                 for (i in dataSnapshot.children){
                     val model= i.getValue(Subject::class.java)
@@ -55,7 +52,6 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
                         if(model.field==fieldForMark){
                             list.add(model as Subject)
 
-
                             if (!emptyMark && model.ects != 0 && model.mark >= 2.0){
                                 ectsSum += model.ects
                                 floatEctsSum = model.ects.toFloat()
@@ -63,50 +59,31 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
                             }else {
                                 emptyMark = true
                             }
-
                         }
                     }
-
                 }
                 llSubjectsMark.adapter = SubjectsMarksAdapter(list,this@ListOfMarks)
 
                 if (!emptyMark){
+                    //Wyliczenie średniej ocen
                     resultAverage = markSum / ectsSum
                     textView4Mark.text = String.format("%.2f",resultAverage)
                     textView4Mark.setTextColor(Color.parseColor("#FFFFFF"))
                     textView4Mark.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
-
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }
         ref.addValueEventListener(postListener)
-
-
-
     }
 
+    //Przejście do szczegułów po kliknięciu na przedmiot
     override fun onItemClick(subjects: Subject, position: Int) {
         val intent= Intent(this, DetailActivity::class.java)
         intent.putExtra("subject", subjects)
         startActivity(intent)
     }
-
-/*
-    override fun onItemClick(subjects: Subject, position: Int) {
-        val intent= Intent(this, DetailActivity::class.java)
-        intent.putExtra("subject", subjects)
-
-        startActivity(intent)
-    }
-
- */
-
-    //private lateinit var bottomSheetFragment: EditSubject
-
-
 }

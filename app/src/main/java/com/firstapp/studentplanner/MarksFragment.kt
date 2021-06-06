@@ -35,22 +35,7 @@ class MarksFragment(subject: Subject, userID: String): Fragment() {
             view.findViewById<TextView>(R.id.textviewMark).text = sub.mark.toString()
         }
         view.findViewById<TextView>(R.id.textviewECTS).text = sub.ects.toString()
-        /*
 
-        var listOfAchievements1 = ArrayList<Achievement>()
-        val ref = FirebaseDatabase.getInstance().getReference("Users")
-        val key = sub.id.toString()
-        ref.child(userId).child("Subjects").child(key).child("achievement").get().addOnSuccessListener {
-            if (it.value != null) {
-                listOfAchievements1 = it.value as ArrayList<Achievement>
-                //Log.d("TAG", listOfAchievements1.toString())
-
-                view.findViewById<RecyclerView>(R.id.recyclerViewMarks).layoutManager = LinearLayoutManager(requireContext())
-                view.findViewById<RecyclerView>(R.id.recyclerViewMarks).adapter = AchievementAdapter(listOfAchievements1, requireContext() as DetailActivity)
-            }
-        }
-
-         */
         action.setAchievements()
 
 
@@ -64,12 +49,11 @@ class MarksFragment(subject: Subject, userID: String): Fragment() {
         view.findViewById<Button>(R.id.buttonAddNewAchievement).setOnClickListener {
             bottomSheetFragment.show(requireFragmentManager(), "BottomSheetDialog")
         }
-
         return view
     }
-
 }
 
+//Służy do przesłania danych do DetailActivity
 interface SetRecyclerViewMark{
     fun setAchievements()
 }

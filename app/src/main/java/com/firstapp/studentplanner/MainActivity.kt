@@ -22,33 +22,26 @@ class MainActivity : AppCompatActivity() {
         val editEmail = findViewById<EditText>(R.id.editEmail)
         val editPassword = findViewById<EditText>(R.id.editPassword)
 
+        //Rejestracja użytkownika po podaniu maila i hasła
         btnRegister.setOnClickListener{
             if(editEmail.text.trim().toString().isNotEmpty() || editPassword.text.trim().toString().isNotEmpty()){
                 createUser(editEmail.text.trim().toString(),editPassword.text.trim().toString())
             }else{
-                Toast.makeText(this,"Input Required",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Wypełnij wszystkie pola",Toast.LENGTH_LONG).show()
             }
         }
+        //Przejście do panelu logowania
         tvLogin.setOnClickListener{
             val intent = Intent(this,Login::class.java);
             startActivity(intent);
         }
     }
+    //Dodanie użytkownika do bazy
     fun createUser(email:String, password:String){
         auth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this){ task ->
-                    if(task.isSuccessful){                      
-                        //val user = Firebase.auth.currentUser
-                        //user!!.sendEmailVerification()
-                            //.addOnCompleteListener { task ->
-                                //if (task.isSuccessful) {
-                                    //Log.d(TAG, "Email sent.")
-                                //}
-                            //}                        
-                        //Log.e("Task Message", "Successful");
-                        //var intent = Intent(this,Dashboard::class.java);
-                        //startActivity(intent);                                               
-                 
+                    if(task.isSuccessful){
+                        //Wysłanie maila weryfikacyjnego
                         auth.currentUser?.sendEmailVerification()
                                 ?.addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
@@ -61,13 +54,13 @@ class MainActivity : AppCompatActivity() {
                                 }
                         
                     }else{
-                        Log.e("Task Message", "Failes"+task.exception);
-                        Toast.makeText(this,"Failed",Toast.LENGTH_LONG).show()
+                        Log.e("Task Message", "Failes"+task.exception)
+                        Toast.makeText(this,"Błąd",Toast.LENGTH_LONG).show()
                     }
                 }
 
     }
-
+    //Przejście odrazu do Dashboarda gdy użytkownik był zalogowany wcześniej
     override fun onStart() {
         super.onStart()
         val user = auth.currentUser;

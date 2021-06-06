@@ -15,16 +15,21 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         auth = FirebaseAuth.getInstance();
         val tvRegister = findViewById<TextView>(R.id.tvRegister)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
         val editTextPassword = findViewById<EditText>(R.id.editTextPassword)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
+
+        //Przejście do panelu rejestracji
         tvRegister.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java);
             startActivity(intent);
         }
+
+        //Zalogowanie użytkownika po podaniu maila i hasła
         btnLogin.setOnClickListener{
             if(editTextEmail.text.trim().toString().isNotEmpty() || editTextPassword.text.trim().toString().isNotEmpty()){
                 signInUser(editTextEmail.text.trim().toString(),editTextPassword.text.trim().toString())
@@ -33,42 +38,35 @@ class Login : AppCompatActivity() {
             }
         }
 
+        //Przejście do panelu resetowania hasła
         tvForgotPassword.setOnClickListener{
             val intent = Intent(this,ResetPassword::class.java);
             startActivity(intent);
         }
-
     }
 
+    //Przejście do Dashboarda po zalogowaniu
     fun signInUser(email:String, password: String){
         auth.signInWithEmailAndPassword(email,password)
             .addOnCompleteListener(this){ task ->
                 if(task.isSuccessful){
-                    Log.e("Task Message", "Successful");
-                    
-                    //----------------------------
+                    Log.e("Task Message", "Successful")
+
                     val user = auth.currentUser
-                    if (user !=null){
+                    if (user != null){
 
                         if (user.isEmailVerified){
-                            var intent = Intent(this,Dashboard::class.java);
+                            var intent = Intent(this,Dashboard::class.java)
                             startActivity(intent);
                             finish()
                         }else{
                             Toast.makeText(this,"Twój email nie został zweryfikowany.",Toast.LENGTH_LONG).show()
                         }
-
-
                     }
-                    //----------------------------
-                    
-                    //var intent = Intent(this,Dashboard::class.java);
-                    //startActivity(intent);
                 }else{
-                    Log.e("Task Message", "Failes"+task.exception);
-                    Toast.makeText(this,"Wrong email or password",Toast.LENGTH_LONG).show();
+                    Log.e("Task Message", "Failes"+task.exception)
+                    Toast.makeText(this,"Wrong email or password",Toast.LENGTH_LONG).show()
                 }
             }
     }
-
 }
