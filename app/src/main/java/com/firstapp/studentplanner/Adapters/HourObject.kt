@@ -1,4 +1,4 @@
-package com.firstapp.studentplanner
+package com.firstapp.studentplanner.Adapters
 
 import java.io.Serializable
 

@@ -1,6 +1,5 @@
 package com.firstapp.studentplanner
 
-import android.R.attr.data
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +7,9 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Adapters.HourObject
+import com.firstapp.studentplanner.Classes.DayObject
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -62,12 +64,12 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
                     }
                     list2.sortBy{it.minute}
                     list2.sortBy{it.hour}
-                    var newOb =HourObject(0,0)
+                    var newOb = HourObject(0,0)
                     if (list2.isNotEmpty()) {
-                        var newOb2 =HourObject(list2.last().hour,list2.last().minute)
+                        var newOb2 = HourObject(list2.last().hour,list2.last().minute)
                         for(k in list2){
                             if(k.hour!=0 || k.minute!=0){
-                                newOb =HourObject(k.hour,k.minute)
+                                newOb = HourObject(k.hour,k.minute)
                                 break
                             }
                         }

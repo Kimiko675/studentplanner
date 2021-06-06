@@ -1,17 +1,16 @@
 package com.firstapp.studentplanner
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import com.firstapp.studentplanner.Classes.Achievement
+import com.firstapp.studentplanner.Classes.Homework
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_homework_detail.*
-import kotlinx.android.synthetic.main.detales_about_subject.*
 
 class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
     private lateinit var auth: FirebaseAuth

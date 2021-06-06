@@ -1,13 +1,12 @@
 package com.firstapp.studentplanner
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 
-class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPickedTime, DialogInterface.OnDismissListener {
+class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
 
     private lateinit var auth: FirebaseAuth;
 
@@ -52,40 +51,15 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
     }
 
     override fun onItemClick(subjects: Subject, position: Int) {
-            val intent= Intent(this, DetailActivity::class.java)
-            intent.putExtra("subject", subjects)
-        /*
-            intent.putExtra("subject", subjects.subject)
-            intent.putExtra("field", subjects.field)
-            intent.putExtra("form", subjects.form)
-            intent.putExtra("dayWeek",subjects.dayOfWeek)
-            intent.putExtra("hour",subjects.hour)
-            intent.putExtra("minute", subjects.minute)
-            intent.putExtra("dayStart", subjects.dayStart)
-            intent.putExtra("monthStart", subjects.monthStart)
-            intent.putExtra("yearStart", subjects.yearStart)
-            intent.putExtra("dayEnd", subjects.dayEnd)
-            intent.putExtra("monthEnd", subjects.monthEnd)
-            intent.putExtra("yearEnd", subjects.yearEnd)
-            intent.putExtra("time", subjects.howLong)
-
-         */
+        val intent= Intent(this, DetailActivity::class.java)
+        intent.putExtra("subject", subjects)
         startActivity(intent)
-
     }
 
-    private lateinit var bottomSheetFragment: EditSubject
-
     override fun onEditClick(subjects: Subject) {
-
         val intent= Intent(this, EditExistingSubject::class.java)
         intent.putExtra("subject", subjects)
         startActivity(intent)
-        /*
-        bottomSheetFragment = EditSubject(subjects)
-        bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
-
-         */
     }
 
     override fun onDeleteClick(id: String) {
@@ -94,39 +68,5 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener, GetPicke
         ref.child(id).removeValue()
         Toast.makeText(this, "Przedmiot usunięty", Toast.LENGTH_SHORT).show()
 
-    }
-
-    override fun getTime(hour: Int, minute: Int) {
-        val bundle = Bundle()
-        bundle.putInt("hour",hour)
-        bundle.putInt("minute",minute)
-
-        bottomSheetFragment.arguments = bundle
-    }
-
-    override fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int) {
-        val bundle = Bundle()
-        bundle.putInt("dayStart",dayStart)
-        bundle.putInt("monthStart",monthStart)
-        bundle.putInt("yearStart",yearStart)
-        bottomSheetFragment.arguments = bundle
-    }
-
-    override fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int) {
-        val bundle = Bundle()
-        bundle.putInt("day",dayEnd)
-        bundle.putInt("month",monthEnd)
-        bundle.putInt("year",yearEnd)
-        bottomSheetFragment.arguments = bundle
-    }
-
-    override fun onDismiss(dialog: DialogInterface?) {
-        /*
-        bottomSheetFragment.displayTime()
-        bottomSheetFragment.displayDayStart()
-        bottomSheetFragment.displayDayEnd()
-        bottomSheetFragment.displayDaySingle()
-
-         */
     }
 }

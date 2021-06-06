@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.day_picker.*
-import kotlinx.android.synthetic.main.dialog_add_subject.*
 
 class DayPicker: DialogFragment() {
 

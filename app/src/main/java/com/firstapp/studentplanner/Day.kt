@@ -3,18 +3,17 @@ package com.firstapp.studentplanner
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Classes.ListObject
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_day.*
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
-import kotlinx.android.synthetic.main.dialog_add_subject.*
 import java.util.*
 import java.util.Calendar
 

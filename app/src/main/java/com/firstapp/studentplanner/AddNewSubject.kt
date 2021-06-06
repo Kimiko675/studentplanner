@@ -4,11 +4,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Classes.Form
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,7 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_add_subject.*
 import kotlinx.android.synthetic.main.activity_add_subject.buttonAddSubject
 import kotlinx.android.synthetic.main.activity_list_of_fields.*
-import kotlinx.android.synthetic.main.dialog_add_subject.*
 import kotlinx.android.synthetic.main.fragment_add_form.*
 
 class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime, DialogInterface.OnDismissListener {
@@ -39,10 +39,7 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
         listOfForms.add(Form())
         myAdapter.notifyDataSetChanged()
 
-
         val arrayAdapter = ArrayAdapter<String>(this@AddNewSubject, android.R.layout.simple_spinner_item, listOfFields)
-
-
 
         // wyjęcie danych o użytkowniku
         auth = FirebaseAuth.getInstance();

@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.firstapp.studentplanner.Classes.Homework
 import kotlinx.android.synthetic.main.item_homework.view.*
 
 class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clickListener: OnHomeworkItemClickListener) : RecyclerView.Adapter<HomeworkAdapter.ViewHolder>() {

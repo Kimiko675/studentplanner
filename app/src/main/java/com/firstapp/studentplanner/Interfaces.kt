@@ -1,5 +1,8 @@
 package com.firstapp.studentplanner
 
+import com.firstapp.studentplanner.Classes.Achievement
+import com.firstapp.studentplanner.Classes.Homework
+
 public interface GetPickedTime {
     public fun getTime(hour: Int, minute: Int)
     public fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int)

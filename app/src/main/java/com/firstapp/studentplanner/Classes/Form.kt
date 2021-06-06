@@ -1,4 +1,4 @@
-package com.firstapp.studentplanner
+package com.firstapp.studentplanner.Classes
 
 import java.io.Serializable
 

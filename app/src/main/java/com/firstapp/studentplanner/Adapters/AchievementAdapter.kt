@@ -1,13 +1,12 @@
 package com.firstapp.studentplanner
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
+import com.firstapp.studentplanner.Classes.Achievement
 import kotlinx.android.synthetic.main.item_achievement.view.*
 
 class AchievementAdapter(private val AchievementList: ArrayList<Achievement>, var clickListener: OnAchievementItemClickListener): RecyclerView.Adapter<AchievementAdapter.ViewHolder>() {

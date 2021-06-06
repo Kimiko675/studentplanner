@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_of_all_forms.*
+import com.firstapp.studentplanner.Adapters.FormDetalesAdapter
+import com.firstapp.studentplanner.Classes.Form
 
 class FormsFragment(list: ArrayList<Form>): Fragment() {
 

@@ -7,13 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Classes.Achievement
+import com.firstapp.studentplanner.Classes.Form
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_create_subject.*
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_list_of_subjects.*
 import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.detales_about_subject.*

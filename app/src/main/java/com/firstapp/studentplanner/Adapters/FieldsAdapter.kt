@@ -29,7 +29,6 @@ class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListen
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imageView: ImageView = itemView.image_view
         val textView: TextView = itemView.text_view_1
-        //val textView2: TextView = itemView.text_view_2
         fun initialize(field: String, action: OnFieldItemClickListener){
             itemView.findViewById<ImageButton>(R.id.image_button_delete_field).setOnClickListener {
                 action.onDeleteClick(field)

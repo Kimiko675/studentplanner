@@ -1,14 +1,9 @@
 package com.firstapp.studentplanner
 
 import android.app.*
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.icu.text.DateFormat.Field.YEAR
-import android.icu.util.Calendar.YEAR
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +12,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firstapp.studentplanner.Classes.Achievement
+import com.firstapp.studentplanner.Classes.Homework
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,10 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_homework.*
 import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.dialog_add_homework.*
-import java.text.DateFormat.Field.YEAR
 import java.util.*
-import java.util.Calendar
-import java.util.Calendar.YEAR
 import kotlin.collections.ArrayList
 
 class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement, OnHomeworkItemClickListener, GetPickedDeadline, GetPickedTime, DialogInterface.OnDismissListener {

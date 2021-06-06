@@ -1,28 +1,14 @@
 package com.firstapp.studentplanner
 
-import android.accounts.AccountManager.get
-import android.content.Intent
-import android.content.res.Resources
-import android.media.CamcorderProfile.get
-import android.nfc.tech.Ndef.get
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatDrawableManager.get
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.common.collect.Iterators.get
-import com.google.gson.reflect.TypeToken.get
-import com.google.rpc.context.AttributeContext
-import io.grpc.internal.SharedResourceHolder.get
+import com.firstapp.studentplanner.Classes.Subject
 import kotlinx.android.synthetic.main.item.view.text_view_1
 import kotlinx.android.synthetic.main.item2.view.*
-import java.lang.reflect.Array.get
-import java.util.*
-import kotlin.collections.ArrayList
 
 class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener: OnSubjectItemClickListener) : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 

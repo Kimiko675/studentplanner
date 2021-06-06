@@ -3,9 +3,9 @@ package com.firstapp.studentplanner
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.firstapp.studentplanner.Classes.Subject
 import kotlinx.android.synthetic.main.item2_mark.view.*
 
 class SubjectsMarksAdapter(private val SubjectsMarksList: MutableList<Subject>, var clickListener: OnSubjectMarkItemClickListener) : RecyclerView.Adapter<SubjectsMarksAdapter.ViewHolder>() {
