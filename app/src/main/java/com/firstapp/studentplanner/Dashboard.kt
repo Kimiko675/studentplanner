@@ -30,7 +30,6 @@ class Dashboard : AppCompatActivity() {
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
-
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnAdd = findViewById<Button>(R.id.btnAddSubject)
         val btnList = findViewById<Button>(R.id.btnList)

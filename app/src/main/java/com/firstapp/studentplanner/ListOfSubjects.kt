@@ -22,7 +22,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_subjects)
-
+        //połączenie z Firebase
     auth = FirebaseAuth.getInstance();
     val userId: String = FirebaseAuth.getInstance().currentUser.uid
     val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
@@ -30,6 +30,7 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
     llSubjects.layoutManager = LinearLayoutManager(this)
     llSubjects.adapter = SubjectsAdapter(list,this)
 
+        //pobieranie danych z bazy i przekazywanie ich do adaptera
     val postListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             // Get Post object and use the values to update the UI
@@ -43,25 +44,24 @@ class ListOfSubjects : AppCompatActivity(), OnSubjectItemClickListener {
         }
 
         override fun onCancelled(databaseError: DatabaseError) {
-            // Getting Post failed, log a message
             Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
         }
     }
     ref.addValueEventListener(postListener)
     }
-
+    //uruchamianie kolejnej aktywności i przekzywanie do niej danych
     override fun onItemClick(subjects: Subject, position: Int) {
         val intent= Intent(this, DetailActivity::class.java)
         intent.putExtra("subject", subjects)
         startActivity(intent)
     }
-
+    //uruchamianie kolejnej aktywności (edycji) i przekzywanie do niej danych
     override fun onEditClick(subjects: Subject) {
         val intent= Intent(this, EditExistingSubject::class.java)
         intent.putExtra("subject", subjects)
         startActivity(intent)
     }
-
+    //usuwanie przedmiotu
     override fun onDeleteClick(id: String) {
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")

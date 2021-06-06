@@ -20,7 +20,6 @@ class ConvertHomeworkToAchievement(val text: String, val subjectId: String): Bot
         super.onCreate(savedInstanceState)
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.SheetDialog);
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         toSend = activity as ConvertToAchievement
 

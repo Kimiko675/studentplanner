@@ -42,7 +42,6 @@ class DetailActivity : AppCompatActivity(), GetPickedMark, GetAchievement, OnAch
 
             tvTitleNameOfSubject.text = sub.subject
             textviewField.text = sub.field
-
             for (i in sub.forms!!){
                 listOfForms.add(i)
             }

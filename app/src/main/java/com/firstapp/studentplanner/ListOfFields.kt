@@ -23,6 +23,7 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_fields)
+        //połączenie z Firebase
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
@@ -30,6 +31,7 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
         llFields.layoutManager = LinearLayoutManager(this)
         llFields.adapter = FieldsAdapter(list, this)
 
+        //pobieranie danych z bazy i przekazywanie ich do adaptera
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -48,12 +50,14 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
         ref.addValueEventListener(postListener)
     }
 
+    //uruchamianie kolejnej aktywności i przekazywanie do niej danych
     override fun onItemClick(field: String) {
         val intent= Intent(this, ListOfMarks::class.java)
         intent.putExtra("field", field)
         startActivity(intent)
     }
 
+    //usuwanie elementu
     override fun onDeleteClick(field: String) {
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref2 = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
@@ -62,14 +66,13 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
 
         val postListener2 = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
                 list.clear()
                 for (i in dataSnapshot.children){
                     val model= i.getValue(Subject::class.java)
                     i.key?.let { Log.d("Tab", it) }
                     list.add(model as Subject)
                 }
-
+                //zablokowanie przed usunięciem kierunku, który ma przypisane przedmioty
                 for (i in list){
                     Log.d("PETLA", i.field.toString())
                     if (i.field == field){
@@ -79,6 +82,7 @@ class ListOfFields : AppCompatActivity(), OnFieldItemClickListener {
                     }
                 }
 
+                //jeśli usuwanie nie zostało zablokowane to wyszkujemy odpowiedni element w bazie i go usuwamy
                 if (!flag){
                     val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
                     var key: String = ""

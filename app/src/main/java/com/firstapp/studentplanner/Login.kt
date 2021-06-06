@@ -25,7 +25,6 @@ class Login : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java);
             startActivity(intent);
         }
-
         btnLogin.setOnClickListener{
             if(editTextEmail.text.trim().toString().isNotEmpty() || editTextPassword.text.trim().toString().isNotEmpty()){
                 signInUser(editTextEmail.text.trim().toString(),editTextPassword.text.trim().toString())

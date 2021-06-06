@@ -25,7 +25,6 @@ class AddHomework: BottomSheetDialogFragment() {
 
     private var title: String = ""
     private var description: String = ""
-
     private var listOfSubjects = ArrayList<String>()
     private var listOfIds = ArrayList<String>()
 

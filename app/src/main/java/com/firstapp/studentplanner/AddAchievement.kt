@@ -12,7 +12,6 @@ class AddAchievement: BottomSheetDialogFragment() {
 
     private var title: String = ""
     private var description: String = ""
-
     lateinit var toSend: GetAchievement
 
     override fun onCreate(savedInstanceState: Bundle?) {

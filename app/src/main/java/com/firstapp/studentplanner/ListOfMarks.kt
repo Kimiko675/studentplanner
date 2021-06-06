@@ -36,7 +36,6 @@ class ListOfMarks : AppCompatActivity(), OnSubjectMarkItemClickListener {
 
 
         textView2Mark.text = fieldForMark
-
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")

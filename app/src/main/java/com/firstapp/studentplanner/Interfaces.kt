@@ -3,13 +3,13 @@ package com.firstapp.studentplanner
 import com.firstapp.studentplanner.Classes.Achievement
 import com.firstapp.studentplanner.Classes.Homework
 
-public interface GetPickedTime {
-    public fun getTime(hour: Int, minute: Int)
-    public fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int)
-    public fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int)
+ interface GetPickedTime {
+     fun getTime(hour: Int, minute: Int)
+     fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int)
+     fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int)
 }
 
-public interface GetPickedMark {
+ interface GetPickedMark {
     fun getMark(mark: Float)
 }
 
@@ -25,6 +25,6 @@ interface GetHomework{
     fun getHomework(homework: Homework)
 }
 
-public interface GetPickedDeadline {
-    public fun getDay(dayEnd: Int, monthEnd: Int, yearEnd: Int)
+ interface GetPickedDeadline {
+     fun getDay(dayEnd: Int, monthEnd: Int, yearEnd: Int)
 }

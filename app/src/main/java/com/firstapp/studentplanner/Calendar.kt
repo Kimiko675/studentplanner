@@ -33,14 +33,18 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
         var day = dni[1]
         var size = 0
 
-
+        //przygotowanie do pobierania danych z bazy
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
+
+        //listy przechowujące datę przedmiotu
         val list = mutableListOf<DayObject>()
         val list2 = mutableListOf<HourObject>()
         day_list.layoutManager = LinearLayoutManager(this)
         day_list.adapter = DayAdapter(list, this)
+
+        //pobieranie danych i umieszczanie ich w odpowiednich listach
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.clear()
@@ -62,9 +66,11 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
                             }
                         }
                     }
+                    //sortowanie według godzin i minut
                     list2.sortBy{it.minute}
                     list2.sortBy{it.hour}
                     var newOb = HourObject(0,0)
+                    //wstawianie gotowych obiektów do ostatecznej listy
                     if (list2.isNotEmpty()) {
                         var newOb2 = HourObject(list2.last().hour,list2.last().minute)
                         for(k in list2){
@@ -94,7 +100,7 @@ class Calendar : AppCompatActivity(), OnDayItemClickListener {
         }
         ref.addValueEventListener(postListener)
         }
-
+        //przekazywanie danych do kolejnej aktywności
         override fun onItemClick(day_object: DayObject, position: Int) {
             if(day_object.size!=0){
                 val intent= Intent(this, Day::class.java)

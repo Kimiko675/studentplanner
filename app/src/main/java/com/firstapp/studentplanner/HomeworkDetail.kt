@@ -20,10 +20,10 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homework_detail)
+        //pobranie użytkownika
         userId = FirebaseAuth.getInstance().currentUser.uid
 
-        //hw = intent.getSerializableExtra("homework") as Homework;
-
+        //pobranie danych z poprzedniej aktywności
         val homeworkid = intent.getStringExtra("homeworkId").toString()
         val homeworktitle = intent.getStringExtra("homeworkTitle").toString()
         val homeworkdescription = intent.getStringExtra("homeworkDescription").toString()
@@ -35,6 +35,7 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
         val homeworkhour = intent.getStringExtra("homeworkHour").toString().toInt()
         val homeworkminute = intent.getStringExtra("homeworkMinute").toString().toInt()
         val string = intent.getStringExtra("homeworkNotification").toString()
+        //sprawdzenie, czy użytkownik zaznaczył powiadomienia, jeśli tak, to pobieramy dodatkowe dane
         val homeworknotification: Boolean
         if (string == "true"){
             homeworknotification = true
@@ -45,17 +46,20 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
 
         hw = Homework(homeworkid, homeworktitle, homeworkdescription, homeworksubject, homeworksubjectid, homeworkday, homeworkmonth, homeworkyear, homeworkhour, homeworkminute, homeworknotification, homeworkdayreminder)
 
+        //wyświetlanie danych
         textView_name.text = hw.title
         textView_date.text = hw.day.toString() + "/" + hw.month.toString() + "/" + hw.year.toString() + "    " + hw.hour.toString() + ":" + if (hw.minute<10) { "0" + hw.minute.toString() } else { hw.minute.toString() }
         textView_sub.text = hw.subject
         textView_des.text = hw.description
 
+        //usuwanie zadania
         image_button_delete_homework2.setOnClickListener{
             val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
             ref.child(hw.id).removeValue()
             this.finish();
         }
 
+        //oznaczenie zadania jako skończone
         image_button_complete_homework2.setOnClickListener{
             val bottomSheetFragment = ConvertHomeworkToAchievement(hw.title, hw.subjectId)
             bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
@@ -65,7 +69,7 @@ class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
 
 
     }
-
+    //po oznaczeniu zadania jako skończone możemy zapisać je jako osiągnięcie
     override fun convertToAchievement(achievement: Achievement, subjectId: String) {
         var needToAdd: Boolean = true
 

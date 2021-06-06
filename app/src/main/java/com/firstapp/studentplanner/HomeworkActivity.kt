@@ -41,7 +41,6 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     lateinit var builder: NotificationCompat.Builder
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homework)

@@ -20,7 +20,6 @@ class FormsFragment(list: ArrayList<Form>): Fragment() {
 
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

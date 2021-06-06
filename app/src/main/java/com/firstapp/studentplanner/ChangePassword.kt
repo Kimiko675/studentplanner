@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.dialog_change_password.*
 
 class ChangePassword: BottomSheetDialogFragment() {
 
+    //tworzenie wyglądu i połączenie z Firebase
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +36,20 @@ class ChangePassword: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         buttonChangePassword.setOnClickListener {
+            //sprawdzenie, czy żadne pole nie jest puste
             if (editTextOldPassword.text.isNotEmpty() && editTextNewPassword.text.isNotEmpty() && editTextNewPasswordAgain.text.isNotEmpty()) {
+                //sprawdzenie, czy nowy mail został dwa razy wpisany tak samo
                 if (editTextNewPassword.text.toString() == editTextNewPasswordAgain.text.toString()) {
                     val user = FirebaseAuth.getInstance().currentUser
+                    //uwierzytelnianie użytkownika
                     if (user != null && user.email != null) {
                         val credential: AuthCredential = EmailAuthProvider
                             .getCredential(user.email!!, editTextOldPassword.text.toString())
                         user?.reauthenticate(credential)
                             ?.addOnCompleteListener {
                                 if (it.isSuccessful) {
+                                    //zmiana hasła, wylogowanie i wymuszenie ponownego zalogowania
                                     user!!.updatePassword(editTextNewPassword.text.toString())
                                         .addOnCompleteListener { task ->
                                             if (task.isSuccessful) {

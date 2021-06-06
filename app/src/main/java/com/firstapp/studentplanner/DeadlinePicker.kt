@@ -22,7 +22,6 @@ class DeadlinePicker: DialogFragment() {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.SheetDialog);
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         picker = activity as GetPickedDeadline
         return inflater.inflate(R.layout.day_picker, container, false)

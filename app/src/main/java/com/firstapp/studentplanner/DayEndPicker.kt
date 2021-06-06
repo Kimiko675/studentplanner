@@ -22,7 +22,6 @@ class DayEndPicker: DialogFragment() {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.SheetDialog);
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         picker = activity as GetPickedTime
         return inflater.inflate(R.layout.day_picker, container, false)

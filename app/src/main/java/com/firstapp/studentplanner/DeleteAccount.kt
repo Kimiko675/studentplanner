@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.dialog_change_password.buttonChangePasswor
 import kotlinx.android.synthetic.main.dialog_delete_account.*
 
 class DeleteAccount:BottomSheetDialogFragment() {
+
+    //tworzenie wyglądu i połączenie z Firebase
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +39,14 @@ class DeleteAccount:BottomSheetDialogFragment() {
 
         buttonDeleteAcc.setOnClickListener {
             val user = FirebaseAuth.getInstance().currentUser
+            //uwierzytelnianie użytkownika
             if (user != null && user.email != null) {
                 val credential: AuthCredential = EmailAuthProvider
                     .getCredential(user.email!!, editTextDeletePass.text.toString())
                 user?.reauthenticate(credential)
                     ?.addOnCompleteListener {
                         if (it.isSuccessful) {
+                            //usuwanie konta, wylogowanie i przejście do ekranu logowania
                             user!!.delete()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {

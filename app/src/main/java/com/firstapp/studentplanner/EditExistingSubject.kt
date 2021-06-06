@@ -33,7 +33,6 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
         setContentView(R.layout.activity_add_subject)
 
         val sub: Subject = intent.getSerializableExtra("subject") as Subject;
-
         tvTitleAddSubject.text = "Edycja przedmiotu"
         buttonAddSubject.text = "Zedytuj przedmiot"
 
