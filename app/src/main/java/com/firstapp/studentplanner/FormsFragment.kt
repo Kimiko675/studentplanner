@@ -13,13 +13,11 @@ import com.firstapp.studentplanner.Classes.Form
 class FormsFragment(list: ArrayList<Form>): Fragment() {
 
     private var listOfForms = ArrayList<Form>(list)
-    //private var myAdapter = FormDetalesAdapter(listOfForms)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +30,4 @@ class FormsFragment(list: ArrayList<Form>): Fragment() {
         view.findViewById<RecyclerView>(R.id.recyclerviewListOfAllForms).layoutManager = LinearLayoutManager(requireContext())
         return view
     }
-
-
-
 }

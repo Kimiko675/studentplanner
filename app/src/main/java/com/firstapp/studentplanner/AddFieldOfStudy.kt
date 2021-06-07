@@ -33,7 +33,7 @@ class AddFieldOfStudy: BottomSheetDialogFragment() {
             var isNotEmptyField: Boolean = false
             var isNotEmptyTerm: Boolean = false
 
-            //sprawdzam czy jest wpisany kierunek i semestr
+            //sprawdzamy czy jest wpisany kierunek i semestr
             if (field.isNotEmpty()) { isNotEmptyField = true } else { Toast.makeText(context, "Podaj kierunek", Toast.LENGTH_SHORT).show() }
             if (term.isNotEmpty()) { isNotEmptyTerm = true } else { Toast.makeText(context, "Podaj semestr", Toast.LENGTH_SHORT).show() }
 

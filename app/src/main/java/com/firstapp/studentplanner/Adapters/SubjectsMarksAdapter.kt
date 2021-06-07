@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.item2_mark.view.*
 
 class SubjectsMarksAdapter(private val SubjectsMarksList: MutableList<Subject>, var clickListener: OnSubjectMarkItemClickListener) : RecyclerView.Adapter<SubjectsMarksAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectsMarksAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item2_mark,parent,false)
         return ViewHolder(view)
@@ -37,16 +36,9 @@ class SubjectsMarksAdapter(private val SubjectsMarksList: MutableList<Subject>, 
         val textView2: TextView = itemView.text_view_2Mark
         val textView3: TextView = itemView.text_view_3Mark
         fun initialize(subjects: Subject, action: OnSubjectMarkItemClickListener){
-
             itemView.setOnClickListener{
                 action.onItemClick(subjects, adapterPosition)
             }
-
-
         }
     }
-}
-
-interface OnSubjectMarkItemClickListener {
-    fun onItemClick(subjects: Subject, position: Int)
 }

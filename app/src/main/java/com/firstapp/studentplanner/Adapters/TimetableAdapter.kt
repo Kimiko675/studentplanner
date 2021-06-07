@@ -13,8 +13,6 @@ import kotlinx.android.synthetic.main.item3.view.*
 
 class TimetableAdapter(private val SubjectsList: MutableList<ListObject>, var clickListener: OnSubItemClickListener) : RecyclerView.Adapter<TimetableAdapter.ViewHolder>() {
 
-    var listener: RecyclerViewClickListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetableAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item3,parent,false)
         return ViewHolder(view)
@@ -74,9 +72,3 @@ class TimetableAdapter(private val SubjectsList: MutableList<ListObject>, var cl
         }
     }
 }
-
-interface OnSubItemClickListener{
-    fun onItemClick(listObject: ListObject, position: Int)
-}
-
-

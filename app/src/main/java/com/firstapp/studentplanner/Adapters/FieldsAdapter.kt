@@ -37,12 +37,5 @@ class FieldsAdapter(private val fieldsList: MutableList<String>, var clickListen
                 action.onItemClick(field)
             }
         }
-
-
     }
-}
-
-interface OnFieldItemClickListener{
-    fun onItemClick(field: String)
-    fun onDeleteClick(field: String)
 }

@@ -12,9 +12,6 @@ import kotlinx.android.synthetic.main.fragment_add_form.view.*
 class FormAdapter(private val FormList: List<Form>, var clickListener: OnFormItemClickListener) : RecyclerView.Adapter<FormAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-        // pola do uzupełnienia
-
         var time: Button = itemView.buttonPickTime
         var howLong: EditText = itemView.edittextHowLong
         var formOfSubject: Spinner = itemView.spinnerAddForm
@@ -99,26 +96,10 @@ class FormAdapter(private val FormList: List<Form>, var clickListener: OnFormIte
             holder.dayOfEnd.text = currentItem.dayEnd.toString() + "/" + currentItem.monthEnd.toString() + "/" + currentItem.yearEnd.toString()
         }
 
-
-
         holder.initialize(position, currentItem, clickListener)
     }
 
     override fun getItemCount(): Int {
         return FormList.size
     }
-
-}
-
-interface OnFormItemClickListener{
-    fun onDeleteClick(form: Form)
-    fun updateFields(): ArrayList<String>
-    fun showTimePicker()
-    fun showDayStartPicker()
-    fun showDayEndPicker()
-    fun getPosition(position: Int)
-    fun sendFormInfo(info: Int)
-    fun sendDayOfWeekInfo(info: Int)
-    fun sendHowLong(info: String)
-    fun sendPickedTime(hour: Int, minute: Int)
 }

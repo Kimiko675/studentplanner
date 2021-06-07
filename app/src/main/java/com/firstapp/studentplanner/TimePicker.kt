@@ -15,6 +15,7 @@ class TimePicker: DialogFragment() {
     private var hour: Int = 0
     private var minute: Int = 0
 
+    // interfejs do przesyłania danych do AddNewSubject EditExistingSubject HomeworkActivity
     private lateinit var picker: GetPickedTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class TimePicker: DialogFragment() {
             hour = tpTimePicker.hour
             minute = tpTimePicker.minute
 
+            // przesyłanie danych
             picker.getTime(hour, minute)
             dismiss()
         }

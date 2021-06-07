@@ -36,10 +36,8 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
         tvTitleAddSubject.text = "Edycja przedmiotu"
         buttonAddSubject.text = "Zedytuj przedmiot"
 
-
         edittextAddSubjectName.setText(sub.subject)
         edittextECTS.setText("" + sub.ects)
-
 
         for (i in sub.forms!!){
             listOfForms.add(i)
@@ -48,11 +46,9 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
 
         val arrayAdapter = ArrayAdapter<String>(this@EditExistingSubject, android.R.layout.simple_spinner_item, listOfFields)
 
-        // wyjęcie danych o użytkowniku
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
-        // pobieranie kierunków z bazy
         val refForFields = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
         val postListenerForFields = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -61,6 +57,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
                     listOfFields.add(i.value as String)
                 }
 
+                // podpięcie adaptera pod spinner do wyboru kierunku
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerAddSubjectField.adapter = arrayAdapter
             }
@@ -98,6 +95,11 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
 
             if (name == ""){
                 isEveryThingOk = false
+            }
+
+            if (listOfForms.isEmpty()){
+                isEveryThingOk = false
+                Toast.makeText(this, "Nie można dodać przedmiotu bez żadnej formy", Toast.LENGTH_SHORT).show()
             }
 
             if (isEveryThingOk){
@@ -176,10 +178,7 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
 
             var intent = Intent(this,ListOfSubjects::class.java);
             startActivity(intent);
-
         }
-
-
     }
 
     override fun onDeleteClick(form: Form) {

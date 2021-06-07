@@ -41,7 +41,3 @@ class AchievementAdapter(private val AchievementList: ArrayList<Achievement>, va
     }
 
 }
-
-interface OnAchievementItemClickListener{
-    fun onDeleteClick(achievement: Achievement)
-}

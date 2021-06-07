@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.detales_about_marks.*
 import kotlinx.android.synthetic.main.mark_picker.*
 
 class MarkPicker: DialogFragment() {
 
     private var mark: Float = 0f
 
+    // interfejs do przesyłania danych do DetailActivity
     private lateinit var picker: GetPickedMark
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.SheetDialog);
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,6 +27,7 @@ class MarkPicker: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // ustawienie widoczności suwaka do wyboru oceny
         checkboxMark.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 sliderMark.visibility = View.VISIBLE
@@ -43,6 +42,7 @@ class MarkPicker: DialogFragment() {
             }else{
                 mark = 0f
             }
+            //przesyłanie danych do DetailActivity
             picker.getMark(mark)
             dismiss()
         }

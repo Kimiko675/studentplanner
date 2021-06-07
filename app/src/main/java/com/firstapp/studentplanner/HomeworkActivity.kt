@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firstapp.studentplanner.Classes.Achievement
 import com.firstapp.studentplanner.Classes.Homework
@@ -36,10 +35,6 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     var adapter = HomeworkAdapter(listOfHomeworks, this)
 
     val channelId = "com.firstapp.studentplanner"
-    private val description = "Zadanie"
-
-    lateinit var builder: NotificationCompat.Builder
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +45,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
 
-
+        // utworzenie kanału dla powiadomień
         createNotificationChannel()
 
         val postListener = object : ValueEventListener {
@@ -81,10 +76,11 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
     }
 
+    // funkcja tworząca kanał dla powiadomień
     fun createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val title = "title"
-            val description = "description"
+            val title = "com.firstapp.studentplanner powiadomienia"
+            val description = "powiadomienia przychodzące klika dni przed końcowym terminem"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(channelId, title, importance)
             channel.description = description
@@ -94,6 +90,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
     }
 
+    // funkcja haszująca string na int
     fun hashing(string: String): Int {
         return string.hashCode()
     }
@@ -114,12 +111,8 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
             }
         }
 
+        // ustawienie powiadomienia jeśli urzytkowanik sobie tego zażyczył
         if (homework.notification) {
-
-
-
-
-
             var myCalendar = java.util.Calendar.getInstance()
 
             myCalendar.set(java.util.Calendar.YEAR, homework.year)
@@ -134,14 +127,6 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
             val intent = Intent(this, NotificationBroadcast::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
-
-            /*
-            val intent2 = Intent(this, HomeworkDetail::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-
-             */
-
 
             intent.putExtra("homeworkId", homework.id)
             intent.putExtra("homeworkTitle", homework.title)
@@ -164,27 +149,13 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
 
             val pendingIntent = PendingIntent.getBroadcast(this, hashing(homework.id), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+            // zaplanowanie powiadomienia w alarm manager
             val alarmManager: AlarmManager = (getSystemService(Context.ALARM_SERVICE) as AlarmManager)!!
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, myCalendar.timeInMillis, pendingIntent)
 
         }
 
     }
-
-    /*
-
-    fun scheduleNotification(notification: Notification, time: Long, homework: Homework, date: Date, pendingIntent: PendingIntent) {
-
-    }
-
-    class Receiver : BroadcastReceiver(){
-        override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("HomeworkActivity", " Receiver : " + Date().toString())
-        }
-    }
-
-
-     */
 
     override fun onDeleteHomeworkClick(homework: Homework) {
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Homeworks")
@@ -269,12 +240,8 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     }
 
     override fun getDayStart(dayStart: Int, monthStart: Int, yearStart: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun getDayEnd(dayEnd: Int, monthEnd: Int, yearEnd: Int) {
-        TODO("Not yet implemented")
     }
-
-
 }

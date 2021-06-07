@@ -1,23 +1,17 @@
 package com.firstapp.studentplanner
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import java.lang.reflect.Field
 
 class Dashboard : AppCompatActivity() {
 
@@ -33,7 +27,6 @@ class Dashboard : AppCompatActivity() {
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnAdd = findViewById<Button>(R.id.btnAddSubject)
         val btnList = findViewById<Button>(R.id.btnList)
-
 
         val ref = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
 
@@ -53,14 +46,13 @@ class Dashboard : AppCompatActivity() {
         ref.addValueEventListener(postListener)
 
         btnAdd.setOnClickListener{
+            // sprawdzenie czy w bazie jest kierunek, nie można dodać przedmiotu bez posiadania kierunku
             if (list.isNotEmpty()) {
-
                 val intent = Intent(this,AddNewSubject::class.java);
                 startActivity(intent);
             }else {
-                Toast.makeText(this, "Najpier dodaj kierunek", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Najpierw dodaj kierunek", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         btnLogout.setOnClickListener{
@@ -94,7 +86,7 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent);
         }
 
-        // tworzenie okna dialogowego
+        // tworzenie okna dialogowego z dodawaniem kierunku
         val bottomSheetFragment = AddFieldOfStudy()
 
         btnAddField.setOnClickListener {

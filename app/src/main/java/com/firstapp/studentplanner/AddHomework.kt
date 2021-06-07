@@ -28,6 +28,7 @@ class AddHomework: BottomSheetDialogFragment() {
     private var listOfSubjects = ArrayList<String>()
     private var listOfIds = ArrayList<String>()
 
+    // interfejs do przesyłania danych do HomeworkActivity
     lateinit var toSend: GetHomework
 
 
@@ -42,8 +43,6 @@ class AddHomework: BottomSheetDialogFragment() {
     private var flag2: Boolean = false
 
     lateinit var arrayAdapter: ArrayAdapter<String>
-
-    //lateinit var toShow: ShowDeadlinePicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +71,6 @@ class AddHomework: BottomSheetDialogFragment() {
             }
         }
         refForFields.addValueEventListener(postListenerForFields)
-
-
     }
 
     override fun onCreateView(
@@ -82,10 +79,8 @@ class AddHomework: BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         toSend = activity as GetHomework
-        //toShow = activity as ShowDeadlinePicker
         val view = inflater.inflate(R.layout.dialog_add_homework,container,false)
         view.findViewById<Button>(R.id.buttonDeadlinePicker).setOnClickListener {
-            //toShow.showDeadlinePicker()
             val dayPicker = DeadlinePicker()
             fragmentManager?.let { it1 -> dayPicker.show(it1, "Dialog") }
             flag1 = true
@@ -107,6 +102,7 @@ class AddHomework: BottomSheetDialogFragment() {
 
         afterCheckbox.visibility = View.INVISIBLE
 
+        // chowanie i pokazywanie suwaka do wyboru dnia przyjścia powiadomienia
         checkboxNotification.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 afterCheckbox.visibility = View.VISIBLE
@@ -142,6 +138,7 @@ class AddHomework: BottomSheetDialogFragment() {
 
                 val homework = Homework("",title, description, subject,subjectId, day, month, year, hour1, minute1, notification, reminderDay)
 
+                // przesłanie danych do HomeworkActivity
                 toSend.getHomework(homework)
                 dismiss()
             }
@@ -149,8 +146,6 @@ class AddHomework: BottomSheetDialogFragment() {
     }
 
     fun displayDay(){
-
-
         if (arguments != null && flag1){
             day = arguments?.getInt("day")!!
             month = arguments?.getInt("month")!!
@@ -161,8 +156,6 @@ class AddHomework: BottomSheetDialogFragment() {
     }
 
     fun displayTime(){
-
-
         if (arguments != null && flag2){
             hour1 = arguments?.getInt("hour")!!
             minute1 = arguments?.getInt("minute")!!

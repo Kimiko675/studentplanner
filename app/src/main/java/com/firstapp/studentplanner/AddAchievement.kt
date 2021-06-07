@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.firstapp.studentplanner.Classes.Achievement
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_achievement.*
@@ -12,6 +13,8 @@ class AddAchievement: BottomSheetDialogFragment() {
 
     private var title: String = ""
     private var description: String = ""
+
+    // interfejs do przesłania danych do DetailActivity
     lateinit var toSend: GetAchievement
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +34,16 @@ class AddAchievement: BottomSheetDialogFragment() {
             title = editTextAchievementTitle.text.toString()
             description = editTextAchievementDescription.text.toString()
 
-            val achiev = Achievement(title, description)
+            if (title != "" && description != "")
+            {
+                val achiev = Achievement(title, description)
 
-            toSend.getAchievement(achiev)
-            dismiss()
-
+                // przesyłanie danych do DetailActivity
+                toSend.getAchievement(achiev)
+                dismiss()
+            }else{
+                Toast.makeText(context, "Pozostawiono puste pola", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

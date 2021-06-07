@@ -4,11 +4,8 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.google.common.hash.Hashing
-import kotlin.concurrent.timer
 
 class NotificationBroadcast: BroadcastReceiver() {
 
@@ -25,6 +22,7 @@ class NotificationBroadcast: BroadcastReceiver() {
     var notifynotification: Boolean = false
     var notifydayreminder: Int = 0
 
+    // funkcja haszująca string na int
     fun hashing(string: String): Int {
         return string.hashCode()
     }
@@ -53,7 +51,6 @@ class NotificationBroadcast: BroadcastReceiver() {
             }
             notifydayreminder = intent.getStringExtra("homeworkDayReminder").toString().toInt()
         }
-
 
         val intent2 = Intent(context, HomeworkDetail::class.java)
 
@@ -90,14 +87,11 @@ class NotificationBroadcast: BroadcastReceiver() {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         }
 
-
-
+        // ostateczne zbudowanie powiadomienia
         if (builder != null) {
             if (notificationManager != null) {
                 notificationManager.notify(hashing(notifyid), builder.build())
             }
         }
     }
-
-
 }

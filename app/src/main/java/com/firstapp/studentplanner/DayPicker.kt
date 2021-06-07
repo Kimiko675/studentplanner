@@ -15,6 +15,7 @@ class DayPicker: DialogFragment() {
     private var month: Int = 0
     private var year: Int = 0
 
+    // interfejs do przesyłania danych do AddNewSubject EditExistingSubject i HomeworkActivity
     private lateinit var picker: GetPickedTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class DayPicker: DialogFragment() {
             month = dpDayPicker.month
             year = dpDayPicker.year
 
+            // przesyłanie danych
             picker.getDayStart(day,month + 1,year)
             dismiss()
         }

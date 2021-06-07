@@ -13,14 +13,12 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_homework_detail.*
 
 class HomeworkDetail : AppCompatActivity(), ConvertToAchievement{
-    private lateinit var auth: FirebaseAuth
     private lateinit var hw: Homework
     lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homework_detail)
-        //pobranie użytkownika
         userId = FirebaseAuth.getInstance().currentUser.uid
 
         //pobranie danych z poprzedniej aktywności

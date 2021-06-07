@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.item_homework.view.*
 
 class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clickListener: OnHomeworkItemClickListener) : RecyclerView.Adapter<HomeworkAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeworkAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_homework,parent,false)
         return ViewHolder(view)
@@ -28,8 +27,6 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
         }else{
             holder.imageView.visibility = View.INVISIBLE
         }
-
-        //day.toString() + "/" + month.toString() + "/" + year.toString()
 
         holder.initialize(HomeworksList[position],clickListener)
     }
@@ -57,10 +54,4 @@ class HomeworkAdapter(private val HomeworksList: MutableList<Homework>, var clic
             }
         }
     }
-}
-
-interface OnHomeworkItemClickListener {
-    fun onDeleteHomeworkClick(homework: Homework)
-    fun onCompleteHomeworkClick(homework: Homework)
-    fun onItemClick(homework: Homework, position: Int)
 }

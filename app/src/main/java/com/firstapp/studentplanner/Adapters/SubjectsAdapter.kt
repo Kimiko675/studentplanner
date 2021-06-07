@@ -23,7 +23,6 @@ class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener
         val currentItem = SubjectsList[position]
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
-        //holder.textView3.text = currentItem.form.toString()
         holder.imageButton.setOnClickListener{
             listener?.onRecyclerViewItemClicked(it,SubjectsList[position])
         }
@@ -43,12 +42,10 @@ class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener
         val imageButton: ImageButton = itemView.image_button_edit
         val imageButton2: ImageButton = itemView.image_button_delete
         fun initialize(subjects: Subject, action: OnSubjectItemClickListener){
-            var listener: OnSubjectItemClickListener
             textView.text = subjects.subject
             textView2.text = subjects.field
 
             var forms = arrayListOf<String>("wykład","ćwiczenia","seminarium","spotkanie","zebranie","rejestracja","inne")
-            //textView3.text = forms[subjects.form]
 
             itemView.setOnClickListener{
                 action.onItemClick(subjects, adapterPosition)
@@ -64,11 +61,3 @@ class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener
         }
     }
 }
-
-interface OnSubjectItemClickListener{
-    fun onItemClick(subjects: Subject, position: Int)
-    //fun onEditClick(Pid: String,Psubject: String, Pfield: String, Pform: String, PhowLong: String, isCyclicalP: Boolean, Phour: Int, Pminute: Int, PdayOfWeek: String, PdayStart: Int, PmonthStart: Int, PyearStart: Int, PdayEnd: Int, PmonthEnd: Int, PyearEnd: Int, Pmark: Int)
-    fun onEditClick(subjects: Subject)
-    fun onDeleteClick(id: String)
-}
-

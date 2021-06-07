@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.firstapp.studentplanner.Adapters.HourObject
+import com.firstapp.studentplanner.Classes.HourObject
 import com.firstapp.studentplanner.Classes.DayObject
 import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth

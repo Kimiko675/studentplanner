@@ -11,8 +11,6 @@ import kotlinx.android.synthetic.main.item_day.view.*
 
 class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener: OnDayItemClickListener) : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
 
-    var listener: RecyclerViewClickListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayAdapter.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_day,parent,false)
         return ViewHolder(view)
@@ -70,8 +68,4 @@ class DayAdapter(private val DayList: MutableList<DayObject>, var clickListener:
             }
         }
     }
-}
-
-interface OnDayItemClickListener{
-    fun onItemClick(day_object: DayObject, position: Int)
 }

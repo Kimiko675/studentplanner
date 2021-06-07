@@ -12,10 +12,8 @@ import com.firstapp.studentplanner.Classes.Subject
 class MarksFragment(subject: Subject, userID: String): Fragment() {
 
     private var sub: Subject = subject
-    private var userId: String = userID
 
     private lateinit var action: SetRecyclerViewMark
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

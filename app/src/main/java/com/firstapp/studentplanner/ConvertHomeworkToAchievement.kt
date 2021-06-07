@@ -14,6 +14,7 @@ class ConvertHomeworkToAchievement(val text: String, val subjectId: String): Bot
     private var title: String = ""
     private var description: String = text
 
+    // interfejs do przesłania danych do HomeworkActivity i HomeworkDetail
     lateinit var toSend: ConvertToAchievement
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class ConvertHomeworkToAchievement(val text: String, val subjectId: String): Bot
 
             val achiev = Achievement(title, description)
 
+            // przesłanie danych do HomeworkActivity i HomeworkDetail
             toSend.convertToAchievement(achiev, subjectId)
             dismiss()
 

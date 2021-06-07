@@ -15,6 +15,7 @@ class DeadlinePicker: DialogFragment() {
     private var month: Int = 0
     private var year: Int = 0
 
+    // interfejs do przesyłania danych do HomeworkActivity
     private lateinit var picker: GetPickedDeadline
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,8 @@ class DeadlinePicker: DialogFragment() {
             month = dpDayPicker.month
             year = dpDayPicker.year
 
+            // przesyłanie danych do HomeworkActivity
+            // +1 bo miesiące numerowane są od 0
             picker.getDay(day,month + 1,year)
             dismiss()
         }

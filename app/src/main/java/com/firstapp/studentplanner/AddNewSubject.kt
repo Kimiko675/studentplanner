@@ -41,11 +41,9 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
 
         val arrayAdapter = ArrayAdapter<String>(this@AddNewSubject, android.R.layout.simple_spinner_item, listOfFields)
 
-        // wyjęcie danych o użytkowniku
         auth = FirebaseAuth.getInstance();
         val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
-        // pobieranie kierunków z bazy
         val refForFields = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Fields")
         val postListenerForFields = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -63,7 +61,6 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
         }
         refForFields.addValueEventListener(postListenerForFields)
 
-        // pobieranie przedmiotów z bazy
         val refForSubjects = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
         val postListenerForSubjects = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -102,6 +99,11 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
 
             if (name == ""){
                 isEveryThingOk = false
+            }
+
+            if (listOfForms.isEmpty()){
+                isEveryThingOk = false
+                Toast.makeText(this, "Nie można dodać przedmiotu bez żadnej formy", Toast.LENGTH_SHORT).show()
             }
 
             if (isEveryThingOk){
@@ -228,7 +230,6 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
     }
 
     override fun sendPickedTime(hour: Int, minute: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
