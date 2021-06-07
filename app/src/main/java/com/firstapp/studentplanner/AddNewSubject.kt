@@ -89,11 +89,19 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
 
             //dodawanie przedmiotu do bazy
             var isEveryThingOk: Boolean = true
+            var correctDates: Boolean = true
 
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
             val name = edittextAddSubjectName.text.toString()
-            val ects = edittextECTS.text.toString().toInt()
+            var ects: Int = 0
+
+            if (edittextECTS.text.toString()!="") {
+                ects = edittextECTS.text.toString().toInt()
+                isEveryThingOk = true
+            } else {
+                isEveryThingOk = false
+            }
 
             val field = spinnerAddSubjectField.selectedItem.toString()
 
@@ -124,7 +132,7 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
                         isEveryThingOk = false
                         break
                     }
-                    if (i.minute == -1){
+                    if (i.minute == -1) {
                         isEveryThingOk = false
                         break
                     }
@@ -160,10 +168,16 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
                         isEveryThingOk = false
                         break
                     }
+                    //Sprawdzamy, czy przedział jest poprawnie podany
+                    if (i.yearStart>i.yearEnd || (i.yearStart==i.yearEnd && i.monthStart>i.monthEnd) || (i.yearStart==i.yearEnd && i.monthStart==i.monthEnd && i.dayStart>i.dayEnd)) {
+                        correctDates = false
+                    } else {
+                        correctDates = true
+                    }
                 }
             }
 
-            if (isEveryThingOk){
+            if (isEveryThingOk && correctDates){
                 val ref = FirebaseDatabase.getInstance().getReference("Users")
                 val newRef = ref.push()
                 val key = newRef.key
@@ -172,21 +186,19 @@ class AddNewSubject : AppCompatActivity(), OnFormItemClickListener,GetPickedTime
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Dodano przedmiot", Toast.LENGTH_LONG).show()
+                            var intent = Intent(this,Dashboard::class.java);
+                            startActivity(intent)
                         } else {
                             Toast.makeText(this, "Błąd", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
+            } else if (isEveryThingOk && !correctDates) {
+                Toast.makeText(this, "Niepoprawny przedział dat", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Niektóre pola są wciąż puste", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show()
             }
-
-            var intent = Intent(this,Dashboard::class.java);
-            startActivity(intent);
-
         }
-
-
     }
 
     override fun onDeleteClick(form: Form) {

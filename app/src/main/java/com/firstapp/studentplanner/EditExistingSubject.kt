@@ -90,7 +90,14 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
             val userId: String = FirebaseAuth.getInstance().currentUser.uid
 
             val name = edittextAddSubjectName.text.toString()
-            val ects = edittextECTS.text.toString().toInt()
+            var ects: Int = 0
+
+            if (edittextECTS.text.toString()!="") {
+                ects = edittextECTS.text.toString().toInt()
+                isEveryThingOk = true
+            } else {
+                isEveryThingOk = false
+            }
             val field = spinnerAddSubjectField.selectedItem.toString()
 
             if (name == ""){
@@ -167,6 +174,8 @@ class EditExistingSubject: AppCompatActivity(), OnFormItemClickListener,GetPicke
                     ref.child(userId).child("Subjects").child(key).setValue(newSubject).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Zedytowano przedmiot", Toast.LENGTH_LONG).show()
+                            var intent = Intent(this,ListOfSubjects::class.java);
+                            startActivity(intent)
                         } else {
                             Toast.makeText(this, "Błąd", Toast.LENGTH_LONG).show()
                         }

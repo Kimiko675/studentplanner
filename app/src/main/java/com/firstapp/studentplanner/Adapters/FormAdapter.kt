@@ -77,7 +77,7 @@ class FormAdapter(private val FormList: List<Form>, var clickListener: OnFormIte
         }
 
         if (currentItem.hour != -1){
-            holder.time.text = currentItem.hour.toString() + ":" + currentItem.minute.toString()
+            holder.time.text = currentItem.hour.toString() + ":" + if (currentItem.minute<10) { "0" + currentItem.minute.toString() } else { currentItem.minute.toString() }
         }
 
         if (currentItem.howLong != ""){

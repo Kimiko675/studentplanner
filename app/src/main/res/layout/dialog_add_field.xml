@@ -39,6 +39,7 @@
             android:hint="nazwa"
             android:textAlignment="center"
             android:textSize="20dp"
+            android:maxLength="100"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"/>
@@ -51,6 +52,7 @@
             android:hint="semestr"
             android:textAlignment="center"
             android:textSize="20dp"
+            android:maxLength="2"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"/>

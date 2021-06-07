@@ -86,7 +86,8 @@
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
             android:background="#88ffffff"
-            app:boxBackgroundMode="none"/>
+            app:boxBackgroundMode="none"
+            android:maxLength="30"/>
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"

@@ -34,7 +34,7 @@ class FormDetalesAdapter(private val FormList: List<Form>): RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var currentItem = FormList[position]
 
-        holder.time.text = currentItem.hour.toString() + ":" + currentItem.minute.toString()
+        holder.time.text = currentItem.hour.toString() + ":" + if (currentItem.minute<10) { "0" + currentItem.minute.toString() } else { currentItem.minute.toString() }
 
         holder.howLong.text = currentItem.howLong
 
