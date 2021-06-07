@@ -27,7 +27,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="ocena"
+                android:text="@string/mark"
                 android:textColor="@color/white" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
-                android:text="punkty ECTS"
+                android:text="@string/ects_points"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -55,12 +55,12 @@
                 android:background="@drawable/rounded_rectangle_all_corners_purple"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="-"
+                android:text="@string/empty"
                 android:layout_weight="1"
 
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"/>
@@ -78,8 +78,8 @@
 
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="-"
-                android:textSize="30dp"
+                android:text="@string/empty"
+                android:textSize="30sp"
                 android:background="@drawable/rounded_rectangle_all_corners_lightgray" />
 
 
@@ -105,12 +105,12 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:text="Dodaj osiągnięcie"
+            android:text="@string/add_achivment"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

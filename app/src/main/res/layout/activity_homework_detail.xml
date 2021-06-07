@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_rectangle_bottom"
         android:padding="20dp"
-        android:text="text"
+        android:text="@string/text"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,18 +47,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Termin wykonania:"
+            android:text="@string/deadline"
             android:textColor="@color/white"
             />
             <TextView
                 android:id="@+id/textView_date"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Termin"
+                android:text="@string/empty"
                 android:layout_marginTop="5dp"
                 android:paddingTop="10dp"
                 android:textColor="@color/purple"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:fontFamily="@font/raleway_extralight"
                 android:textAlignment="center"
                 android:background="@drawable/white_solid"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Przedmiot:"
+            android:text="@string/subject"
             android:textColor="@color/white"
             />
 
@@ -80,16 +80,16 @@
             android:background="@drawable/white_solid"
             android:fontFamily="@font/raleway_extralight"
             android:padding="10dp"
-            android:text="Przedmiot"
+            android:text="@string/empty"
             android:textAlignment="center"
             android:textColor="@color/purple"
-            android:textSize="22dp" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Opis:"
+            android:text="@string/description"
             android:textColor="@color/white"
             />
         <TextView
@@ -97,11 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="Przedmiot"
+            android:text="@string/empty"
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:textColor="@color/purple"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:fontFamily="@font/raleway_extralight"
             android:textAlignment="center"
             android:background="@drawable/white_solid"
@@ -120,10 +120,11 @@
 
             <ImageButton
                 android:id="@+id/image_button_delete_homework2"
+                android:contentDescription="@string/delete_button"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="160dp"
+                android:layout_marginEnd="160dp"
                 android:background="@drawable/btn2_background"
                 android:src="@drawable/ic_delete2"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,9 +137,9 @@
 
             <ImageButton
                 android:id="@+id/image_button_complete_homework2"
+                android:contentDescription="@string/add_homework"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_alignParentTop="true"
                 android:background="@drawable/btn2_background"
                 android:src="@drawable/ic_baseline_add_task_242"
                 android:textAlignment="center"

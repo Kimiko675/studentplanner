@@ -19,7 +19,7 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
 
-        android:text="text"
+        android:text="@string/text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp"
