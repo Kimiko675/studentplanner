@@ -41,7 +41,7 @@
             android:maxLines="1"
             android:paddingStart="15dp"
             android:paddingTop="8dp"
-            android:text="@string/line"
+            android:text="Line 2"
             android:textColor="@color/purple"
             android:textSize="22sp"
             android:textStyle="bold" />

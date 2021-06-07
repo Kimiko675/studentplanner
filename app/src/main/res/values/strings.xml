@@ -104,10 +104,8 @@
     <string name="howlong_time">czas trwania</string>
     <string name="start">rozpoczęcie</string>
     <string name="form_of_sub">Forma przedmiotu</string>
-    <string name="line">Line 1</string>
     <string name="delete_subj">usuń</string>
     <string name="hat">czapka</string>
-    <string name="line">Line 1</string>
     <string name="line2">Line 2</string>
 
     <string-array name="formsOfSubject">

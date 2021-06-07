@@ -51,7 +51,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/raleway_medium"
             android:maxLines="1"
-            android:text="@string/line"
+            android:text="Line 1"
             android:textColor="@color/purple"
             android:textSize="22sp"
             android:textStyle="bold" />
