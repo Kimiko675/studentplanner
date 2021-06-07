@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firstapp.studentplanner.Classes.Achievement
 import com.firstapp.studentplanner.Classes.Homework
+import com.firstapp.studentplanner.Classes.Subject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,6 +33,7 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
     private val bottomSheetFragment = AddHomework()
 
     private var listOfHomeworks = ArrayList<Homework>()
+    private var listOfSubjects = ArrayList<String>()
     var adapter = HomeworkAdapter(listOfHomeworks, this)
 
     val channelId = "com.firstapp.studentplanner"
@@ -71,8 +73,31 @@ class HomeworkActivity : AppCompatActivity(), GetHomework, ConvertToAchievement,
         }
         ref.addValueEventListener(postListener)
 
+        val refForFields = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Subjects")
+        val postListenerForFields = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                listOfSubjects.clear()
+                for (i in dataSnapshot.children){
+                    val value = i.getValue(Subject::class.java)
+                    if (value != null) {
+                        listOfSubjects.add(value.subject as String)
+                    }
+                    break
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        refForFields.addValueEventListener(postListenerForFields)
+
         buttonAddNewHomework.setOnClickListener {
-            bottomSheetFragment.show(supportFragmentManager, "BottomSheetDialog")
+            if (listOfSubjects.isNotEmpty()){
+                bottomSheetFragment.show(supportFragmentManager, "BottomSheetDialog")
+            }else{
+                Toast.makeText(this, "Nie można dodać zadania gdy nie posiadasz żadnego przedmiotu", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 

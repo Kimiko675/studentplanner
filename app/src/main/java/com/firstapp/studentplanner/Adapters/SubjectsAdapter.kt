@@ -23,12 +23,6 @@ class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener
         val currentItem = SubjectsList[position]
         holder.textView.text = currentItem.subject
         holder.textView2.text = currentItem.field
-        holder.imageButton.setOnClickListener{
-            listener?.onRecyclerViewItemClicked(it,SubjectsList[position])
-        }
-        holder.imageButton2.setOnClickListener{
-            listener?.onRecyclerViewItemClicked(it,SubjectsList[position])
-        }
         holder.initialize(SubjectsList[position],clickListener)
     }
 
@@ -39,8 +33,6 @@ class SubjectsAdapter(private val SubjectsList: List<Subject>, var clickListener
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textView: TextView = itemView.text_view_1
         val textView2: TextView = itemView.text_view_2
-        val imageButton: ImageButton = itemView.image_button_edit
-        val imageButton2: ImageButton = itemView.image_button_delete
         fun initialize(subjects: Subject, action: OnSubjectItemClickListener){
             textView.text = subjects.subject
             textView2.text = subjects.field

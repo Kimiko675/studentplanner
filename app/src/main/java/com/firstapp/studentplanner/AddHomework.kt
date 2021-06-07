@@ -92,8 +92,10 @@ class AddHomework: BottomSheetDialogFragment() {
             flag1 = false
             flag2 = true
         }
+
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         view.findViewById<Spinner>(R.id.spinnerAddHomeworkSubjects).adapter = arrayAdapter
+
         return view
     }
 
